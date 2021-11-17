@@ -1,9 +1,11 @@
+package SquaresofaSortedArray;
 import java.util.Arrays;
 
 public class SquaresofaSortedArray {
     public static void main(String[] args) {
+        Solution sol = new Solution();
+
         int[] nums = { -7, -3, 2, 3, 10 };
-        SquaresofaSortedArray sol = new SquaresofaSortedArray();
         int[] res = sol.sortedSquares(nums);
         System.out.println(Arrays.toString(res));
 
@@ -15,7 +17,9 @@ public class SquaresofaSortedArray {
         res = sol.sortedSquares(nums2);
         System.out.println(Arrays.toString(res));
     }
+}
 
+class Solution {
     public int[] sortedSquares(int[] nums) {
         int[] res = new int[nums.length];
         int origin = 0;
