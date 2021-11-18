@@ -1,11 +1,15 @@
-# LeetCode 추천 문제 75
-## New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
+# LeetCode 풀어보기
 
+아래의 추천 문제를 모두 풀어 보는 것을 목표로 함.
+
+## 추천 문제 75선
+## New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 출처 - https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU
 
+---
 Array
 
-- 1. Two Sum - https://leetcode.com/problems/two-sum/
+- (해결) Two Sum - https://leetcode.com/problems/two-sum/  
 - Best Time to Buy and Sell Stock - https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 - Contains Duplicate - https://leetcode.com/problems/contains-duplicate/
 - Product of Array Except Self - https://leetcode.com/problems/product-of-array-except-self/

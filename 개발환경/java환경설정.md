@@ -1,4 +1,5 @@
-# vscode에서 java 개발하기
+# Java 개발환경
+## vscode에서 java 개발하기
 
 1. vscode 설치
 2. 자바 확장프로그램 설치  
@@ -38,3 +39,8 @@ OracleJDK의 독자적 기능으로 글꼴 라이브러리와 Java Web Start 등
 5. vscode 프로젝트 폴더 만들기 & 열기 ctrl+K ctrl+O
 6. java 파일 만들기
 7. run 해보기
+
+## intellij
+1. intellij를 설치
+2. 프로젝트 생성
+3. run해보기
