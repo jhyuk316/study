@@ -1,7 +1,7 @@
 package TwoSum;
-/**
- * TwoSum
- */
+// 1. Two Sum
+// https://leetcode.com/problems/two-sum/  
+
 import java.util.Arrays;
 
 public class TwoSum {
