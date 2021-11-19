@@ -2,7 +2,9 @@ public class Oop {
     public static void main(String[] args) {
         TV[] tvList = new TV[3];
         
-        tvList[0] = new TV();
+        for(int i = 0 ; i < 3; ++i){
+            tvList[i] = new TV();
+        }
         System.out.println(tvList[0].channel);
 
 

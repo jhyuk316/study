@@ -350,9 +350,11 @@ Thread-1:3
 Thread-0:4
 Thread-1:4
 ```
-람다식
-익명함수
-Runnable은 추상메소드가 1개인 인터페이스 람다식으로 축약 가능
+
+람다식 - 익명함수  
+함수형인터페이스 @FunctionalInterface  
+구현해야 할 추상 메소드가 하나만 정의된 인터페이스  
+Runnable은 함수형 인터페이스
 ```java
 new Thread(() -> {
     for(int i = 0; i<5;++i){
