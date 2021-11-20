@@ -98,6 +98,39 @@ TCP는 IP위에서 데이터 전달을 보증하고 순서대로 받게 해줌.
 ## 6. What is hosting  
 서버 컴퓨터의 전체 또는 일부분을 이용할 수 있도록 임대해주는 서비스  
 웹 호스팅, 서버 호스팅, 메일 호스팅등이 있음.  
+e.g. AWS(Amazon Web Services), Cloudflare, GitHub, Microsoft Azure
+
+- 공유 웹 호스팅(Shared web hosting)  
+여러 개의 사이트가 한 서버를 공유해 운영  
+오버셀링(서버 용량을 넘어선 판매)에 취약함
+여러 사이트에 사람이 동시 몰리면 서버의 부담이 큼
+    - Reseller web hosting  
+호스팅 서비스를 구매해 다른 사람에게 재판매 하는 것. 계정을 구매해 하위 계정을 만듬.
+
+- 메일 호스팅(Email Hosting)  
+메일 도메인을 직접 구매하여 메일 서버에 연결하여 운영  
+e.g. Google Workspace
+
+- 서버 호스팅(Server hosting)  
+    ![VPS](internet/vps.png)
+    - 가상 사설 서버(Virtual Private Server)  
+    가상 서버의 공유 코어 CPU를 할당 받음  
+    ![VDS](internet/vds.png)  
+    - 가상 전용 서버(Virtural Decicated Server)  
+    가상 서버의 전용 코어 CPU를 할당 받음  
+    - 전용 서버 호스팅(Decicated Hosting service)  
+    한대의 서버를 통째로 할당
+    e.g. AWS metal  
+    - 코로케이션(colocation web hosting service)  
+    서버를 구매해 IDC(Internet Data Center)에 입주시켜 운영하는 것
+
+- Cloud hosting  
+    - Clustered hosting  
+    동일한 콘덴츠를 호스팅 하는 여러 서버가 존재
+        - 클러스터? 여러 대의 컴퓨터들이 연결되어 하나의 시스템처럼 동작하는 컴퓨터 집합
+    - Grid hosting
+    클러스터가 그리드 처럼 작동하는 서버
+        - 그리드? 원거리 통신망으로 연결된 서로 다른 기종의 컴퓨터를 하나로 묶어 가상의 고성능 컴퓨터를 구성
 
 ---
 ## 출처  
@@ -107,4 +140,6 @@ HTTP란 무엇인가? [https://velog.io/@surim014/HTTP란-무엇인가](https://
 브라우저는 어떻게 동작하는가? [https://d2.naver.com/helloworld/59361](https://d2.naver.com/helloworld/59361)  
 DNS란 무엇입니까? [https://www.cloudflare.com/ko-kr/learning/dns/what-is-dns/](https://www.cloudflare.com/ko-kr/learning/dns/what-is-dns/)  
 도메인이란? [https://한국인터넷정보센터.한국/jsp/resources/domainInfo/domainInfo.jsp](https://xn--3e0bx5euxnjje69i70af08bea817g.xn--3e0b707e/jsp/resources/domainInfo/domainInfo.jsp)  
-호스팅 [https://namu.wiki/w/호스팅](https://namu.wiki/w/%ED%98%B8%EC%8A%A4%ED%8C%85)
+호스팅 [https://namu.wiki/w/호스팅](https://namu.wiki/w/%ED%98%B8%EC%8A%A4%ED%8C%85) 
+Web hosting service https://en.wikipedia.org/wiki/Web_hosting_service  
+Difference between VPS and VDS https://www.geeksforgeeks.org/difference-between-vps-and-vds/
