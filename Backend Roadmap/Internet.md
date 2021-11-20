@@ -112,10 +112,10 @@ e.g. AWS(Amazon Web Services), Cloudflare, GitHub, Microsoft Azure
 e.g. Google Workspace
 
 - 서버 호스팅(Server hosting)  
-    ![VPS](internet/vps.png)
+    ![VPS](Internet/vps.png)
     - 가상 사설 서버(Virtual Private Server)  
     가상 서버의 공유 코어 CPU를 할당 받음  
-    ![VDS](internet/vds.png)  
+    ![VDS](Internet/vds.png)  
     - 가상 전용 서버(Virtural Decicated Server)  
     가상 서버의 전용 코어 CPU를 할당 받음  
     - 전용 서버 호스팅(Decicated Hosting service)  
