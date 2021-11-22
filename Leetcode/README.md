@@ -9,7 +9,7 @@
 ---
 Array
 
-- (해결 O(n^2)) Two Sum - https://leetcode.com/problems/two-sum/  
+- (해결 O(n)) Two Sum - https://leetcode.com/problems/two-sum/  
 - (해결 O(n)) Best Time to Buy and Sell Stock - https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 - (해결 O(n)) Contains Duplicate - https://leetcode.com/problems/contains-duplicate/
 - (해결 O(n)) Product of Array Except Self - https://leetcode.com/problems/product-of-array-except-self/

@@ -16,7 +16,7 @@ public class MaximumSubarray {
     }
 }
 
-// time limit exceeded
+// slide window - time limit exceeded
 // class Solution {
 //     public int maxSubArray(int[] nums) {
 //         int max = nums[0];
