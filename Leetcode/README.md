@@ -3,18 +3,21 @@
 아래의 추천 문제를 모두 풀어 보는 것을 목표로 함.
 
 ## 추천 문제 75선
+
 ## New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
+
 출처 - https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU
 
 ---
+
 Array
 
-- (해결 O(n)) Two Sum - https://leetcode.com/problems/two-sum/  
+- (해결 O(n)) Two Sum - https://leetcode.com/problems/two-sum/
 - (해결 O(n)) Best Time to Buy and Sell Stock - https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 - (해결 O(n)) Contains Duplicate - https://leetcode.com/problems/contains-duplicate/
 - (해결 O(n)) Product of Array Except Self - https://leetcode.com/problems/product-of-array-except-self/
-- Maximum Subarray - https://leetcode.com/problems/maximum-subarray/
-- Maximum Product Subarray - https://leetcode.com/problems/maximum-product-subarray/
+- (해결 O(n)) Maximum Subarray - https://leetcode.com/problems/maximum-subarray/
+- (해결 O(n)) Maximum Product Subarray - https://leetcode.com/problems/maximum-product-subarray/
 - Find Minimum in Rotated Sorted Array - https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 - Search in Rotated Sorted Array - https://leetcode.com/problems/search-in-rotated-sorted-array/
 - 3Sum - https://leetcode.com/problems/3sum/

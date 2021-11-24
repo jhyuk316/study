@@ -11,28 +11,13 @@ public class ContainsDuplicate {
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        System.out.println(sol.containsDuplicate(new int[]{1,2,3,1}));
-        System.out.println(sol.containsDuplicate(new int[]{1,2,3,4}));
-        System.out.println(sol.containsDuplicate(new int[]{1,1,1,1}));
+        System.out.println(sol.containsDuplicate(new int[] {1, 2, 3, 1}));
+        System.out.println(sol.containsDuplicate(new int[] {1, 2, 3, 4}));
+        System.out.println(sol.containsDuplicate(new int[] {1, 1, 1, 1}));
 
     }
 }
 
-// map
-// class Solution {
-//     public boolean containsDuplicate(int[] nums) {
-//         Map<Integer, Integer> duple = new HashMap<Integer, Integer>();
-//         for (int i = 0; i < nums.length; ++i) {
-//             if (duple.containsKey(nums[i])) {
-//                 return true;
-//             } else {
-//                 duple.put(nums[i], 1);
-//             }
-//         }
-
-//         return false;
-//     }
-// }
 
 // set
 // HashSet 해쉬를 이용한 빠른 Set
@@ -42,13 +27,30 @@ class Solution {
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> duple = new HashSet<>();
         for (int num : nums) {
-            if(duple.contains(num)){
+            if (duple.contains(num)) {
                 return false;
-            }else{
+            } else {
                 duple.add(num);
             }
 
         }
         return true;
+    }
+}
+
+
+// map
+class Solution2 {
+    public boolean containsDuplicate(int[] nums) {
+        Map<Integer, Integer> duple = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; ++i) {
+            if (duple.containsKey(nums[i])) {
+                return true;
+            } else {
+                duple.put(nums[i], 1);
+            }
+        }
+
+        return false;
     }
 }
