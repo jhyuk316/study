@@ -127,7 +127,7 @@ Java 스레드
 
 ![Process_states_diagram](02%20General%20Knowledge/Process_states_diagram.jpg)
 
-|          | 상태전이                   | 설명                                                                                                                   |
+| 용어     | 상태전이                   | 설명                                                                                                                   |
 | -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | dispatch | ready -> running           | 리스트 맨 앞의 프로세스가 cpu를 점유하는 것.                                                                           |
 | block    | running -> blocked         | 실행 상태의 프로세스가 허가된 시간을 다 쓰기 전에 입출력 동작을 필요로 하는 경우 cpu를 스스로 반납하고 보류 상태가 됨. |
@@ -143,6 +143,16 @@ Java 스레드
 - 각 프로세스 자원을 다른 프로세스로부터 보호
 - 프로세스간 동기화
 
+![Process Management](02%20General%20Knowledge/Process%20Management.jpg)
+
+1. 사용자 모드에서 프로세스 A 실행
+2. 시스템 콜 호출, A는 트랩에 걸림, 커널 모드로 전환
+3. 커널 모드에서 시스템 콜 수행
+4. 작업 수행에 따라 Running Queue나 Sleep Queue에 넣음.
+5. 디스패처가 호출
+6. 디스패처가 우선순위가 높은 B를 실행.
+7. 프로세스 B가 실행
+
 #### 1.1.1 Multiprogramming
 
 다중 프로그래밍, 멀티태스킹
@@ -153,6 +163,112 @@ Java 스레드
   - 하드웨어 인터럽트 발생. e.g. 키보드 입력, Timeout
 - Context Switching(문맥 교환) - 프로세스 하나를 멈추고 다른 프로세스를 시작 및 다시 시작 하는 것
 - 쓰레드 - 프로세스의 하위 프로세스, 독립적 실행 시퀀스.
+
+#### How multiprogramming increase effciency
+
+대부분 프로그램은 CPU cycles과 I/O cycles을 번갈아 실행
+
+I/O 처리시간이 CPU 사용시간보다 훨씬 김.
+
+I/O를 처리하는 시간 동안 다른 프로세스를 처리하도록해서 처리율과 응답시간을 향상시킴.
+
+#### Process creation
+
+![Process Structure](02%20General%20Knowledge/2021-11-26-19-08-40.png)
+생성 시기
+
+- System initializaton
+- Execution of process creation system call by a process.
+- A user request to create a new process
+- Initiation of a batch job
+
+생성 과정
+![Process Creation](02%20General%20Knowledge/2021-11-26-19-06-04.png)
+fork(), clone() 시스템 콜에 의해 수행
+
+1. 프로세스 생성 권한 확인
+2. PID 할당
+3. 주소 공간과 PCB 공간 할당
+4. 할당 받은 PCB 초기화
+5. 링크(큐에 삽입)
+
+### Process termination
+
+- 일괄 처리의 중단 명령 수행
+- 사용자 로그 오프
+- 프로세스의 서비스 끝내기 요청 실행
+- 오류 및 실패 조건
+- 정상적 완료
+- 시간 제한 초과
+- 메모리 사용 불가
+- 바운드 위반, e.g. out of range
+- 보호 오류, e.g. 읽기 전용파일에 쓰기
+- 산술 오류, e.g. 0으로 나누기
+- 시간 실행 초과
+- I/O 실패
+- 유효하지 않은 명령
+- 권한이 필요한 명령
+- 데이터 오용
+- 운영체제 중재, e.g. deadlock
+- 부모 프로세스 종료
+- 부모 프로세스의 요청
+
+#### Two-state process management model
+
+![Two-state process](02%20General%20Knowledge/2021-11-26-17-35-54.png)
+
+문제 - running 상태가 된 프로세스가 I/O대기 중 일 수 있음.
+
+#### Three-state process management model
+
+![Three-state process](02%20General%20Knowledge/2021-11-26-17-36-05.png)
+
+#### Process description and control
+
+PCB
+
+#### Processor modes
+
+- 커널 모드, ring 0, supervisor mode
+
+  - 모든 명령어
+  - kernel, privileged or protected instructions
+  - mode bit 0
+  - 시스템 공간, 사용자 공간
+
+- 사용자 모드, ring 3
+  - 일부 명령어
+    - I/O 명령이 불가, OS에게 요청해야 함.(시스템 콜)
+    - 시스템 콜(user mode trap instruction, Supervisor Call instruction) - Mode bit를 설정하여 시스템 명령을 하고 명령 끝나면 mode bit를 복구
+  - 응용프로그램
+  - 사용자 메모리 공간
+
+#### Kernel system concept
+
+- 커널 - 커널 상태에서 실행되는 시스템 부분
+  - 유저 모드에서 실행되는 보통 시스템 소프트웨어는 제외
+- OS의 중요한 부분은 커널 모드에서 동작
+- 사용자 공간에서 실행 되는 소프트웨어가 변경 할 수 없는 보호 메커니즘 구현
+- 사용자가 시스템 콜을 하는데 오버헤드가 있음(the trap mechanism and authentication)
+
+#### Requesting system services
+
+사용자 모드 프로그램이 커널 서비스 요청 방법
+
+- 시스템 콜
+  - OS는 시스템 콜에 해당 하는 라이브러리 제공
+  - 트랩 명령으로 cpu를 커널 모드로 전환
+  - 다음 호출될 함수의 진입점으로 분기
+  - 완료시 사용자 모드로 전환
+  - 제어를 사용자 프로레스로 반환
+  - 메시지 전달보다 효율적임.
+- 메시지 전달
+  - 사용자 프로세스가 메시지 생성
+  - OS 프로세스에게 메시지 전달
+  - 메시지 확인 후 cpu를 커널 모드로 전환
+  - 기능을 구현하는 프로세스에게 메시지 전달
+  - 사용자 프로세스는 수신 대기
+  - OS 프로세스는 작업 완료시 사용자 프로세스에게 메시지 전달
 
 #### 2.2.1 PCB(Process Control Block), TCB(Task ...)
 
@@ -272,14 +388,12 @@ Java 스레드
 - 프로세스 상태 전이 <http://blog.skby.net/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%83%81%ED%83%9C-%EC%A0%84%EC%9D%B4/>
 - [OS] 프로세스와 스레드의 차이 <https://gmlwjd9405.github.io/2018/09/14/process-vs-thread.html>
 - Process Management <https://gusdnd852.tistory.com/82>
+- 프로세스 생성 <https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jk130694&logNo=220690355283>
 - 운영체제 프로세스 관리는 어떻게 하나요? <https://vmilsh.tistory.com/375>
 - 프로세스 상태전이, 스케줄링 알고리즘 #3 <https://byeongmoo.tistory.com/4>
+- [운영체제 OS] 다단계 큐 스케줄링(MLQ), 다단계 피드백 큐 스케줄링(MFQ) <https://cocoon1787.tistory.com/124>
 - Process (computing) <https://en.wikipedia.org/wiki/Process_(computing)>
 - Process state <https://en.wikipedia.org/wiki/Process_state>
 - Process management (computing) <https://en.wikipedia.org/wiki/Process_management_(computing)>
 
 ---
-
-# TODO
-
-위키피디아 정리
