@@ -110,11 +110,11 @@ Java 스레드
 
 ![Process states](02%20General%20Knowledge/Process_states.svg)
 
-- 생성(create, new)
+- 생성(create, new) : PCB 생성, 메모리에 로드는 안됨.
 - 실행(running) : CPU를 차지하여 명령어를 실행
 - 준비(Ready) : CPU를 사용하고 있지 않지만 언제든지 사용 할 수 있는 상태. CPU할당을 기다림.
 - 보류(Blocked) : 프로세스가 입출력 완료, 시그널 수신 등 어떤 이벤트를 기다리는 상태
-- 종료(terminated)
+- 종료(terminated) : 어떤 이유로 종료 중인 상태.
 
 > 우리나라 교재의 용어와 외국 wiki의 용어차이
 >
@@ -215,13 +215,13 @@ fork(), clone() 시스템 콜에 의해 수행
 
 #### Two-state process management model
 
-![Two-state process](02%20General%20Knowledge/2021-11-26-17-35-54.png)
+![Two-state process](02%20General%20Knowledge/2state.png)
 
 문제 - running 상태가 된 프로세스가 I/O대기 중 일 수 있음.
 
 #### Three-state process management model
 
-![Three-state process](02%20General%20Knowledge/2021-11-26-17-36-05.png)
+![Three-state process](02%20General%20Knowledge/3statemodel.png)
 
 #### Process description and control
 
