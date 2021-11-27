@@ -6,7 +6,12 @@
 
 시스템 자원 관리자
 
-응용 소프트웨어를 실행하기 위한 하드웨어 추상화 플랫폼과 공통 시스템 서비스를 제종하는 '시스템 소프트웨어'
+응용 소프트웨어를 실행하기 위한 하드웨어 추상화 플랫폼과 공통 시스템 서비스를 제공하는 '시스템 소프트웨어'
+
+- 자원관리 - 자원을 적절하게 배분
+- 자원보호 - 비정상적인 작업으로부터 보호
+- 하드웨어 인터페이스
+- 사용자 인터페이스
 
 | 용어                       | 해설                                                             |
 | -------------------------- | ---------------------------------------------------------------- |
@@ -34,6 +39,24 @@ OS의 핵심. 하드웨어의 자원을 필요한 프로세스에 나눠줌.
 - 파일 시스템
 - 네트워크 관리자
 - 디바이스 관리자
+
+커널의 분류
+
+![kernel](02%20General%20Knowledge/OS-structure2.svg)
+
+- Monolithic kernels
+  - 다양한 서비스와 하드웨어 추상화를 하나의 덩어리로 만듬
+  - 유지 보수가 어려움.
+  - 성능이 좋음.
+  - BSD(UNIX), Linux, DOS
+- Microkernels
+  - 간결한 집합을 제공
+  - 다양한 서비스는 서버라는 응용프로그램으로 제공
+  - 확장성이 용이함
+  - L4 마이크로커널
+- Hybrid (or modular) kernels
+  - 성능 향상을 위해 커널 공간에 서비스를 추가
+  - NT(windows), XNU(macOS)
 
 #### 1.3.2 Shell
 
@@ -114,7 +137,7 @@ Java 스레드
 - 실행(running) : CPU를 차지하여 명령어를 실행
 - 준비(Ready) : CPU를 사용하고 있지 않지만 언제든지 사용 할 수 있는 상태. CPU할당을 기다림.
 - 보류(Blocked) : 프로세스가 입출력 완료, 시그널 수신 등 어떤 이벤트를 기다리는 상태
-- 종료(terminated) : 어떤 이유로 종료 중인 상태.
+- 종료(terminated, exit) : 어떤 이유로 종료 중인 상태.
 
 > 우리나라 교재의 용어와 외국 wiki의 용어차이
 >
@@ -123,9 +146,9 @@ Java 스레드
 > | 준비(Ready)   | Ready, Waiting |
 > | 대기(Waiting) | Block          |
 
-#### 2.1.2 프로세스의 상태전이
+#### 2.1.2 프로세스의 상태전이(process transition)
 
-![Process_states_diagram](02%20General%20Knowledge/Process_states_diagram.jpg)
+![Process_transition_diagram](02%20General%20Knowledge/Process_transition_diagram.jpg)
 
 | 용어     | 상태전이                   | 설명                                                                                                                   |
 | -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -149,22 +172,21 @@ Java 스레드
 2. 시스템 콜 호출, A는 트랩에 걸림, 커널 모드로 전환
 3. 커널 모드에서 시스템 콜 수행
 4. 작업 수행에 따라 Running Queue나 Sleep Queue에 넣음.
-5. 디스패처가 호출
-6. 디스패처가 우선순위가 높은 B를 실행.
-7. 프로세스 B가 실행
+5. 디스패처가 우선순위가 높은 B를 실행.
+6. 프로세스 B가 실행
 
-#### 1.1.1 Multiprogramming
+#### 2.2.1 Multiprogramming
 
 다중 프로그래밍, 멀티태스킹
 
 - 동시 실행 - 한 기간 동안 여러 개의 프로세스가 실행되는 것.
 - 요구사항 - 프로세서가 특정 기간 동안 각 프로세스에 할당 되고 적절한 순간 해제 되는 것.
-  - 프로세스는 시스템 호출(소프트웨어 인트럽트) 발생 e.g I/O
+  - 프로세스는 시스템 콜(소프트웨어 인트럽트) 발생 e.g I/O
   - 하드웨어 인터럽트 발생. e.g. 키보드 입력, Timeout
 - Context Switching(문맥 교환) - 프로세스 하나를 멈추고 다른 프로세스를 시작 및 다시 시작 하는 것
 - 쓰레드 - 프로세스의 하위 프로세스, 독립적 실행 시퀀스.
 
-#### How multiprogramming increase effciency
+#### 2.2.2 How multiprogramming increase effciency
 
 대부분 프로그램은 CPU cycles과 I/O cycles을 번갈아 실행
 
@@ -172,7 +194,16 @@ I/O 처리시간이 CPU 사용시간보다 훨씬 김.
 
 I/O를 처리하는 시간 동안 다른 프로세스를 처리하도록해서 처리율과 응답시간을 향상시킴.
 
-#### Process creation
+#### 2.2.3 Process creation
+
+프로세스는 새로운 프로세스를 생성 할 수 있음.
+
+- 부모 프로세스 - 생성한 프로세스
+- 자식 프로세스 - 생성된 프로세스
+- 자식 프로세스는 부모 프로세스의 복제(fork())
+- 자식 프로세스는 이후 다른 프로그램을 로드(exec())
+
+프로세스 트리 구조
 
 ![Process Structure](02%20General%20Knowledge/2021-11-26-19-08-40.png)
 생성 시기
@@ -192,7 +223,7 @@ fork(), clone() 시스템 콜에 의해 수행
 4. 할당 받은 PCB 초기화
 5. 링크(큐에 삽입)
 
-### Process termination
+#### 2.2.4 Process termination
 
 - 일괄 처리의 중단 명령 수행
 - 사용자 로그 오프
@@ -213,21 +244,31 @@ fork(), clone() 시스템 콜에 의해 수행
 - 부모 프로세스 종료
 - 부모 프로세스의 요청
 
-#### Two-state process management model
+#### 2.2.5 Process state
 
-![Two-state process](02%20General%20Knowledge/2state.png)
+1. Two-state process management model
+   ![Two-state process](02%20General%20Knowledge/2state.png)
+   문제 - running 상태가 된 프로세스가 I/O대기 중 일 수 있음
 
-문제 - running 상태가 된 프로세스가 I/O대기 중 일 수 있음.
+2. Three-state process management model
+   ![Three-state process](02%20General%20Knowledge/3statemodel.png)
 
-#### Three-state process management model
+#### 2.2.6 Process description and control
 
-![Three-state process](02%20General%20Knowledge/3statemodel.png)
+PCB(Process Control Block), TCB(Task Control Block)
 
-#### Process description and control
+운영체제가 프로세스에 대한 정보를 저장해 놓은 곳
 
-PCB
+- PID(Process ID) - 프로세스 고유 식별자
+- 프로세스 상태(Process State)
+- PC(Program Counter) - 프로그램 계수기, 프로세스가 다음에 실행할 명령어 주소를 가르킴
+- CPU 레지스터 및 일반 레지스터
+- CPU 스케줄링 정보 - 우선 순위, 최종 실행시가, CPU 점유시간 등
+- 메모리 관리 정보 - 해당 프로세스의 주소 공간
+- 프로세스 계정 정보 - 페이지 테이블, 스케줄링 큐 포인터, 소유자, 부모 등
+- I/O 상태 정보 - 프로세스에 할당 된 입출력장치 목록, 열린 파일 목록 등
 
-#### Processor modes
+#### 2.2.7 Processor modes
 
 - 커널 모드, ring 0, supervisor mode
 
@@ -243,7 +284,7 @@ PCB
   - 응용프로그램
   - 사용자 메모리 공간
 
-#### Kernel system concept
+#### 2.2.8 Kernel system concept
 
 - 커널 - 커널 상태에서 실행되는 시스템 부분
   - 유저 모드에서 실행되는 보통 시스템 소프트웨어는 제외
@@ -251,17 +292,19 @@ PCB
 - 사용자 공간에서 실행 되는 소프트웨어가 변경 할 수 없는 보호 메커니즘 구현
 - 사용자가 시스템 콜을 하는데 오버헤드가 있음(the trap mechanism and authentication)
 
-#### Requesting system services
+#### 2.2.9 Requesting system services
 
 사용자 모드 프로그램이 커널 서비스 요청 방법
 
 - 시스템 콜
+
   - OS는 시스템 콜에 해당 하는 라이브러리 제공
   - 트랩 명령으로 cpu를 커널 모드로 전환
   - 다음 호출될 함수의 진입점으로 분기
   - 완료시 사용자 모드로 전환
   - 제어를 사용자 프로레스로 반환
   - 메시지 전달보다 효율적임.
+
 - 메시지 전달
   - 사용자 프로세스가 메시지 생성
   - OS 프로세스에게 메시지 전달
@@ -270,20 +313,9 @@ PCB
   - 사용자 프로세스는 수신 대기
   - OS 프로세스는 작업 완료시 사용자 프로세스에게 메시지 전달
 
-#### 2.2.1 PCB(Process Control Block), TCB(Task ...)
+### 2.3 Process Scheduler
 
-운영체제가 프로세스에 대한 정보를 저장해 놓은 곳
-
-- PID(Process ID) - 프로세스 고유 식별자
-- 프로세스 상태(Process State)
-- PC(Program Counter) - 프로그램 계수기, 프로세스가 다음에 실행할 명령어 주소를 가르킴
-- CPU 레지스터 및 일반 레지스터
-- CPU 스케줄링 정보 - 우선 순위, 최종 실행시가, CPU 점유시간 등
-- 메모리 관리 정보 - 해당 프로세스의 주소 공간
-- 프로세스 계정 정보 - 페이지 테이블, 스케줄링 큐 포인터, 소유자, 부모 등
-- I/O 상태 정보 - 프로세스에 할당 된 입출력장치 목록, 열린 파일 목록 등
-
-#### 2.2.2 Waiting Queue(대기열)
+#### 2.3.1 Waiting Queue(대기열)
 
 ![Waiting Queue](02%20General%20Knowledge/Waiting%20Queue.png)
 
@@ -291,46 +323,35 @@ PCB
 - Ready Queue - 메모리에 로드된 프로세스들이 실행을 위해 대기하는 곳
 - Device Queue - I/O장치를 이용하려는 작업이 대기하는 곳
 
-#### 2.2.3 Scheduler
+#### 2.3.1 Scheduler
 
 프로세서를 프로세스에 할당하는 과정
 
-1. Job Scheduler - 장기 스케줄러
+![Scheduler](02%20General%20Knowledge/2021-11-27-11-51-43.png)
+
+1. 장기 스케줄러 - Job Scheduler
    - 메모리와 디스크 사이의 스케줄링 담당
    - 하드의 프로그램을 Job Queue에서 꺼내 Ready Queue를 통해서 메모리에 로드
    - 프로세스 상태는 new -> ready 상태로 전이
    - 디스크 내의 작업을 어떤 순서로 메모리에 가져 올지 결정
-2. CPU Scheduler - 단기 스케줄러
-   - CPU와 메모리 사이의 스케줄링 담당
-   - 메모리의 프로세스 중 하나를 선택해서 프로세서를 할당
-   - Ready Queue에 있는 프로그램 먼저 도착한 프로세스에게 CPU 할당(Dispatch)
-   - 프로세스 상태는 ready -> running 상태로 전이
-3. 중기 스케줄러
+2. 중기 스케줄러 - Device Scheduler
    - 프로세스들이 cpu 경쟁이 심해지면, swapping 기법으로 메모리 관리
    - 여유 공간 마련을 위해서 프로세스를 통째로 메모리에서 디스크로 쫓아냄(Swapping)
    - 현 시스템에 너무 많은 프로그램들이 동시에 올라 가는 것을 조절 하는 스케줄러
    - ready -> suspended
+3. 단기 스케줄러 - CPU Scheduler
+   - CPU와 메모리 사이의 스케줄링 담당
+   - 메모리의 프로세스 중 하나를 선택해서 프로세서를 할당
+   - Ready Queue에 있는 프로그램 먼저 도착한 프로세스에게 CPU 할당(Dispatch)
+   - 프로세스 상태는 ready -> running 상태로 전이
 
-#### 2.2.3 Scheduler Algorithm
+#### 2.3.2 Scheduler Algorithm
 
 - 스케줄링 결정 시점
   - running -> Waiting (I/O 작업 요청 발생)
   - Running -> Ready (Timeout)
   - Block -> Ready ( I/O 작업 종료)
   - Running -> Terminated (프로세스 종료)
-
-1. 비선점형 스케줄링
-
-   - 어떤 프로세스가CPU를 할당 받으면 자발적으로 중지 할 때까지 계속 실행 되도록 보장
-   - 다음 프로세스와 상관 없이 응답 시간 예상가능
-   - 스케줄러 호출 빈도가 낮고, 문맺 교환에 의한 오버헤드가 적음.
-   - 일관 처리 시스템에 적합
-   - 처리율이 떨어짐
-
-2. 선점형 스케줄링
-   - 어떤 프로세스가 CPU를 할당 받아도 다른 프로세스가 강제로 점유 할 수 있음.
-   - 모든 프로세스 CPU 사용시간을 동일하게 부여
-   - 특정 요건들을 기준으로 자원을 배분
 
 | 종류               |                           비선점형 스케줄링                           |           선점형 스케줄링            |
 | ------------------ | :-------------------------------------------------------------------: | :----------------------------------: |
@@ -388,8 +409,10 @@ PCB
 - 프로세스 상태 전이 <http://blog.skby.net/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%83%81%ED%83%9C-%EC%A0%84%EC%9D%B4/>
 - [OS] 프로세스와 스레드의 차이 <https://gmlwjd9405.github.io/2018/09/14/process-vs-thread.html>
 - Process Management <https://gusdnd852.tistory.com/82>
+- [운영체제] Process Management(2) <https://movahws.tistory.com/119>
 - 프로세스 생성 <https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jk130694&logNo=220690355283>
 - 운영체제 프로세스 관리는 어떻게 하나요? <https://vmilsh.tistory.com/375>
+- 3장 Process - 장기 스케줄러, 단기 스케줄러 <https://twinw.tistory.com/4>
 - 프로세스 상태전이, 스케줄링 알고리즘 #3 <https://byeongmoo.tistory.com/4>
 - [운영체제 OS] 다단계 큐 스케줄링(MLQ), 다단계 피드백 큐 스케줄링(MFQ) <https://cocoon1787.tistory.com/124>
 - Process (computing) <https://en.wikipedia.org/wiki/Process_(computing)>
@@ -397,3 +420,27 @@ PCB
 - Process management (computing) <https://en.wikipedia.org/wiki/Process_management_(computing)>
 
 ---
+
+## 3. Threads and Concurrency
+
+## 4. Memory Management
+
+## 5. Interprocess Commnunicaiton
+
+### 5. DeadLock
+
+### 5. 뮤텍스
+
+### 5. 세마포어
+
+## 6. I/O management
+
+## 7. POSIX
+
+## 7. Basic Networking Concepts
+
+## A. terminal Usage
+
+## B. Basic terminal commands
+
+grep, awk, sed, lsof, curl, wget, tail, head, less, find, ssh, kill
