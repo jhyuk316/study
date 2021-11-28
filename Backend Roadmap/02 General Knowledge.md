@@ -13,14 +13,17 @@
 - 하드웨어 인터페이스
 - 사용자 인터페이스
 
-| 용어                       | 해설                                                             |
-| -------------------------- | ---------------------------------------------------------------- |
-| 처리능력(Throughput)       | 일정 시간 내에 시스템이 처리하는 일의 양                         |
-| 반환시간(Turn Around Time) | 시스템에 작업을 의뢰한 시간으룹터 처리가 완료될 때까지 걸린 시간 |
-| 사용가능도(Availavility)   | 시스템을 사용할 필요가 있을 때 즉시 사용 가능한 정도             |
-| 신뢰도(Realiabilty)        | 시스템이 주어진 문제를 정확하게 해결하는 정도                    |
+| 용어                       | 해설                                                               |
+| -------------------------- | ------------------------------------------------------------------ |
+| 처리능력(Throughput)       | 일정 시간 내에 시스템이 처리하는 일의 양                           |
+| 반환시간(Turn Around Time) | 시스템에 작업을 의뢰한 시간으로부터 처리가 완료될 때까지 걸린 시간 |
+| 사용가능도(Availavility)   | 시스템을 사용할 필요가 있을 때 즉시 사용 가능한 정도               |
+| 신뢰도(Realiabilty)        | 시스템이 주어진 문제를 정확하게 해결하는 정도                      |
 
 ![linux](02%20General%20Knowledge/linux.png)
+
+- 시스템 콜 인터페이스
+  - OS 커널에 요청 할 수 있는 통로
 
 ### 1.2 Booting
 
@@ -186,6 +189,10 @@ Java 스레드
 - Context Switching(문맥 교환) - 프로세스 하나를 멈추고 다른 프로세스를 시작 및 다시 시작 하는 것
 - 쓰레드 - 프로세스의 하위 프로세스, 독립적 실행 시퀀스.
 
+Context Switching 과정
+
+![Context Switching](02%20General%20Knowledge/2021-11-27-17-48-39.png)
+
 #### 2.2.2 How multiprogramming increase effciency
 
 대부분 프로그램은 CPU cycles과 I/O cycles을 번갈아 실행
@@ -246,12 +253,7 @@ fork(), clone() 시스템 콜에 의해 수행
 
 #### 2.2.5 Process state
 
-1. Two-state process management model
-   ![Two-state process](02%20General%20Knowledge/2state.png)
-   문제 - running 상태가 된 프로세스가 I/O대기 중 일 수 있음
-
-2. Three-state process management model
-   ![Three-state process](02%20General%20Knowledge/3statemodel.png)
+상단의 프로세스 상태 전이 참조
 
 #### 2.2.6 Process description and control
 
@@ -347,6 +349,13 @@ PCB(Process Control Block), TCB(Task Control Block)
 
 #### 2.3.2 Scheduler Algorithm
 
+- Scheduling Criteria 결정 기준
+  - CPU utilization : CPU 사용량.
+  - Throughput : 시간별 process 처리량.
+  - Turnaround time : process 제출시부터 종료까지의 시간.
+  - Waiting time : process가 read queue에 있는 시간.
+  - Response time : 최초 input으로부터 반응시간.
+
 - 스케줄링 결정 시점
   - running -> Waiting (I/O 작업 요청 발생)
   - Running -> Ready (Timeout)
@@ -381,6 +390,7 @@ PCB(Process Control Block), TCB(Task Control Block)
      - Aging - 대기시간이 길어지면 우선순위를 높혀줌.
 5. 라운드 로빈(Round Robin) - 선점
    - 각 프로세스는 동일한 할당 시간을 갖고, 시간이 끝나면 Ready Queue 마지막으로 감.
+   - 문제점 : time quantum이 너무 커지면 FCFS랑 똑같아짐. 너무 작아지면 잦은 Context Switching으로 overhead가 발생
 6. 다단계 큐 스케줄링(Multilevel Queue Scheduling)
 
    ![MLQ](02%20General%20Knowledge/2021-11-26-00-22-17.png)
