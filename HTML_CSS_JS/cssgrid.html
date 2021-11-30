@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSS Grid Layout</title>
+    <style>
+      #wrapper {
+        display: grid; /* css 그리드 사용 */
+        grid-template-columns: 1fr 1fr 1fr; /*칼럼 수 1:1:1*/
+        grid-template-columns: repeat(3, 1fr); /*위를 축약해서 적음*/
+        /* 칼럼 수를 늘리기 */
+        grid-template-columns: repeat(auto-fit, 200px); /*200px로 칼럼수 자동*/
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(200px, 1fr)
+        ); /* 최소 200px, 최대 1:1 로 늘어났다 칼럼이 늘었다 함.*/
+
+        grid-template-rows: 2fr 1fr; /*로우 수 2:1 */
+        grid-template-rows: minmax(
+          100px,
+          auto
+        ); /* 높이 최소값, 최대값 지정, auto는 내용에 맞춤*/
+      }
+      .items {
+        padding: 10px;
+        background-color: #eee;
+      }
+      .items:nth-child(odd) {
+        background-color: #bbb;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="items">
+        1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
+        reprehenderit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+      </div>
+      <div class="items">
+        2 Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum
+        dolor, sit amet consectetur adipisicing elit
+      </div>
+      <div class="items">
+        3 Lorem ipsum dolor sit amet.Lorem ipsum dolor, sit amet consectetur
+        adipisicing elit
+      </div>
+      <div class="items">
+        4 Lorem ipsum dolor sit.Lorem ipsum dolor, sit amet consectetur
+        adipisicing elit
+      </div>
+      <div class="items">5 Lorem, ipsum dolor.</div>
+    </div>
+  </body>
+</html>

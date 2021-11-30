@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>가상 선택자</title>
+    <style>
+      ul {
+        list-style: none;
+      }
+      li {
+        width: 120px;
+        display: inline-block;
+        margin: 10px;
+      }
+      li a {
+        padding: 5px 20px;
+        font-size: 14px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      /* 가상 스타일 */
+      /* 지정 순서를 지켜야 함. */
+      /* :link
+      :visited
+      :hover
+      :active */
+
+      /* link 방문전 */
+      /* visited 방문 후 */
+      .navi a:link,
+      a:visited {
+        display: block;
+        font-size: 14px;
+        color: #888;
+        padding: 10px;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      /* 마우스를 올렸을 때 */
+      /* 탭키로 포커싱이 되었을 때 */
+      .navi a:hover,
+      .navi a:focus {
+        background-color: #222;
+        color: #fff;
+      }
+
+      /* 클릭하는 순간 */
+      .navi a:active {
+        background-color: red;
+      }
+
+      /* 가상요소 */
+      li.new::after {
+        content: "NEW!!";
+        font-size: x-small;
+        padding: 2px 4px;
+        margin: 0 10px;
+        border-radius: 2px;
+        background: #f00;
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navi">
+      <ul>
+        <li><a>메인 메뉴 : </a></li>
+        <li><a href="#">메뉴 1</a></li>
+        <li><a href="#">메뉴 2</a></li>
+        <li><a href="#">메뉴 3</a></li>
+        <li><a href="#">메뉴 4</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <h1>제품 목록</h1>
+      <ul>
+        <li class="new">제품 A</li>
+        <li>제품 B</li>
+        <li>제품 C</li>
+        <li class="new">제품 D</li>
+      </ul>
+    </div>
+  </body>
+</html>

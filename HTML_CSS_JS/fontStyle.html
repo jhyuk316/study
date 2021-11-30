@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 내부 스타일 적용 -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+      h1 {
+        color: rgba(255, 0, 0, 0.5);
+        /* pc에 있는 폰트를 지정해주거나,
+        웹폰트를 사용하거나,
+        폰트 다운로드를 지원해야 제대로 출력 됨. */
+        /* 첫번째 글꼴이 실패하면 두번째 글꼴이 사용됨 */
+        font-family: "Nanum Pen Script", 바탕;
+        /* 대문자M의 5배 사이즈 */
+        font-size: 5em;
+      }
+      .italic {
+        font-style: italic;
+      }
+      .accent {
+        /* font-weight 폰트 굵기, 400이 기본적 굵기, 700정도면 굵게와 비슷 */
+        font-weight: 700;
+        font-size: large;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>레드향</h1>
+      <p class="italic">껍질에 붉은 빛이 돌아 레드향이라 불린다.</p>
+      <p>
+        <span class="accent">레드향</span>은 한라봉과 규을 교배한 것으로 일반
+        귤보다 2~3배 크고, 과육이 붉고 통통하다.
+      </p>
+    </div>
+  </body>
+</html>

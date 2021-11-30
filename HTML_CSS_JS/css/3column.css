@@ -1,0 +1,44 @@
+* {
+  margin: 0px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#container {
+  width: 1200px;
+  margin: 20px auto; /*좌우가 auto가 되서 중앙 정렬이 됨.*/
+}
+
+#header {
+  width: 100%;
+  height: 120px;
+  background-color: gray;
+}
+
+#left-sidebar {
+  width: 250px;
+  height: 600px;
+  background-color: lightgray;
+  float: left;
+}
+
+#right-sidebar {
+  width: 150px;
+  height: 600px;
+  background-color: lightgray;
+  float: right;
+}
+
+#contents {
+  width: 800px;
+  height: 600px;
+  background-color: aliceblue;
+  float: left; /* 왼쪽으로 쌓아가기 그래야 안겹쳐짐 */
+}
+
+#footer {
+  width: 100%;
+  height: 100px;
+  background-color: gray;
+  clear: both;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>플렉스 박스 레이아웃</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .container {
+        width: 700px;
+        background-color: #eee;
+        border: 1px solid #222;
+        margin-bottom: 30px;
+        display: flex; /* 플렉스 컨테이너 지정 */
+        flex-wrap: nowrap; /* 내용이 넘처도 됨, 기본값 */
+        flex-wrap: wrap; /* 넘치지 않게 감쌈. */
+        /* 주축 정렬 */
+        justify-content: flex-end; /* 주축 끝에 정렬*/
+        justify-content: space-between; /* 양끝에 바싹 붙이고 적절한 간격으로 배치*/
+        justify-content: space-around; /* 양옆에도 여백을 주고 적절히 배치*/
+        /* 교차축 정렬 */
+        align-items: flex-end;
+        align-items: baseline; /* 글자 기준선에 맞춰서 정렬*/
+        align-items: center;
+        align-items: stretch; /* 교차축으로 늘임 */
+        /* 여러줄 교차축 정렬 */
+        align-content: center;
+      }
+      .box {
+        padding: 5px 45px;
+        margin: 5px;
+        width: 80px;
+        background-color: #222;
+      }
+      #opt1 {
+        /* 주축 결정 */
+        flex-direction: row; /* 왼쪽에서 오른쪽으로, 기본값 */
+      }
+      #opt2 {
+        flex-direction: row-reverse; /* 오른쪽에서 왼쪽으로 */
+      }
+      #opt3 {
+        flex-direction: column; /* 위에서 아래로 */
+      }
+      #opt4 {
+        flex-direction: column-reverse; /* 아래에서 위로 */
+      }
+      p {
+        color: #fff;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="opt1">
+      <div class="box"><p>1</p></div>
+      <div class="box"><p>2</p></div>
+      <div class="box"><p>3</p></div>
+    </div>
+    <div class="container" id="opt2">
+      <div class="box"><p>1</p></div>
+      <div class="box"><p>2</p></div>
+      <div class="box"><p>3</p></div>
+    </div>
+    <div class="container" id="opt3">
+      <div class="box"><p>1</p></div>
+      <div class="box"><p>2</p></div>
+      <div class="box"><p>3</p></div>
+    </div>
+    <div class="container" id="opt4">
+      <div class="box"><p>1</p></div>
+      <div class="box"><p>2</p></div>
+      <div class="box"><p>3</p></div>
+    </div>
+  </body>
+</html>

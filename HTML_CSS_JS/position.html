@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS position 속성</title>
+    <link rel="stylesheet" href="css/position-3.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      #contents {
+        background: url("../images/bg.jpg") no-repeat;
+        background-size: cover;
+        width: 800px;
+        height: 500px;
+        margin: 0 auto;
+        /* 꼭 선언해야 밑에서 absolute를 쓸 수 있음. */
+        position: relative;
+      }
+      h1 {
+        color: #fff;
+        font-size: 120px;
+        text-shadow: 2px 3px 0 #000;
+        /* 상위의 relative 기준 */
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contents">
+      <h1>CSS3</h1>
+    </div>
+  </body>
+</html>

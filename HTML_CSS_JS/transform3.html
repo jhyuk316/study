@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Transform:translate</title>
+    <style>
+      #container {
+        width: 800px;
+        height: 200px;
+        margin: 20px auto;
+      }
+      .origin {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        float: left;
+        margin: 40px;
+        /* 부모 요소에 있어야 함 */
+        perspective: 200px;
+      }
+      .origin > div {
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+      }
+
+      #movex:hover {
+        transform: rotateX(55deg);
+      }
+      #movey:hover {
+        transform: rotateY(55deg);
+      }
+      #movexy:hover {
+        transform: rotateZ(55deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="origin">
+        <div id="movex"></div>
+      </div>
+      <div class="origin">
+        <div id="movey"></div>
+      </div>
+      <div class="origin">
+        <div id="movexy"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+/* 전체 선택자 */
+/*
+ * {
+  margin: 0;
+  padding: 0;
+}
+ */
+
+/* 타입선택자 */
+h1 {
+  color: blue !important;
+  font-size: 3.5em;
+  font-style: italic;
+}
+body {
+  font-size: 25px;
+}
+p {
+  color: blue;
+}
+
+/* 클래스 선택자 */
+.redtext {
+  color: red;
+}
+
+/* id 선택자 */
+#container {
+  border: 1px solid #222;
+  padding: 10px;
+}
+
+/* 그룹선택자, 선택자를 복수로 정의할 수 있음. */
+h1,
+p {
+  color: green;
+}

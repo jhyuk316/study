@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>날짜 계산</title>
+  </head>
+  <body>
+    <h1>날짜 계산</h1>
+    <p><span id="result"></span>일이 경과 했습니다.</p>
+    <script>
+      var now = new Date();
+      var firstDay = new Date("2020-10-01");
+
+      var toNow = now.getTime();
+      var toFirst = firstDay.getTime();
+      var passTime = toNow - toFirst;
+
+      passTime = Math.round(passTime / (24 * 60 * 60 * 1000)); //일 계산
+
+      document.querySelector("#result").innerText = passTime;
+    </script>
+  </body>
+</html>

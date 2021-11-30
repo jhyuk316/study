@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: lightcyan;
+        /* 자동으로 반복으로 가득 참 */
+        background-image: url(images/healing.jpg);
+        background-repeat: repeat-x;
+        background-position: bottom;
+        /* 배경 위치 고정*/
+        background-attachment: fixed;
+        /* 한번에 쓰기 */
+        /* background: url(images/bg2.png) no-repeat top right fixed; */
+      }
+      #container {
+        height: 2400px;
+      }
+      .box {
+        float: left;
+        border: 1px solid gray;
+        width: 1000px;
+        height: 800px;
+        margin: 20px;
+        background: url(images/bg.jpg) no-repeat left top;
+
+        /* 기본값 */
+        background-size: auto;
+        /* 너비 높이 지정 */
+        /* background-size: 200px 400px; */
+        /* 너비값만 지정 */
+        /* background-size: 200px; */
+        /* 퍼센트 지정 */
+        /* background-size: 80%; */
+
+        /* 크기 맞추기 */
+        /* background-size: contain; */
+        /* 꽉채우기 */
+        /* background-size: cover; */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>배경 꾸미기</h1>
+      <div class="box"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>레드향 주문</title>
+  </head>
+  <body>
+    <h1>레드향 주문하기</h1>
+    <form>
+      <fieldset>
+        <legend>배송 정보</legend>
+        <ul id="shipping">
+          <li>
+            <!-- 읽기 전용 -->
+            <label for="prod">주문 상품</label>
+            <input type="text" id="prod" value="상품용 3kg" readonly />
+          </li>
+          <li>
+            <!-- required 필수 필드-->
+            <!-- autofocus 커서가 처음 위치하는 곳-->
+            <label for="user-name">이름</label>
+            <input type="text" id="user-name" required autofocus />
+          </li>
+          <li>
+            <label for="adrr">주소</label>
+            <input type="text" id="adrr" required />
+          </li>
+          <li>
+            <label for="phone">전화</label>
+            <input type="tel" id="phone" required />
+          </li>
+          <li>
+            <label for="mail">이메일</label>
+            <input type="email" id="mail" />
+          </li>
+          <li>
+            <label for="memo">메모</label>
+            <!-- 글자 메모 cols rows는 대략적 영문 글자수로 크기 설정-->
+            <textarea id="memo" cols="40" rows="5"></textarea>
+          </li>
+        </ul>
+      </fieldset>
+      <div>
+        <input type="submit" value="주문하기" />
+        <input type="reset" value="취소하기" />
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        margin-bottom: 20px;
+      }
+      h1 {
+        padding-bottom: 5px;
+        border-bottom: 3px double gray;
+      }
+      .box1 {
+        /* 콘텐츠 영역의 너비, 높이임, 박스 크기가 아님*/
+        width: 200px;
+        height: 100px;
+        padding: 20px;
+        border: 10px solid #ccc;
+      }
+      .box2 {
+        /* 보더 박스(여백)까지 사이즈에 포함하라. */
+        box-sizing: border-box;
+        width: 200px;
+        height: 100px;
+        padding: 20px;
+        border: 10px solid lightblue;
+        border-radius: 10px;
+      }
+      .circle {
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>박스 모델</h1>
+    <p class="box1"></p>
+    <p class="box2"></p>
+    <img class="circle" src="images/activity.jpg" />
+  </body>
+</html>
