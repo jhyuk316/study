@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      #fontTable {
+        border: 1px solid #222;
+        width: 20em;
+      }
+      th,
+      td {
+        border: 1px solid #222;
+        padding: 5px;
+        text-align: center;
+        width: 2fr;
+      }
+
+      td:nth-child(1) {
+        text-align: end;
+      }
+
+      th {
+        background: linear-gradient(aliceblue, lightskyblue);
+      }
+
+      tr:nth-child(2n + 1) {
+        background-color: LightCyan;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="fontTable">
+      <tr>
+        <th>종류</th>
+        <th>속성</th>
+      </tr>
+      <tr>
+        <td>font-family</td>
+        <td>글꼴 종류</td>
+      </tr>
+      <tr>
+        <td>font-size</td>
+        <td>글자 크기</td>
+      </tr>
+      <tr>
+        <td>font-style</td>
+        <td>이텔릭체</td>
+      </tr>
+      <tr>
+        <td>font-weight</td>
+        <td>글자 굵기</td>
+      </tr>
+    </table>
+  </body>
+</html>

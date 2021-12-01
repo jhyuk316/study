@@ -104,7 +104,7 @@
 
 ### tag 속성 지원 브라우저 확인 사이트
 
-<caniuse.com>
+caniuse.com
 
 ## 2. CSS
 
@@ -130,10 +130,12 @@ h1 {
 }
 
 /* id선택자, 한번만 사용가능, 유일한 속성으로 지정 */
+#container {
+  border: 1px solid #222;
+  padding: 10px;
+}
 /* 여러번 사용한다고 해서 문제가 있지는 않음. */
 ```
-
-전체 선택자 웹문서 전체에 사용 \*를 사용
 
 ### CSS 우선순위
 
@@ -186,7 +188,7 @@ pc에 있는 폰트를 지정해주거나,
 
 웹폰트를 많이 쓰면 사이트가 느림.
 
-구글 폰트 <fonts.google.com>
+구글 폰트 fonts.google.com
 
 폰트를 고르고 임포트문을 복사함.
 
@@ -295,9 +297,9 @@ th {
 
 콘덴츠 영역을 둘러 쌓는 여백
 
-마진 - 박스 모델 사이의 여백
-보더 - 테두리 굵기
-패딩 - 콘덴츠와 테두리 사이의 여백
+- 마진 - 박스 모델 사이의 여백
+- 보더 - 테두리 굵기
+- 패딩 - 콘덴츠와 테두리 사이의 여백
 
 박스 모델 값 지정
 
@@ -314,7 +316,7 @@ border-witdh - 너비
 ```css
 #box1 {
   border-width: 2px; /* 상우하좌 모두 2px */
-  border-width: thick thin; /* 상굵 우얇 하굵 좌얇 번갈아가면서, 즉 상하 굴게 좌우 얇게  */
+  border-width: thick thin; /* 상굵 우얇 하굵 좌얇, 즉, 상하 굵게, 좌우 얇게  */
   border-width: 10px 5px 5px 2px; /* 상10 우5 하5 좌2*/
 }
 ```
@@ -324,7 +326,7 @@ border 색상
 ```css
 #box1 {
   border-color: red;
-  border-top-color: blue;
+  border-top-color: blue; /* 위에 테두리만 파란색 */
 }
 ```
 
@@ -360,7 +362,7 @@ border-radius: 10%;
 
 display
 
-display : block; -블럭요소로
+display : block; -블럭요소로  
 display : inline-block; 형태는 인라인으로 각 요소는 블럭으로
 
 float - 떠있게 함
@@ -376,10 +378,10 @@ float - 떠있게 함
 위치 설정
 top, right, bottom, left 브라우저에서 얼마나 떨어져있나
 
-position:static - 기본값, 소스가 나열 된 순서대로
-position:relative - 이전 요소와의 상대 위치
-position:fixed - 브라우저 기준 항상 고정
-position:absolute - 상위 요소 중 relative라고 설정된 것으로부터 고정.
+- position: static - 기본값, 소스가 나열 된 순서대로
+- position: relative - 이전 요소와의 상대 위치
+- position: fixed - 브라우저 기준 항상 고정
+- position: absolute - 상위 요소 중 relative라고 설정된 것으로부터 고정.
 
 [position.html](position.html) 참조
 
@@ -461,7 +463,7 @@ div {
      background-color: white;
      color: blue; /* 글자색을 파란색으로 */
    }
-   /* 자식 선택자 > 자식 요소에만 영향 */
+   /* 자식 선택자 > 자식 요소에만 영향, 손자 영향 X */
    section > p {
      background-color: white;
      color: green;
@@ -488,15 +490,15 @@ div {
    }
    ```
 
-   | 종류         | 선택요소                      | 예시                                      |
-   | ------------ | ----------------------------- | ----------------------------------------- | ------ | ----- |
-   | [속성]       | 해당 속성이 있는 요소         | [href]                                    |
-   | [속성=값]    | 속성 값이 있는 요소           | [target=_black]                           |
-   | [속성 ~= 값] | 속성값이 포함된 요소(단어별)  | [class ~= button]                         |
-   | [속성        | = 값]                         | 속성값이 포함된 요소(하이픈 포함, 단어별) | [title | = us] |
-   | [속성 ^= 값] | 속성값으로 시작되는 요소      | [title ^= eng]                            |
-   | [속성 %= 값] | 속성값으로 끝나는 요소        | [herf $= xls]                             |
-   | [속성 *= 값] | 속성값의 일부가 일치하는 요소 | [herf *= w3]                              |
+   | 종류          | 선택요소                                  | 예시              |
+   | ------------- | ----------------------------------------- | ----------------- |
+   | [속성]        | 해당 속성이 있는 요소                     | [href]            |
+   | [속성=값]     | 속성 값이 있는 요소                       | [target=_black]   |
+   | [속성 ~= 값]  | 속성값이 포함된 요소(단어별)              | [class ~= button] |
+   | [속성 \|= 값] | 속성값이 포함된 요소(하이픈 포함, 단어별) | [title \| = us]   |
+   | [속성 ^= 값]  | 속성값으로 시작되는 요소                  | [title ^= eng]    |
+   | [속성 %= 값]  | 속성값으로 끝나는 요소                    | [herf $= xls]     |
+   | [속성 *= 값]  | 속성값의 일부가 일치하는 요소             | [herf *= w3]      |
 
 3. 가상 클래스 선택자
 
@@ -572,10 +574,10 @@ viewprot - 실제 내용이 표시되는 영역
 <meta name="viewport" content="width-device-width, initial-scale=1">
 ```
 
-vw(viewport width) : 1vw는 뷰포트 너비값의 1%
-vh(viewport height) : 1vh는 뷰포트 높이값의 1%
-vmin(viewport mininum) : 뷰포트의 너비와 높이중에서 작은 값의 1%
-vmax(viewport maximum) : 뷰포트의 너비와 높이중에서 큰 값의 1%
+- vw(viewport width) : 1vw는 뷰포트 너비값의 1%
+- vh(viewport height) : 1vh는 뷰포트 높이값의 1%
+- vmin(viewport mininum) : 뷰포트의 너비와 높이중에서 작은 값의 1%
+- vmax(viewport maximum) : 뷰포트의 너비와 높이중에서 큰 값의 1%
 
 미디어 쿼리
 
@@ -626,7 +628,7 @@ and : 복수 조건
 
 단말기 화면 크기 확인 및 추천 뷰포트 <https://yesviz.com/devices.php>
 
-#### 플렉스 박스
+### 플렉스 박스
 
 - 그리드 레이아웃
 
@@ -645,12 +647,12 @@ and : 복수 조건
 
    ![플렉스 박스](images/Front기초_플렉스%20박스.png)
 
-- 플렉스 컨테이너(부모)
-- 플렉스 항목
-- 주축 : 보통 가로를 주축으로 함
-- 교차축 : 주축과 교차하는 축
+   - 플렉스 컨테이너(부모)
+   - 플렉스 항목
+   - 주축 : 보통 가로를 주축으로 함
+   - 교차축 : 주축과 교차하는 축
 
-  모질라 flexbox 참조
+   모질라 flexbox 참조
 
 2. CSS 그리드 레이아웃
 
@@ -900,7 +902,7 @@ setAttribute() - 속성 노드의 값을 바꿈
 
 쿼리로 변수로 받아서 처리 가능
 
-- addEventListener(이벤트, 함수, 캡처 여부) - 이벤트 처리기 연결
+- addEventListener(이벤트명, 함수, 캡처 여부) - 이벤트 처리기 연결
   - 캡처 여부 - 기본 false, true 캡처링, false 버블링,
   - 캡처링 - 부모 노드에서 자식 노드로 전달
   - 버블링 - 자식 노드에서 부모 노드로 전달
@@ -936,8 +938,8 @@ setAttribute() - 속성 노드의 값을 바꿈
 
 부모 노드에서 자식 노드를 삭제 해야함.
 
-parentNode - 부모 요소 노드 값
-removeChild(자식노드) - 자식노드 삭제
+1. parentNode - 부모 요소 노드 값
+2. removeChild(자식노드) - 자식노드 삭제
 
 ---
 
