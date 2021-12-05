@@ -1,4 +1,4 @@
-package TwoSum;
+package Array.TwoSum;
 // 1. Two Sum
 // https://leetcode.com/problems/two-sum/
 
@@ -21,23 +21,6 @@ public class TwoSum {
     }
 }
 
-// O(n^2)
-// class Solution {
-// public int[] twoSum(int[] nums, int target) {
-// int[] res = { 0, 0 };
-// for (int i = 0; i < nums.length; ++i) {
-// for (int j = i + 1; j < nums.length; ++j) {
-// if (nums[i] + nums[j] == target) {
-// res[0] = i;
-// res[1] = j;
-// return res;
-// }
-// }
-// }
-// return res;
-// }
-// }
-
 
 // O(n)
 class Solution {
@@ -52,5 +35,23 @@ class Solution {
             }
         }
         return new int[] {0, 0};
+    }
+}
+
+
+// O(n^2)
+class Solution1 {
+    public int[] twoSum(int[] nums, int target) {
+        int[] res = {0, 0};
+        for (int i = 0; i < nums.length; ++i) {
+            for (int j = i + 1; j < nums.length; ++j) {
+                if (nums[i] + nums[j] == target) {
+                    res[0] = i;
+                    res[1] = j;
+                    return res;
+                }
+            }
+        }
+        return res;
     }
 }

@@ -1,4 +1,4 @@
-package SquaresofaSortedArray;
+package Array.SquaresofaSortedArray;
 // 977. Squares of a Sorted Array
 // https://leetcode.com/problems/squares-of-a-sorted-array/
 
@@ -8,19 +8,20 @@ public class SquaresofaSortedArray {
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        int[] nums = { -7, -3, 2, 3, 10 };
+        int[] nums = {-7, -3, 2, 3, 10};
         int[] res = sol.sortedSquares(nums);
         System.out.println(Arrays.toString(res));
 
-        int[] nums1 = { -7, -3, -1, 1 };
+        int[] nums1 = {-7, -3, -1, 1};
         res = sol.sortedSquares(nums1);
         System.out.println(Arrays.toString(res));
 
-        int[] nums2 = { -4, -4, -3 };
+        int[] nums2 = {-4, -4, -3};
         res = sol.sortedSquares(nums2);
         System.out.println(Arrays.toString(res));
     }
 }
+
 
 class Solution {
     public int[] sortedSquares(int[] nums) {

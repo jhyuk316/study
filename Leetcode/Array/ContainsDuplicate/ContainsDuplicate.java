@@ -1,4 +1,4 @@
-package ContainsDuplicate;
+package Array.ContainsDuplicate;
 // 217. Contains Duplicate
 // https://leetcode.com/problems/contains-duplicate/
 

@@ -1,4 +1,4 @@
-package BestTimetoBuyandSellStock;
+package Array.BestTimetoBuyandSellStock;
 // 121. Best Time to Buy and Sell Stock
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
@@ -7,11 +7,12 @@ public class BestTimetoBuyandSellStock {
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        System.out.println(sol.maxProfit(new int[]{7,1,5,3,6,4}));
-        System.out.println(sol.maxProfit(new int[]{7,6,4,3,1}));
-        System.out.println(sol.maxProfit(new int[]{3,9,1,5,1}));
+        System.out.println(sol.maxProfit(new int[] {7, 1, 5, 3, 6, 4}));
+        System.out.println(sol.maxProfit(new int[] {7, 6, 4, 3, 1}));
+        System.out.println(sol.maxProfit(new int[] {3, 9, 1, 5, 1}));
     }
 }
+
 
 class Solution {
     public int maxProfit(int[] prices) {
