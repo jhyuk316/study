@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,31 +27,29 @@ class Solution {
             }
         }
 
-        // System.out.println(numMap);
+        Arrays.sort(nums);
 
         Set<List<Integer>> resSet = new HashSet<List<Integer>>();
 
         int target = 0;
         for (int i = 0; i < nums.length - 2; ++i) {
+            if (nums[i] > 0) {
+                break;
+            }
             if (numMap.get(nums[i]) == 1) {
                 numMap.remove(nums[i]);
             } else {
                 numMap.put(nums[i], numMap.get(nums[i]) - 1);
             }
 
-            Map<Integer, Integer> tempMap = new HashMap<>(numMap);
-            // System.out.println(tempMap);
-
-            for (int j = i + 1; j < nums.length - 1; ++j) {
-                if (tempMap.get(nums[j]) == 1) {
-                    tempMap.remove(nums[j]);
-                } else {
-                    tempMap.put(nums[j], tempMap.get(nums[j]) - 1);
+            for (int j = nums.length - 1; j > i; --j) {
+                if (nums[j] < 0) {
+                    break;
                 }
-
                 target = 0 - nums[i] - nums[j];
 
-                if (tempMap.containsKey(target)) {
+                if ((target == nums[j] && numMap.get(nums[j]) > 1)
+                        || (target != nums[j] && numMap.containsKey(target))) {
                     List<Integer> temp = new ArrayList<Integer>();
                     temp.add(nums[i]);
                     temp.add(nums[j]);
@@ -83,14 +82,20 @@ class Solution1 {
         Set<List<Integer>> resSet = new HashSet<List<Integer>>();
 
         for (int i = 0; i < nums.length - 2; ++i) {
-            for (int j = i + 1; j < nums.length - 1; ++j) {
+            if (numList.get(i) > 0) {
+                break;
+            }
+            for (int j = nums.length - 1; j > i; --j) {
+                if (numList.get(j) < 0) {
+                    break;
+                }
                 int target = 0 - numList.get(i) - numList.get(j);
-                int k = binarySearch(numList, target, j + 1, numList.size() - 1);
+                int k = binarySearch(numList, target, i + 1, j - 1);
                 if (k != -1) {
                     List<Integer> temp = new ArrayList<Integer>();
                     temp.add(numList.get(i));
-                    temp.add(numList.get(j));
                     temp.add(numList.get(k));
+                    temp.add(numList.get(j));
                     resSet.add(temp);
                 }
             }
@@ -126,10 +131,20 @@ public class threeSum {
         Solution sol = new Solution();
 
         System.out.println(sol.threeSum(new int[] {-1, 0, 1, 2, -1, -4}));
-        // System.out.println(sol.threeSum(new int[] {-100, 0, 10, 2, -1, -4}));
-        // System.out.println(sol.threeSum(new int[] {0, 0, 0, 2, 0, -4}));
-        // System.out.println(sol.threeSum(new int[] {}));
-        // System.out.println(sol.threeSum(new int[] {0}));
+
+        // [[-2, -1, 3], [-3, 0, 3], [-2, 0, 2]]
+        System.out.println(sol.threeSum(new int[] {-3, -2, -1, 0, 2, 3}));
+
+        System.out.println(sol.threeSum(new int[] {1, 1, -2}));
+        System.out.println(sol.threeSum(new int[] {0, 2, 3}));
+        System.out.println(sol.threeSum(new int[] {-3, -2, -1}));
+        System.out.println(sol.threeSum(new int[] {-1, 0, 1, 0}));
+        System.out.println(sol.threeSum(new int[] {3, -2, 1, 0}));
+
+        System.out.println(sol.threeSum(new int[] {-100, 0, 10, 2, -1, -4}));
+        System.out.println(sol.threeSum(new int[] {0, 2, 0, 2, 0, -4}));
+        System.out.println(sol.threeSum(new int[] {}));
+        System.out.println(sol.threeSum(new int[] {0}));
     }
 
 }

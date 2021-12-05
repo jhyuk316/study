@@ -19,9 +19,9 @@ Array
 - (해결 O(n)) Maximum Subarray - <https://leetcode.com/problems/maximum-subarray/>
 - (해결 O(n)) Maximum Product Subarray - <https://leetcode.com/problems/maximum-product-subarray/>
 - (해결 O(logn) Find Minimum in Rotated Sorted Array - <https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/>
-- Search in Rotated Sorted Array - <https://leetcode.com/problems/search-in-rotated-sorted-array/>
-- 3Sum - <https://leetcode.com/problems/3sum/>
-- Container With Most Water - <https://leetcode.com/problems/container-with-most-water/>
+- [] Search in Rotated Sorted Array - <https://leetcode.com/problems/search-in-rotated-sorted-array/>
+- [x]O(n^2) 3Sum - <https://leetcode.com/problems/3sum/>
+- [] Container With Most Water - <https://leetcode.com/problems/container-with-most-water/>
 
 ---
 
