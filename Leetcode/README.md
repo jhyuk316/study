@@ -27,17 +27,17 @@ Array
 
 Binary
 
-- [x] Sum of Two Integers - <https://leetcode.com/problems/sum-of-two-integers/>
-- [ ] Number of 1 Bits - <https://leetcode.com/problems/number-of-1-bits/>
-- [ ] Counting Bits - <https://leetcode.com/problems/counting-bits/>
-- [ ] Missing Number - <https://leetcode.com/problems/missing-number/>
-- [ ] Reverse Bits - <https://leetcode.com/problems/reverse-bits/>
+- [x] O(1?) Sum of Two Integers - <https://leetcode.com/problems/sum-of-two-integers/>
+- [x] O(n) Number of 1 Bits - <https://leetcode.com/problems/number-of-1-bits/>
+- [x] O(n) Counting Bits - <https://leetcode.com/problems/counting-bits/>
+- [x] O(n) Missing Number - <https://leetcode.com/problems/missing-number/>
+- [x] O(n) Reverse Bits - <https://leetcode.com/problems/reverse-bits/>
 
 ---
 
 Dynamic Programming
 
-- [ ] Climbing Stairs - <https://leetcode.com/problems/climbing-stairs/>
+- [x] O(n) Climbing Stairs - <https://leetcode.com/problems/climbing-stairs/>
 - [ ] Coin Change - <https://leetcode.com/problems/coin-change/>
 - [ ] Longest Increasing Subsequence - <https://leetcode.com/problems/longest-increasing-subsequence/>
 - [ ] Longest Common Subsequence -
