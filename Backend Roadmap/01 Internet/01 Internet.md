@@ -31,11 +31,12 @@
 ## 2. What is HTTP?
 
 - HyperText Transfer Protocol
-  하이퍼텍스트를 전송하기 위해 클라이언트와 서버 사이에 이루어 지는 요청/응답 프로토콜  
-   - 하이퍼텍스트란? 한 페이지씩 순차적으로 넘겨 보는 문자열이 아니라 링크를 통해 건너 뛸 수 있는 문자열. 대표적으로 HTML이 있음.  
-   클라언트는 HTTP request를 서버로 보내고 서버는 HTTP response를 보낸다.  
-   HTTP는 상태를 저장하지 않기 때문에 각 요청간의 상관 관계를 표현 할 수 없다.  
-   그래서 cookie와 session을 통해 상태를 유지한다.
+  하이퍼텍스트를 전송하기 위해 클라이언트와 서버 사이에 이루어 지는 요청/응답 프로토콜
+
+  - 하이퍼텍스트란? 한 페이지씩 순차적으로 넘겨 보는 문자열이 아니라 링크를 통해 건너 뛸 수 있는 문자열. 대표적으로 HTML이 있음.  
+    클라언트는 HTTP request를 서버로 보내고 서버는 HTTP response를 보낸다.  
+    HTTP는 상태를 저장하지 않기 때문에 각 요청간의 상관 관계를 표현 할 수 없다.  
+    그래서 cookie와 session을 통해 상태를 유지한다.
 
   - Requsest  
     클라이언트가 서버에 요구하는 것  
@@ -81,7 +82,7 @@
   웹표준화 기구인 W3C에서 정해진대로 CSS 명세에 따라 HTML을 해석하여 표시함.  
   구조
 
-      ![Untitled](Internet/Untitled.png)
+  ![Main components of the browser](images/Main%20components%20of%20the%20browser.png)
 
   - 사용자 인터페이스 : 주소표시줄, 이전/다음, 새로고침, 북마크 등
   - 브라우저 엔진 : 브라우저의 핵심. 브라우저의 동작을 담당
@@ -93,23 +94,23 @@
 
 - DOM(Document Object Model) 문서 객체 모델  
    서 내의 모든 요소를 정의하고, 각각의 요소에 접근하는 방법을 제공  
-   ![DOM Tree](Internet/dom-tree.png)
+   ![DOM Tree](images/dom-tree.png)
 
 - CSSOM  
    HTML 대신 CSS가 대상인 DOM  
-   ![CSSOM Tree](Internet/cssom-tree.png)
+   ![CSSOM Tree](images/cssom-tree.png)
 
 - Render Tree  
    CSSOM 및 DOM 트리는 결합하여 렌더링 트리를 형성  
    렌더링 트리는 표시되는 각 요소의 레이아웃을 계산하는 데 사용되고 픽셀을 화면에 렌더링하는 페인트 프로세스에 대한 입력으로 처리
-  ![Render Tree](Internet/render-tree.png)
+  ![Render Tree](images/render-tree.png)
 
 ## 4. DNS and How it works?
 
 - Domain Name System  
   호스트의 도메인 이름을 호스트의 네트워크 주소로 바꾸거나 그 반대의 변환을 수행
 
-      ![Untitled](Internet/Untitled%201.png)
+  ![dns-lookup-diagram](images/dns-lookup-diagram.png)
 
   - DNS 리커서 : 웹 브라우저 등의 애플리케이션을 통해 클라이언트 컴퓨터로부터 쿼리를 받는 서버. 도서관 사서
   - 루트 이름 서버 : 다른 더욱 특정한 위치에 대한 참조. 도서관 책장 분류 색인
@@ -122,7 +123,7 @@
   도메인 레지스트리에게서 등록된 이름.  
   e.g. www.google.com(.루트) .루트는 숨어 있음.
 
-      ![Untitled](Internet/Untitled%202.png)
+  ![Domain name](images/domain_name.png)
 
   - 일반최상위도메인 : 국제 인터넷 주소자원 관리기관(ICANN)이 관리. .com, .org, .net 등이 있고, 대부분 국가와 관계 없이 등록 가능
   - 국가코드최상위도메인 : 각국의 NIC에서 관리하는 국가별 도메인. .kr, .jp .cn
@@ -148,14 +149,16 @@ e.g. AWS(Amazon Web Services), Cloudflare, GitHub, Microsoft Azure
   메일 도메인을 직접 구매하여 메일 서버에 연결하여 운영  
   e.g. Google Workspace
 
-- 서버 호스팅(Server hosting)  
-   ![VPS](Internet/vps.png)
+- 서버 호스팅(Server hosting)
 
   - 가상 사설 서버(Virtual Private Server)  
     가상 서버의 공유 코어 CPU를 할당 받음  
-    ![VDS](Internet/vds.png)
+    ![VPS](images/vps.png)
+
   - 가상 전용 서버(Virtural Decicated Server)  
-    가상 서버의 전용 코어 CPU를 할당 받음
+    가상 서버의 전용 코어 CPU를 할당 받음  
+    ![VDS](images/vds.png)
+
   - 전용 서버 호스팅(Decicated Hosting service)  
     한대의 서버를 통째로 할당
     e.g. AWS metal
