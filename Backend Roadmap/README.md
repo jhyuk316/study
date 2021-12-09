@@ -1,5 +1,7 @@
 # Backend Roadmap
 
+Backend Roadmap을 따라가며 공부하는 기록
+
 ![Backend Roadmap](https://roadmap.sh/roadmaps/backend.png)
 
 [https://roadmap.sh/backend](https://roadmap.sh/backend)
