@@ -14,6 +14,55 @@ import java.util.HashSet;
 
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+
+        if (nums.length < 3) {
+            return res;
+        }
+
+        Arrays.sort(nums);
+
+        int i, j, k;
+        for (i = 0; i < nums.length - 2; ++i) {
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            j = i + 1;
+            k = nums.length - 1;
+            while (j < k) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
+                    j++;
+                    continue;
+                }
+                if (k < nums.length - 1 && nums[k] == nums[k + 1]) {
+                    k--;
+                    continue;
+                }
+
+                if (nums[j] + nums[k] + nums[i] == 0) {
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(nums[i]);
+                    temp.add(nums[j]);
+                    temp.add(nums[k]);
+                    res.add(temp);
+                    j++;
+                    k--;
+                } else if (nums[j] + nums[k] + nums[i] > 0) {
+                    k--;
+                } else if (nums[j] + nums[k] + nums[i] < 0) {
+                    j++;
+                }
+            }
+        }
+        return res;
+    }
+}
+
+
+// O(n^2)
+// 2개의 숫자를 결정하고 마지막 숫자를 map으로 찾음.
+class Solution2 {
+    public List<List<Integer>> threeSum(int[] nums) {
         if (nums.length < 3) {
             return new ArrayList<List<Integer>>();
         }
@@ -55,7 +104,7 @@ class Solution {
                     temp.add(nums[j]);
                     temp.add(target);
 
-                    Collections.sort(temp);
+                    // Collections.sort(temp);
                     resSet.add(temp);
                 }
             }
@@ -67,6 +116,8 @@ class Solution {
 }
 
 
+// O(n^2)
+// 2개의 숫자를 결정하고 마지막 숫자를 binarySearch로 찾음.
 class Solution1 {
     public List<List<Integer>> threeSum(int[] nums) {
         if (nums.length < 3) {
@@ -135,16 +186,17 @@ public class threeSum {
         // [[-2, -1, 3], [-3, 0, 3], [-2, 0, 2]]
         System.out.println(sol.threeSum(new int[] {-3, -2, -1, 0, 2, 3}));
 
-        System.out.println(sol.threeSum(new int[] {1, 1, -2}));
-        System.out.println(sol.threeSum(new int[] {0, 2, 3}));
-        System.out.println(sol.threeSum(new int[] {-3, -2, -1}));
-        System.out.println(sol.threeSum(new int[] {-1, 0, 1, 0}));
-        System.out.println(sol.threeSum(new int[] {3, -2, 1, 0}));
+        System.out.println(sol.threeSum(new int[] {0, 0, 0, 0}));
+        // System.out.println(sol.threeSum(new int[] {1, 1, -2}));
+        // System.out.println(sol.threeSum(new int[] {0, 2, 3}));
+        // System.out.println(sol.threeSum(new int[] {-3, -2, -1}));
+        // System.out.println(sol.threeSum(new int[] {-1, 0, 1, 0}));
+        // System.out.println(sol.threeSum(new int[] {3, -2, 1, 0}));
 
-        System.out.println(sol.threeSum(new int[] {-100, 0, 10, 2, -1, -4}));
-        System.out.println(sol.threeSum(new int[] {0, 2, 0, 2, 0, -4}));
-        System.out.println(sol.threeSum(new int[] {}));
-        System.out.println(sol.threeSum(new int[] {0}));
+        // System.out.println(sol.threeSum(new int[] {-100, 0, 10, 2, -1, -4}));
+        // System.out.println(sol.threeSum(new int[] {0, 2, 0, 2, 0, -4}));
+        // System.out.println(sol.threeSum(new int[] {}));
+        // System.out.println(sol.threeSum(new int[] {0}));
     }
 
 }

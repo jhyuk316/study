@@ -21,7 +21,7 @@ Array
 - [x] O(logn) Find Minimum in Rotated Sorted Array - <https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/>
 - [x] O(logn) Search in Rotated Sorted Array - <https://leetcode.com/problems/search-in-rotated-sorted-array/>
 - [x] O(n^2) 3Sum - <https://leetcode.com/problems/3sum/>
-- [ ] Container With Most Water - <https://leetcode.com/problems/container-with-most-water/>
+- [x] O(n) Container With Most Water - <https://leetcode.com/problems/container-with-most-water/>
 
 ---
 
@@ -38,9 +38,9 @@ Binary
 Dynamic Programming
 
 - [x] O(n) Climbing Stairs - <https://leetcode.com/problems/climbing-stairs/>
-- [ ] Coin Change - <https://leetcode.com/problems/coin-change/>
+- [x] O(n) Coin Change - <https://leetcode.com/problems/coin-change/>
 - [ ] Longest Increasing Subsequence - <https://leetcode.com/problems/longest-increasing-subsequence/>
-- [ ] Longest Common Subsequence -
+- [ ] Longest Common Subsequence - <https://leetcode.com/problems/longest-common-subsequence/>
 - [ ] Word Break Problem - <https://leetcode.com/problems/word-break/>
 - [ ] Combination Sum - <https://leetcode.com/problems/combination-sum-iv/>
 - [ ] House Robber - <https://leetcode.com/problems/house-robber/>
@@ -76,7 +76,7 @@ Interval
 
 Linked List
 
-- [ ] Reverse a Linked List - <https://leetcode.com/problems/reverse-linked-list/>
+- [x] O(n) Reverse a Linked List - <https://leetcode.com/problems/reverse-linked-list/>
 - [ ] Detect Cycle in a Linked List - <https://leetcode.com/problems/linked-list-cycle/>
 - [ ] Merge Two Sorted Lists - <https://leetcode.com/problems/merge-two-sorted-lists/>
 - [ ] Merge K Sorted Lists - <https://leetcode.com/problems/merge-k-sorted-lists/>
