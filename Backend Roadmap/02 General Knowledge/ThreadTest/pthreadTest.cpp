@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int sum;                   /* this data is shared by the thread(s) */
 void *runner(void *param); /* threads call this function */
@@ -24,7 +25,9 @@ int main(int argc, char *argv[])
     /* create the thread */
     pthread_create(&tid, &attr, runner, argv[1]);
     /* wait for the thread to exit */
-    pthread_join(tid, NULL);
+    // pthread_join(tid, NULL);
+
+    sleep(5);
 
     printf("sum = %d\n", sum);
     printf("main end\n");
@@ -37,7 +40,7 @@ void *runner(void *param)
     printf("pthread Start\n");
     for (i = 1; i <= upper; i++)
     {
-        // printf("%d\n", i);
+        printf("%d\n", i);
         sum += i;
     }
     printf("pthread End\n");
