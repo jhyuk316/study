@@ -39,7 +39,7 @@ Dynamic Programming
 
 - [x] O(n) Climbing Stairs - <https://leetcode.com/problems/climbing-stairs/>
 - [x] O(n) Coin Change - <https://leetcode.com/problems/coin-change/>
-- [ ] Longest Increasing Subsequence - <https://leetcode.com/problems/longest-increasing-subsequence/>
+- [x] O(n^2) Longest Increasing Subsequence - <https://leetcode.com/problems/longest-increasing-subsequence/>
 - [ ] Longest Common Subsequence - <https://leetcode.com/problems/longest-common-subsequence/>
 - [ ] Word Break Problem - <https://leetcode.com/problems/word-break/>
 - [ ] Combination Sum - <https://leetcode.com/problems/combination-sum-iv/>
