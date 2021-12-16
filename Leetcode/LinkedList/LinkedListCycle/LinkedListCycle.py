@@ -5,9 +5,9 @@ from typing import List, Optional
 
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, x):
+    def __init__(self, x, next=None):
         self.val = x
-        self.next = None
+        self.next = next
 
     def __str__(self):
         temp = f"{self.val}"
@@ -29,6 +29,7 @@ def makeCycleList(list: List[int], pos: int) -> ListNode:
             cycleNode = tempNode
         tempList.next = tempNode
         tempList = tempList.next
+
     tempNode.next = cycleNode
 
     return result.next

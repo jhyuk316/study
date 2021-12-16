@@ -4,6 +4,7 @@ package DynamicProgramming.CoinChange;
 
 import java.util.Arrays;
 
+// O(m*n)
 class Solution {
     public int coinChange(int[] coins, int amount) {
         if (amount == 0) {

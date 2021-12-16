@@ -3,7 +3,7 @@
 
 from typing import List
 
-
+# O(n^2)
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         lengthList = [0 for _ in range(len(nums))]
