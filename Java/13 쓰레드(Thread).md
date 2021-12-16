@@ -21,7 +21,17 @@
   - [9.1 synchronized를 이용한 동기화](#91-synchronized를-이용한-동기화)
   - [9.2 wait()와 notify()](#92-wait와-notify)
   - [생산자 소비자 문제](#생산자-소비자-문제)
+    - [기아현상과 경쟁 상태](#기아현상과-경쟁-상태)
   - [9.3 Lock과 Condition을 이용한 동기화](#93-lock과-condition을-이용한-동기화)
+    - [ReentrantLock 생성자](#reentrantlock-생성자)
+    - [ReentrantLock과 Condition](#reentrantlock과-condition)
+  - [9.4 volatile](#94-volatile)
+    - [volatile로 long과 double을 원자화](#volatile로-long과-double을-원자화)
+  - [9.5 fork & join 프레임웍](#95-fork--join-프레임웍)
+    - [compute()의 구현](#compute의-구현)
+    - [다른 쓰레드의 작업 훔쳐오기](#다른-쓰레드의-작업-훔쳐오기)
+    - [fork()와 join()](#fork와-join)
+- [출처](#출처)
 
 ## 1. 프로세스와 쓰레드
 
@@ -488,16 +498,356 @@ class RunnableEx22 implements Runnable {
 
 ### 9.2 wait()와 notify()
 
+효율적인 동기화가 가능  
+동기화 블록 내에서만 사용가능
+
 - wait() - 쓰레드가 락을 반납하고 waiting pool에 대기.
 - notify() - waiting pool에서 대기중인 쓰레드 중 하나를 깨움.
 - notifyAll() - waiting pool에서 대기중인 모든 쓰레드를 깨움.
 
 ### 생산자 소비자 문제
 
+- 한 요리사는 Table에 음식 추가, 두 손님은 Table의 음식 소비
+- 요리사와 손님이 같은 객체(Table)를 공유
+
+소스 참조 - synchronized가 없을 때 <https://github.com/castello/javajungsuk3/blob/master/source/ch13/ThreadWaitEx1.java>
+
+- 음식 추가하려는데 먹거나, 하나 남은 음식을 두 손님이 먹음
+
+소스 참조 - synchronized만 추가 <https://github.com/castello/javajungsuk3/blob/master/source/ch13/ThreadWaitEx2.java>
+
+- 손님이 lock을 가진 채로 무한히 대기
+
+소스 참조 - synchronized에 wait()와 notify() 적용
+
+```java
+class ThreadWaitEx3 {
+    public static void main(String[] args) throws Exception {
+        Table table = new Table();
+
+        new Thread(new Cook(table), "COOK1").start();
+        new Thread(new Customer(table, "donut"),  "CUST1").start();
+        new Thread(new Customer(table, "burger"), "CUST2").start();
+
+        Thread.sleep(2000);
+        System.exit(0);
+    }
+}
+
+class Customer implements Runnable {    // 소비자
+    private Table table;
+    private String food;
+
+    Customer(Table table, String food) {
+        this.table = table;
+        this.food  = food;
+    }
+
+    public void run() {
+        while(true) {
+            try { Thread.sleep(100);} catch(InterruptedException e) {}
+            String name = Thread.currentThread().getName();
+
+            table.remove(food);
+            System.out.println(name + " ate a " + food);
+        } // while
+    }
+}
+
+class Cook implements Runnable {    // 생산자
+    private Table table;
+
+    Cook(Table table) {	this.table = table; }
+
+    public void run() {
+        while(true) {
+            int idx = (int)(Math.random()*table.dishNum());
+            table.add(table.dishNames[idx]);
+            try { Thread.sleep(10);} catch(InterruptedException e) {}
+        } // while
+    }
+}
+
+class Table {
+    String[] dishNames = { "donut","donut","burger" }; // donut의 확률을 높인다.
+    final int MAX_FOOD = 6;
+    private ArrayList<String> dishes = new ArrayList<>();
+
+    public synchronized void add(String dish) {
+        while(dishes.size() >= MAX_FOOD) {
+                String name = Thread.currentThread().getName();
+                System.out.println(name+" is waiting.");
+                try {
+                    wait(); // COOK쓰레드가 lock을 풀고 대기
+                    Thread.sleep(500);
+                } catch(InterruptedException e) {}
+        }
+        dishes.add(dish);
+        notify();  // 기다리고 있는 CUST를 깨우기 위함.
+        System.out.println("Dishes:" + dishes.toString());
+    }
+
+    public void remove(String dishName) {
+
+        synchronized(this) {
+            String name = Thread.currentThread().getName();
+
+            while(dishes.size()==0) {
+                    System.out.println(name+" is waiting.");
+                    try {
+                        wait(); // CUST쓰레드를 기다리게 한다.
+                        Thread.sleep(500);
+                    } catch(InterruptedException e) {}
+            }
+
+            while(true) {
+                for(int i=0; i<dishes.size();i++) {
+                    if(dishName.equals(dishes.get(i))) {
+                        dishes.remove(i);
+                        notify(); // 잠자고 있는 COOK을 깨우기 위함
+                        return;
+                    }
+                } // for문의 끝
+
+                try {
+                    System.out.println(name+" is waiting.");
+                    wait(); // 원하는 음식이 없는 CUST쓰레드를 기다리게 한다.
+                    Thread.sleep(500);
+                } catch(InterruptedException e) {}
+            } // while(true)
+        } // synchronized
+    }
+
+    public int dishNum() { return dishNames.length; }
+}
+```
+
+- waiting pool에 요리사와 손님이 같이 기다림.
+- notify()로 누가 깨어 날지 모름.
+
+#### 기아현상과 경쟁 상태
+
+- starvation - 운이 나쁘면 요리사는 계속 대기
+  - 해결 notifyAll()로 모든 쓰레드를 깨움.
+- race condition - notifyAll()로 손님과 요루시가 모두 깨어나 서로 lock을 얻으려고 싸움.
+
 ### 9.3 Lock과 Condition을 이용한 동기화
 
-> ReentrantLock - 재진입이 가능한 lock. 가장 일반적인 배타 lock  
-> ReentrantReadWriteLock - 읽기에는 공유적이고, 쓰기에는 배타적인 lock  
-> StampedLock - ReentrantReadWriteLock에 낙관적인 lock의 가능을 추가
->
-> - 낙관적인 lock - 일단 변경하고 나중에 확인.
+JDK 1.5 추가
+
+synchronized는 메서드 내에서만 사용 가능한 제약이 있음.
+
+Lock 클래스
+
+- ReentrantLock - 재진입이 가능한 lock. 가장 일반적인 배타 lock
+- ReentrantReadWriteLock - 읽기에는 공유적(동시에 가능)이고, 쓰기에는 배타적인 lock
+  - 읽기 lock은 여러 개가 동시에 됨.
+  - 쓰기 lock은 하나만 되며, 읽기 lock과 동시에 되지 않음.
+- StampedLock - ReentrantReadWriteLock에 낙관적인 lock의 가능을 추가, JDK 1.8
+  - 낙관적인 읽기 lock - 쓰기 lock에 의해 lock이 해제 됨.
+  - 무조건 읽기 lock을 거는 것이 아니라 쓰기와 읽기가 충돌 할때만 쓰기가 끝난 후에 읽기 lock을 검.
+
+```java
+int getBalance(){
+    long stamp = lock.tryOptimisticRead();  // 낙관적 읽기 lock
+
+    int curBalance = this.balance;  // 공유 데이터 balance 읽기
+
+    if(!lock.validate(stamp)){      // 쓰기 lock에 의해 낙관적 읽기 lock이 풀렸는지 체크
+        stamp = lock.readLock();    // lock이 풀렸으면, 읽기 lock을 얻기 위해 대기
+
+        try{
+            curBalance = this.balance;  // 공유 데이터 읽기
+        } finally {
+            lock.unlockRead(stamp);     // 읽기 lock 해제
+        }
+    }
+}
+```
+
+#### ReentrantLock 생성자
+
+```java
+ReentrantLock()
+ReentrantLock(boolean fair) // true면 lock이 풀렸을 때 가장 오래 기다린 쓰레드가 lock획득.
+```
+
+수동으로 lock을 잠그고 품
+
+```java
+void lock();        // lock 획득. lock을 얻을 때까지 쓰레드를 block 시킴.
+void unlock();      // lock 해제
+boolean isLocked(); // lock이 잠겼는가?
+```
+
+```java
+synchronized(lock){
+// 임계 영역
+}
+
+// 위 아래는 똑같은 코드
+
+lock.lock();
+try{
+// 임계 영역
+} finally { // 언락은 finally로 처리하는게 안전
+    lock.unlock();
+}
+```
+
+```java
+void tryLock(); // lock을 얻으려고 시도, 못 얻으면 포기.(lock()과 달리 대기하지 않음.)
+void tryLock(long timeout, TimeUnit unit) throws InterruptedException
+// InterruptedException 대기 시간 동안 interrupt()에 의해 작업이 취소 될 수 있음을 뜻함.
+```
+
+- 일정 시간만 시도하므로 lock()에 비해 응답성이 좋음.
+
+#### ReentrantLock과 Condition
+
+- 위의 예제의 손님과 요리사를 구분 하기 위한 condition
+
+```java
+private ReentrantLock lock = new ReentrantLock();   // lock 생성
+// lock으로 condition 생성
+private Condition forCook = lock.newCondition();
+private Condition forCust = lock.newCondition();
+```
+
+| Object                  | Condition                               |
+| ----------------------- | --------------------------------------- |
+| void wait()             | void await()                            |
+|                         | void awaitUninterruptibly()             |
+| void wait(long timeout) | boolean await(long time, TimeUnit unit) |
+|                         | long awaitNanos(long nanosTimeout)      |
+|                         | boolean awaitUntil(Date deadline)       |
+| void notify()           | void signal()                           |
+| void notifyAll()        | void signalAll()                        |
+
+소스 참조 - condition을 추가한 소비자 생산자 <https://github.com/castello/javajungsuk3/blob/master/source/ch13/ThreadWaitEx4.java>
+
+- 기아 상태와 경쟁 상태를 줄었음. 완전한 제거는 불가능.
+
+### 9.4 volatile
+
+![multicore_cache](<images/13%20쓰레드(Thread)_multicore_cache.png>)
+
+- 현대의 컴퓨터는 멀티 코어 프로세서를 장착
+- 코어마다 별도의 캐쉬를 가짐.
+
+```java
+volatile int counter = 0;   // 코어가 읽을 때 캐쉬가 아니라 메모리에서 읽어 옴.
+```
+
+synchronized 활용
+
+```java
+public synchronized void plus(){    // synchronized을 들어갈 때 나올 때, 캐쉬와 메모리를 동기화 함.
+    counter++;
+}
+```
+
+#### volatile로 long과 double을 원자화
+
+변수의 읽기와 쓰기를 원자화(동기화 해주는 것이 아님을 주의)
+
+- JVM은 4byte단위로 처리
+- int 이하의 자료형은 한번에 읽거나 씀
+- 8byte인 long과 double은 한번에 읽고 쓸 수 없음.
+- 그 사이에 다른 쓰레드가 들어 올 수 있음.
+
+```java
+volatile long sharedVal;    // long타입(8 byte)를 원자화
+volatile double sharedVal;  // double타입(8 byte)를 원자화
+```
+
+- 원자화 - 작업을 더 이상 나눌 수 없음. 한 동작으로 취급
+- synchronized블록도 일종의 원자화
+
+### 9.5 fork & join 프레임웍
+
+JDK 1.7
+
+> RecursiveAction - 반환값이 없는 작업을 구현할 때 사용  
+> RecursiveTask - 반환값이 있는 작업을 구현할 때 사용
+
+```java
+// RecursiveAction - 반환값이 없는 작업을 구현할 때 사용
+public abstract class RecursiveAction extends ForkJoinTask<void>{
+    // ...
+    protected abstract void compute();  // 상속으로 구현
+    // ...
+}
+// RecursiveTask - 반환값이 있는 작업을 구현할 때 사용
+public abstract class RecursiveTask<V> extends ForkJoinTask<V>{
+    // ...
+    protected abstract V compute();  // 상속으로 구현
+    // ...
+}
+```
+
+```java
+class SumTask extends RecursiveTask<Long>{
+    // ...
+    public Long compute(){
+        // ...
+    }
+}
+
+ForkJoinPool pool = new ForkJoinPool(); // 쓰레드 풀 생성
+SumTask task = new SumTask(form, to);   // 수행할 작업 생성
+Long result = pool.invoke(task);        // invoke()를 호출해서 작업 시작
+```
+
+#### compute()의 구현
+
+- 작업 범위를 어떻게 나눌 것인지만 정의해주면 됨.
+- 일반적인 재귀 함수와 동일한 구조.
+
+```java
+// 5개가 될 때까지 일을 반으로 쪼갬.
+public Long compute() {
+    long size = to - from;
+
+    if(size <= 5)     // 더할 숫자가 5개 이하면
+        return sum(); // 숫자의 합을 반환
+
+    long half = (from+to)/2;
+
+    // 범위를 반으로 나눠서 두 개의 작업을 생성
+    SumTask leftSum  = new SumTask(from, half);
+    SumTask rightSum = new SumTask(half+1, to);
+
+    leftSum.fork(); // 비동기 메서드, 호출 후 결과를 기다리지 않음.
+
+    return rightSum.compute() + leftSum.join(); // 동기 메서드 호출 결과를 기다림.
+}
+```
+
+![compute](<images/13%20쓰레드(Thread)_compute.png>)
+
+- 한 쪽은 fork() 한쪽은 compute()를 재귀함
+
+#### 다른 쓰레드의 작업 훔쳐오기
+
+![work stealing](<images/13%20쓰레드(Thread)_work_stealing.png>)
+
+- 작업 큐에 추가된 작업역시 compute()에 의해 더이상 나눌 수 없을 때까지 나뉨.
+- work stealing - 자신의 작업 큐가 비어있는 쓰레드는 다른 쓰레드의 작업규에서 작업을 가져와 수행
+- 모든 쓰레드가 골고루 작업하게 됨.
+
+#### fork()와 join()
+
+> fork() - 해당 작업을 쓰레드 풀의 작업 큐에 넣음. 비동기 메서드  
+> join() - 해당 작업의 수행이 끝날 때까지 기다렸다가, 수행이 끝나면 결과를 반환. 동기 메서드
+
+- 비동기 메서드 - 호출만 할 뿐, 그 결과를 기다리지 않음.
+
+소스 참조 - fork()와 join() <https://github.com/castello/javajungsuk3/blob/master/source/ch13/ForkJoinEx1.java>
+
+- for문이 더 빠르다 fork()와 join()의 오버헤드 때문에.
+- 멀티 쓰레딩이 이득이 되는 작업에만 적절히 적용 할 것.
+
+## 출처
+
+- Java Volatile Keyword <http://tutorials.jenkov.com/java-concurrency/volatile.html>
