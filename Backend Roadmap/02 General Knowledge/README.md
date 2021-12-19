@@ -4,15 +4,13 @@
 2. [Process Management](02.2%20Process%20Management.md)
 3. [Threads and Concurrency](02.3%20Threads%20and%20Concurrency.md)
 4. [Interprocess Communication](02.4%20Interprocess%20Communication.md)
-
-   - DeadLock
-   - 뮤텍스
-   - 세마포어
-
-5. Memory Management
-6. I/O management
-7. POSIX
-8. Basic Networking Concepts
+   - Process Synchronization
+5. [Deadlock](02.5%20Deadlock.md)
+6. [Main Memory Management](02.6%20Main%20Memory%20Management.md)
+7. [Virtual Memory Management](02.7%20Virtual%20Memory%20Main%20Management.md)
+8. I/O management
+9. POSIX
+10. Basic Networking Concepts
 
 A. terminal Usage
 

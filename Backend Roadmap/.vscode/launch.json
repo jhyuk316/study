@@ -5,18 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Java: Launch Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
       "name": "Python: Current File",
       "type": "python",
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal"
-    },
-    {
-      "type": "java",
-      "name": "Launch javaThread",
-      "request": "launch",
-      "mainClass": "javaThread",
-      "projectName": "Backend Roadmap_41163db6"
     },
     {
       "name": "g++.exe - Build and debug active file",
