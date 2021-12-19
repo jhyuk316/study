@@ -52,6 +52,7 @@ class Solution:
                 fast = fast.next.next
             except:
                 return False
+                
         return False
 
 

@@ -30,6 +30,7 @@ class Solution {
             j = i + 1;
             k = nums.length - 1;
             while (j < k) {
+                // skip same number
                 if (j > i + 1 && nums[j] == nums[j - 1]) {
                     j++;
                     continue;
