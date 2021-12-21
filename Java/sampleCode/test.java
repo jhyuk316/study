@@ -1,35 +1,32 @@
 import java.util.ArrayList;
-
-class NewClass {
-    int newField;
-
-    int getNewField() {
-        return newField;
-    }
-
-    @Deprecated
-    int oldField;
-
-    @Deprecated
-    int getOldField() {
-        return oldField;
-    }
-}
-
+import java.util.HashMap;
+import java.util.Map;
 
 class test {
-    // @SuppressWarnings("deprecation") // deprecation관련 경고를 억제
-    public static void main(String args[]) {
-        NewClass nc = new NewClass();
+	public static void main(String[] args) {
+		ArrayList<Integer> list = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+			list.add(i);
 
-        nc.oldField = 10; // @Depreacted가 붙은 대상을 사용
-        System.out.println(nc.getOldField()); // @Depreacted가 붙은 대상을 사용
+		// list의 모든 요소를 출력
+		list.forEach(i -> System.out.print(i + ","));
+		System.out.println();
 
-        @SuppressWarnings("unchecked") // 지네릭스 관련 경고를 억제
-        ArrayList<NewClass> list = new ArrayList(); // 타입을 지정하지 않음.
-        list.add(nc);
+		// list에서 2 또는 3의 배수를 제거한다.
+		list.removeIf(x -> x % 2 == 0 || x % 3 == 0);
+		System.out.println(list);
 
-        System.out.println("test");
-        System.out.println(list);
-    }
+		list.replaceAll(i -> i * 10); // list의 각 요소에 10을 곱한다.
+		System.out.println(list);
+
+		Map<String, String> map = new HashMap<>();
+		map.put("1", "1");
+		map.put("2", "2");
+		map.put("3", "3");
+		map.put("4", "4");
+
+		// map의 모든 요소를 {k,v}의 형식으로 출력한다.
+		map.forEach((k, v) -> System.out.print("{" + k + "," + v + "},"));
+		System.out.println();
+	}
 }

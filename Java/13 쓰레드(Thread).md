@@ -316,9 +316,9 @@ class ThreadEx14_2 extends Thread {
         while(i!=0 && !isInterrupted()) {
             System.out.println(i--);
             try {
-                Thread.sleep(1000);  // InterruptedException 발생으로 interrput 상태 false.
+                Thread.sleep(1000);  // InterruptedException 발생으로 interrupt 상태 false.
             } catch(InterruptedException e) {
-                // interrput(); InterruptedException 발생했을 때 interrput 상태를 다시 true로 설정
+                // interrupt(); InterruptedException 발생했을 때 interrupt 상태를 다시 true로 설정
             }
         }
 
