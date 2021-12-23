@@ -4,9 +4,10 @@ import pandas as pd
 N = 5
 
 Allocation = np.array([[0, 1, 0], [2, 0, 0], [3, 0, 2], [2, 1, 1], [0, 0, 2]])
-Max = np.array([[7, 5, 3], [3, 2, 2], [9, 0, 2], [2, 2, 2], [4, 3, 3]])
+Max = np.array([[7, 5, 3], [3, 2, 2], [13, 0, 2], [2, 2, 2], [4, 3, 3]])
 Available = np.array([3, 3, 2])
-Need = np.array([[7, 4, 3], [1, 2, 2], [6, 0, 0], [0, 1, 1], [4, 3, 1]])
+# Need = np.array([[7, 4, 3], [1, 2, 2], [10, 0, 0], [0, 1, 1], [4, 3, 1]])
+Need = np.array(Max - Allocation)
 
 data = {
     "Allocation": list(map(str, Allocation)),
