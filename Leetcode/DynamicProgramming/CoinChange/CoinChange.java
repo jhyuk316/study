@@ -31,7 +31,7 @@ class Solution {
 
         }
 
-        // System.out.println(Arrays.toString(count));
+        System.out.println(Arrays.toString(count));
         return count[amount] == 0 ? -1 : count[amount];
     }
 }
@@ -42,15 +42,15 @@ public class CoinChange {
         Solution sol = new Solution();
 
         System.out.println(sol.coinChange(new int[] {1, 2, 5}, 11));
-        System.out.println(sol.coinChange(new int[] {5}, 11));
-        System.out.println(sol.coinChange(new int[] {}, 11));
-        System.out.println(sol.coinChange(new int[] {}, 0));
-        System.out.println(sol.coinChange(new int[] {2}, 1));
+        // System.out.println(sol.coinChange(new int[] {5}, 11));
+        // System.out.println(sol.coinChange(new int[] {}, 11));
+        // System.out.println(sol.coinChange(new int[] {}, 0));
+        // System.out.println(sol.coinChange(new int[] {2}, 1));
 
-        System.out.println(sol.coinChange(new int[] {1, 2, 5}, 101));
-        System.out.println(sol.coinChange(new int[] {7, 12}, 14));
-        System.out.println(sol.coinChange(new int[] {7, 11}, 36));
-        System.out.println(sol.coinChange(new int[] {186, 419, 83, 408}, 6249));
+        // System.out.println(sol.coinChange(new int[] {1, 2, 5}, 101));
+        // System.out.println(sol.coinChange(new int[] {1, 7, 12}, 14));
+        // System.out.println(sol.coinChange(new int[] {7, 11}, 36));
+        // System.out.println(sol.coinChange(new int[] {186, 419, 83, 408}, 6249));
     }
 
 }
