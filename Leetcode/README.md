@@ -41,7 +41,7 @@ Dynamic Programming
 - [x] O(m\*n) Coin Change - <https://leetcode.com/problems/coin-change/>
 - [x] O(n^2) Longest Increasing Subsequence - <https://leetcode.com/problems/longest-increasing-subsequence/>
 - [x] O(m\*n^2) Longest Common Subsequence - <https://leetcode.com/problems/longest-common-subsequence/>
-- [ ] Word Break Problem - <https://leetcode.com/problems/word-break/>
+- [x] O(m\*n) Word Break Problem - <https://leetcode.com/problems/word-break/>
 - [ ] Combination Sum - <https://leetcode.com/problems/combination-sum-iv/>
 - [ ] House Robber - <https://leetcode.com/problems/house-robber/>
 - [ ] House Robber II - <https://leetcode.com/problems/house-robber-ii/>
