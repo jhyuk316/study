@@ -87,7 +87,7 @@ Linked List
 
 Matrix
 
-- [ ] Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
+- [x] space: O(1) Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
 - [ ] Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
 - [ ] Rotate Image - <https://leetcode.com/problems/rotate-image/>
 - [ ] Word Search - <https://leetcode.com/problems/word-search/>
@@ -96,8 +96,8 @@ Matrix
 
 String
 
-- [ ] Longest Substring Without Repeating Characters - <https://leetcode.com/problems/longest-substring-without-repeating-characters/>
-- [ ] Longest Repeating Character Replacement - <https://leetcode.com/problems/longest-repeating-character-replacement/>
+- [x] O(n) Longest Substring Without Repeating Characters - <https://leetcode.com/problems/longest-substring-without-repeating-characters/>
+- [x] O(n) Longest Repeating Character Replacement - <https://leetcode.com/problems/longest-repeating-character-replacement/>
 - [ ] Minimum Window Substring - <https://leetcode.com/problems/minimum-window-substring/>
 - [ ] Valid Anagram - <https://leetcode.com/problems/valid-anagram/>
 - [ ] Group Anagrams - <https://leetcode.com/problems/group-anagrams/>

@@ -1,5 +1,16 @@
 # 139. Word Break
 # https://leetcode.com/problems/word-break/
+#
+
+"""
+문제에 대한 생각.
+DP로 풀어야만 하는가? 의문이 들었다.
+DP가 아닌 방법으로 접근이 더 쉬웠던 것 같음.
+하지만 실패하고 DP로 풀려고 여러 방법을 시도.
+
+결과적으로 DP로 해결 하고 나니 신기하게도 전형적인 DP문제 였음. 충격!!!
+이 문제를 받고 어떻게 DP라는 것을 알 수 있을까?
+"""
 
 from typing import List
 
