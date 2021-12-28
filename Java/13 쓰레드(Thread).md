@@ -21,7 +21,7 @@
   - [9.1 synchronized를 이용한 동기화](#91-synchronized를-이용한-동기화)
   - [9.2 wait()와 notify()](#92-wait와-notify)
   - [생산자 소비자 문제](#생산자-소비자-문제)
-    - [기아현상과 경쟁 상태](#기아현상과-경쟁-상태)
+    - [기아 현상과 경쟁 상태](#기아-현상과-경쟁-상태)
   - [9.3 Lock과 Condition을 이용한 동기화](#93-lock과-condition을-이용한-동기화)
     - [ReentrantLock 생성자](#reentrantlock-생성자)
     - [ReentrantLock과 Condition](#reentrantlock과-condition)
@@ -91,8 +91,8 @@ class ThreadEx1_1 extends Thread {
 
 class ThreadEx1_2 implements Runnable {
     public void run() {
-        // Runnable인터페이스이므로 Thread의 메서드를 호출 할 수 없음.
-        // Thread.currentThread() - 현재 실행중인 Thread를 반환
+        // Runnable인터페이스이므로 Thread의 메서드를 호출할 수 없음.
+        // Thread.currentThread() - 현재 실행 중인 Thread를 반환
         System.out.println(Thread.currentThread().getName());   // Thread-1
     }
 }
@@ -167,8 +167,8 @@ public static final int NORM_PRIORITY = 5;  // 보통 우선순위
 | ----------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 |             | ThreadGroup(String name)                       | 지정된 이름의 쓰레드 그룹 생성                                                                                            |
 |             | ThreadGroup(ThreadGroup parent, String name)   | 지정된 쓰레드 그룹에 포함되는 쓰레드 그룹 생성                                                                            |
-| int         | activeCount()                                  | 쓰레드 그룹에 포함된 활성상태인 쓰레드 수 반환                                                                            |
-| int         | activeGroupCount()                             | 쓰레드 그룹에 포함된 활성상태인 쓰레드 그룹 수 반환                                                                       |
+| int         | activeCount()                                  | 쓰레드 그룹에 포함된 활성 상태인 쓰레드 수 반환                                                                           |
+| int         | activeGroupCount()                             | 쓰레드 그룹에 포함된 활성 상태인 쓰레드 그룹 수 반환                                                                      |
 | void        | checkAccess()                                  | 현재 실행중인 쓰레드가 쓰레드 그룹을 변경할 권한이 있는 체크. 없으면 SecurityException 발생                               |
 | void        | destroy()                                      | **Deprecated** 결함. 쓰레드 그룹과 하위 쓰레드 그룹까지 모두 삭제. 단, 쓰레드 그룹이나 하위 쓰레드 그룹이 비어 있어야 함. |
 | int         | enumerate(Thread[] list)                       | 쓰레드 그룹에 속한 쓰레드 또는 하위 쓰레드 그룹의 목록을 지정된 배열에 담고 그 개수를 반환                                |
@@ -221,17 +221,17 @@ void setDaemon(boolean on); // True 데몬 쓰레드 변경, False 사용자 쓰
 
 쓰레드 메서드
 
-| Modifier and Type | Method                        | Description                                                                                   |
-| ----------------- | ----------------------------- | --------------------------------------------------------------------------------------------- |
-| static void       | sleep(long millis)            | ms, ns단위로 쓰레드를 일시 정지. 시간이 지나면 자동적으로 다시 실행 대기 상태가 됨.           |
-| static void       | sleep(long millis, int nanos) |                                                                                               |
-| final void        | join()                        | 쓰레드가 완료되면 join()을 호출한 쓰레드로 돌아옴                                             |
-| final void        | join(long millis)             | 지정된 시간(ms, ns)동안 쓰레드 실행. 시간이 지나거나 완료되면 join()을 호출한 쓰레드로 돌아옴 |
-| final void        | join(long millis, int nanos)  |                                                                                               |
-| final void        | stop()                        | **Deprecated** 데드락 문제. 쓰레드 즉시 종료.                                                 |
-| final void        | suspend()                     | **Deprecated** 데드락 문제. 쓰레드를 일시 정지.                                               |
-| final void        | resume()                      | **Deprecated** 데드락 문제. suspend()된 쓰레드 재개                                           |
-| static void       | yield()                       | 실행 중에 자신의 실행시간을 다른 쓰레드에게 양보(yield)하고 자신은 실행 대기 상태가 됨.       |
+| Modifier and Type | Method                        | Description                                                                                    |
+| ----------------- | ----------------------------- | ---------------------------------------------------------------------------------------------- |
+| static void       | sleep(long millis)            | ms, ns단위로 쓰레드를 일시 정지. 시간이 지나면 자동적으로 다시 실행 대기 상태가 됨.            |
+| static void       | sleep(long millis, int nanos) |                                                                                                |
+| final void        | join()                        | 쓰레드가 완료되면 join()을 호출한 쓰레드로 돌아옴                                              |
+| final void        | join(long millis)             | 지정된 시간(ms, ns) 동안 쓰레드 실행. 시간이 지나거나 완료되면 join()을 호출한 쓰레드로 돌아옴 |
+| final void        | join(long millis, int nanos)  |                                                                                                |
+| final void        | stop()                        | **Deprecated** 데드락 문제. 쓰레드 즉시 종료.                                                  |
+| final void        | suspend()                     | **Deprecated** 데드락 문제. 쓰레드를 일시 정지.                                                |
+| final void        | resume()                      | **Deprecated** 데드락 문제. suspend()된 쓰레드 재개                                            |
+| static void       | yield()                       | 실행 중에 자신의 실행시간을 다른 쓰레드에게 양보(yield)하고 자신은 실행 대기 상태가 됨.        |
 
 ### 쓰레드 상태
 
@@ -248,11 +248,11 @@ void setDaemon(boolean on); // True 데몬 쓰레드 변경, False 사용자 쓰
 
 ![thread state](<images/13%20쓰레드(Thread)_thread_state.png>)
 
-1. 쓰레드 생성 후 start()를 호출하면, 실행대기열에 Runnable 상태로 대기.
+1. 쓰레드 생성 후 start()를 호출하면, 실행 대기열에 Runnable 상태로 대기.
 2. 자신의 차례가 되면 실행(running).
 3. 실행 시간이 다 되거나 yield()를 만나면 다시 실행 대기.
 4. 실행 중 suspend(), sleep(), wait(), join(), I/O block에 의해 일시정지.
-5. 지정시간 경과(time-out), notify(), resume(), interrupt()가 호출되면 다시 실행대기열에 대기.
+5. 지정시간 경과(time-out), notify(), resume(), interrupt()가 호출되면 다시 실행 대기열에 대기.
 6. 실행을 모두 마치거나 stop()이 호출되면 쓰레드 소멸.
 
 ### sleep()
@@ -333,7 +333,7 @@ class ThreadEx14_2 extends Thread {
 
 - Deprecated.
 - suspend() - 쓰레드를 멈춤. resume()로만 깨어남
-- resume() - 쓰레드를 다시 실행대기 상태로 만듬.
+- resume() - 쓰레드를 다시 실행 대기 상태로 만듦.
 - stop() - 쓰레드 즉시 종료.
 
 소스 참조 - Ex17 <https://github.com/castello/javajungsuk3/blob/master/source/ch13/ThreadEx17.java>
@@ -341,7 +341,7 @@ class ThreadEx14_2 extends Thread {
 ### yield() - 다른 쓰레드에게 양보
 
 - 자신의 실행시간을 다음 차례의 쓰레드에게 양보(yield) 후 실행대기.
-- yield()와 interrupt()를 적절히 사용하면, 응답성과 효율을 높힘.
+- yield()와 interrupt()를 적절히 사용하면, 응답성과 효율을 높임.
 
 yield()와 interrupt() 예제 - Ex17번과 비교
 
@@ -410,7 +410,7 @@ class ThreadEx18_1 implements Runnable {
     }
 
     public void stop() {
-        stopped = true; // stop()이 호출되도 1초간 sleep한뒤 정지
+        stopped = true; // stop()이 호출돼도 1초간 sleep한뒤 정지
         th.interrupt(); // 하지만 interrupt()로 예외가 발생하여 즉시 종료.
         System.out.println(th.getName() + " - interrupt() by stop()");
     }
@@ -423,8 +423,8 @@ class ThreadEx18_1 implements Runnable {
 
 ### join - 다른 쓰레드의 작업을 기다림
 
-- 지정 된 시간동안 특정 쓰레드가 작업하는 것을 기다림.
-- interrupt()에 의해 대기상테에서 벗어날 수 있음.
+- 지정된 시간 동안 특정 쓰레드가 작업하는 것을 기다림.
+- interrupt()에 의해 대기상태에서 벗어날 수 있음.
 
 ```java
 void join();    // 다른 쓰레드가 마치길 계속 기다림.
@@ -499,11 +499,11 @@ class RunnableEx22 implements Runnable {
 ### 9.2 wait()와 notify()
 
 효율적인 동기화가 가능  
-동기화 블록 내에서만 사용가능
+동기화 블록 내에서만 사용 가능
 
 - wait() - 쓰레드가 락을 반납하고 waiting pool에 대기.
-- notify() - waiting pool에서 대기중인 쓰레드 중 하나를 깨움.
-- notifyAll() - waiting pool에서 대기중인 모든 쓰레드를 깨움.
+- notify() - waiting pool에서 대기 중인 쓰레드 중 하나를 깨움.
+- notifyAll() - waiting pool에서 대기 중인 모든 쓰레드를 깨움.
 
 ### 생산자 소비자 문제
 
@@ -625,7 +625,7 @@ class Table {
 - waiting pool에 요리사와 손님이 같이 기다림.
 - notify()로 누가 깨어 날지 모름.
 
-#### 기아현상과 경쟁 상태
+#### 기아 현상과 경쟁 상태
 
 - starvation - 운이 나쁘면 요리사는 계속 대기
   - 해결 notifyAll()로 모든 쓰레드를 깨움.
@@ -644,8 +644,8 @@ Lock 클래스
   - 읽기 lock은 여러 개가 동시에 됨.
   - 쓰기 lock은 하나만 되며, 읽기 lock과 동시에 되지 않음.
 - StampedLock - ReentrantReadWriteLock에 낙관적인 lock의 가능을 추가, JDK 1.8
-  - 낙관적인 읽기 lock - 쓰기 lock에 의해 lock이 해제 됨.
-  - 무조건 읽기 lock을 거는 것이 아니라 쓰기와 읽기가 충돌 할때만 쓰기가 끝난 후에 읽기 lock을 검.
+  - 낙관적인 읽기 lock - 쓰기 lock에 의해 lock이 해제됨.
+  - 무조건 읽기 lock을 거는 것이 아니라 쓰기와 읽기가 충돌할 때만 쓰기가 끝난 후에 읽기 lock을 검.
 
 ```java
 int getBalance(){
@@ -685,12 +685,12 @@ synchronized(lock){
 // 임계 영역
 }
 
-// 위 아래는 똑같은 코드
+// 위아래는 똑같은 코드
 
 lock.lock();
 try{
 // 임계 영역
-} finally { // 언락은 finally로 처리하는게 안전
+} finally { // 언락은 finally로 처리하는 게 안전
     lock.unlock();
 }
 ```
@@ -698,14 +698,14 @@ try{
 ```java
 void tryLock(); // lock을 얻으려고 시도, 못 얻으면 포기.(lock()과 달리 대기하지 않음.)
 void tryLock(long timeout, TimeUnit unit) throws InterruptedException
-// InterruptedException 대기 시간 동안 interrupt()에 의해 작업이 취소 될 수 있음을 뜻함.
+// InterruptedException 대기 시간 동안 interrupt()에 의해 작업이 취소될 수 있음을 뜻함.
 ```
 
 - 일정 시간만 시도하므로 lock()에 비해 응답성이 좋음.
 
 #### ReentrantLock과 Condition
 
-- 위의 예제의 손님과 요리사를 구분 하기 위한 condition
+- 위의 예제의 손님과 요리사를 구분하기 위한 condition
 
 ```java
 private ReentrantLock lock = new ReentrantLock();   // lock 생성
@@ -733,28 +733,28 @@ private Condition forCust = lock.newCondition();
 ![multicore_cache](<images/13%20쓰레드(Thread)_multicore_cache.png>)
 
 - 현대의 컴퓨터는 멀티 코어 프로세서를 장착
-- 코어마다 별도의 캐쉬를 가짐.
+- 코어마다 별도의 캐시를 가짐.
 
 ```java
-volatile int counter = 0;   // 코어가 읽을 때 캐쉬가 아니라 메모리에서 읽어 옴.
+volatile int counter = 0;   // 코어가 읽을 때 캐시가 아니라 메모리에서 읽어 옴.
 ```
 
 synchronized 활용
 
 ```java
-public synchronized void plus(){    // synchronized을 들어갈 때 나올 때, 캐쉬와 메모리를 동기화 함.
+public synchronized void plus(){    // synchronized을 들어갈 때 나올 때, 캐시와 메모리를 동기화함.
     counter++;
 }
 ```
 
 #### volatile로 long과 double을 원자화
 
-변수의 읽기와 쓰기를 원자화(동기화 해주는 것이 아님을 주의)
+변수의 읽기와 쓰기를 원자화 (동기화 해주는 것이 아님을 주의)
 
-- JVM은 4byte단위로 처리
-- int 이하의 자료형은 한번에 읽거나 씀
-- 8byte인 long과 double은 한번에 읽고 쓸 수 없음.
-- 그 사이에 다른 쓰레드가 들어 올 수 있음.
+- JVM은 4byte 단위로 처리
+- int 이하의 자료형은 한 번에 읽거나 씀
+- 8byte인 long과 double은 한 번에 읽고 쓸 수 없음.
+- 그 사이에 다른 쓰레드가 들어올 수 있음.
 
 ```java
 volatile long sharedVal;    // long타입(8 byte)를 원자화
@@ -768,17 +768,17 @@ volatile double sharedVal;  // double타입(8 byte)를 원자화
 
 JDK 1.7
 
-> RecursiveAction - 반환값이 없는 작업을 구현할 때 사용  
-> RecursiveTask - 반환값이 있는 작업을 구현할 때 사용
+> RecursiveAction - 반환 값이 없는 작업을 구현할 때 사용  
+> RecursiveTask - 반환 값이 있는 작업을 구현할 때 사용
 
 ```java
-// RecursiveAction - 반환값이 없는 작업을 구현할 때 사용
+// RecursiveAction - 반환 값이 없는 작업을 구현할 때 사용
 public abstract class RecursiveAction extends ForkJoinTask<void>{
     // ...
     protected abstract void compute();  // 상속으로 구현
     // ...
 }
-// RecursiveTask - 반환값이 있는 작업을 구현할 때 사용
+// RecursiveTask - 반환 값이 있는 작업을 구현할 때 사용
 public abstract class RecursiveTask<V> extends ForkJoinTask<V>{
     // ...
     protected abstract V compute();  // 상속으로 구현
@@ -826,13 +826,13 @@ public Long compute() {
 
 ![compute](<images/13%20쓰레드(Thread)_compute.png>)
 
-- 한 쪽은 fork() 한쪽은 compute()를 재귀함
+- 한쪽은 fork() 한쪽은 compute()를 재귀함
 
 #### 다른 쓰레드의 작업 훔쳐오기
 
 ![work stealing](<images/13%20쓰레드(Thread)_work_stealing.png>)
 
-- 작업 큐에 추가된 작업역시 compute()에 의해 더이상 나눌 수 없을 때까지 나뉨.
+- 작업 큐에 추가된 작업 역시 compute()에 의해 더 이상 나눌 수 없을 때까지 나뉨.
 - work stealing - 자신의 작업 큐가 비어있는 쓰레드는 다른 쓰레드의 작업규에서 작업을 가져와 수행
 - 모든 쓰레드가 골고루 작업하게 됨.
 
@@ -846,7 +846,7 @@ public Long compute() {
 소스 참조 - fork()와 join() <https://github.com/castello/javajungsuk3/blob/master/source/ch13/ForkJoinEx1.java>
 
 - for문이 더 빠르다 fork()와 join()의 오버헤드 때문에.
-- 멀티 쓰레딩이 이득이 되는 작업에만 적절히 적용 할 것.
+- 멀티 쓰레딩이 이득이 되는 작업에만 적절히 적용할 것.
 
 ## 출처
 
