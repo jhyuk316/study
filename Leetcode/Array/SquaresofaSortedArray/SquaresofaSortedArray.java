@@ -29,6 +29,7 @@ class Solution {
         int origin = 0;
         int pos = 0;
 
+        // 가장 절대값이 작은 숫자 찾기 origin
         for (int i = 1; i < nums.length; ++i) {
             if (Math.abs(nums[i - 1]) >= Math.abs(nums[i])) {
                 origin = i;
@@ -37,6 +38,7 @@ class Solution {
             }
         }
 
+        // origin으로 부터 가까운 숫자부터 추가
         int before = origin - 1;
         int after = origin + 1;
         res[pos++] = nums[origin] * nums[origin];
@@ -49,6 +51,8 @@ class Solution {
                 before--;
             }
         }
+
+        // 나머지 처리
         while (before >= 0) {
             res[pos++] = nums[before] * nums[before];
             before--;

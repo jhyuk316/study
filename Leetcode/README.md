@@ -1,16 +1,37 @@
 # LeetCode 풀어보기
 
+- [추천 문제 75선](#추천-문제-75선)
+  - [Array](#array)
+  - [Binary](#binary)
+  - [Dynamic Programming](#dynamic-programming)
+  - [Graph](#graph)
+  - [Interval](#interval)
+  - [Linked List](#linked-list)
+  - [Matrix](#matrix)
+  - [String](#string)
+  - [Tree](#tree)
+  - [Heap](#heap)
+- [개인적으로 풀어 본 것](#개인적으로-풀어-본-것)
+  - [Array](#array-1)
+  - [Binary](#binary-1)
+  - [Dynamic Programming](#dynamic-programming-1)
+  - [Graph](#graph-1)
+  - [Interval](#interval-1)
+  - [Linked List](#linked-list-1)
+  - [Matrix](#matrix-1)
+  - [String](#string-1)
+  - [Tree](#tree-1)
+  - [Heap](#heap-1)
+
 아래의 추천 문제를 모두 풀어 보는 것을 목표로 함.
 
 ## 추천 문제 75선
 
-## New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
+New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 출처 - <https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-75-LeetCode-Questions-to-Save-Your-Time-OaM1orEU>
 
----
-
-Array
+### Array
 
 - [x] O(n) Two Sum - <https://leetcode.com/problems/two-sum/>
 - [x] O(n) Best Time to Buy and Sell Stock - <https://leetcode.com/problems/best-time-to-buy-and-sell-stock/>
@@ -23,9 +44,7 @@ Array
 - [x] O(n^2) 3Sum - <https://leetcode.com/problems/3sum/>
 - [x] O(n) Container With Most Water - <https://leetcode.com/problems/container-with-most-water/>
 
----
-
-Binary
+### Binary
 
 - [x] O(1?) Sum of Two Integers - <https://leetcode.com/problems/sum-of-two-integers/>
 - [x] O(n) Number of 1 Bits - <https://leetcode.com/problems/number-of-1-bits/>
@@ -33,9 +52,7 @@ Binary
 - [x] O(n) Missing Number - <https://leetcode.com/problems/missing-number/>
 - [x] O(n) Reverse Bits - <https://leetcode.com/problems/reverse-bits/>
 
----
-
-Dynamic Programming
+### Dynamic Programming
 
 - [x] O(n) Climbing Stairs - <https://leetcode.com/problems/climbing-stairs/>
 - [x] O(m\*n) Coin Change - <https://leetcode.com/problems/coin-change/>
@@ -49,11 +66,9 @@ Dynamic Programming
 - [ ] Unique Paths - <https://leetcode.com/problems/unique-paths/>
 - [ ] Jump Game - <https://leetcode.com/problems/jump-game/>
 
----
+### Graph
 
-Graph
-
-- [ ] Clone Graph - <https://leetcode.com/problems/clone-graph/>
+- [x] O(n) Clone Graph - <https://leetcode.com/problems/clone-graph/>
 - [ ] Course Schedule - <https://leetcode.com/problems/course-schedule/>
 - [ ] Pacific Atlantic Water Flow - <https://leetcode.com/problems/pacific-atlantic-water-flow/>
 - [ ] Number of Islands - <https://leetcode.com/problems/number-of-islands/>
@@ -62,9 +77,7 @@ Graph
 - [ ] Graph Valid Tree (Leetcode Premium) - <https://leetcode.com/problems/graph-valid-tree/>
 - [ ] Number of Connected Components in an Undirected Graph (Leetcode Premium) - <https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/>
 
----
-
-Interval
+### Interval
 
 - [ ] Insert Interval - <https://leetcode.com/problems/insert-interval/>
 - [ ] Merge Intervals - <https://leetcode.com/problems/merge-intervals/>
@@ -72,9 +85,7 @@ Interval
 - [ ] Meeting Rooms (Leetcode Premium) - <https://leetcode.com/problems/meeting-rooms/>
 - [ ] Meeting Rooms II (Leetcode Premium) - <https://leetcode.com/problems/meeting-rooms-ii/>
 
----
-
-Linked List
+### Linked List
 
 - [x] O(n) Reverse a Linked List - <https://leetcode.com/problems/reverse-linked-list/>
 - [x] O(n^2?) Detect Cycle in a Linked List - <https://leetcode.com/problems/linked-list-cycle/>
@@ -83,18 +94,14 @@ Linked List
 - [ ] Remove Nth Node From End Of List - <https://leetcode.com/problems/remove-nth-node-from-end-of-list/>
 - [ ] Reorder List - <https://leetcode.com/problems/reorder-list/>
 
----
-
-Matrix
+### Matrix
 
 - [x] space: O(1) Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
 - [ ] Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
 - [ ] Rotate Image - <https://leetcode.com/problems/rotate-image/>
 - [ ] Word Search - <https://leetcode.com/problems/word-search/>
 
----
-
-String
+### String
 
 - [x] O(n) Longest Substring Without Repeating Characters - <https://leetcode.com/problems/longest-substring-without-repeating-characters/>
 - [x] O(n) Longest Repeating Character Replacement - <https://leetcode.com/problems/longest-repeating-character-replacement/>
@@ -107,11 +114,9 @@ String
 - [ ] Palindromic Substrings - <https://leetcode.com/problems/palindromic-substrings/>
 - [ ] Encode and Decode Strings (Leetcode Premium) - <https://leetcode.com/problems/encode-and-decode-strings/>
 
----
+### Tree
 
-Tree
-
-- [ ] Maximum Depth of Binary Tree - <https://leetcode.com/problems/maximum-depth-of-binary-tree/>
+- [x] O(n) Maximum Depth of Binary Tree - <https://leetcode.com/problems/maximum-depth-of-binary-tree/>
 - [ ] Same Tree - <https://leetcode.com/problems/same-tree/>
 - [ ] Invert/Flip Binary Tree - <https://leetcode.com/problems/invert-binary-tree/>
 - [ ] Binary Tree Maximum Path Sum - <https://leetcode.com/problems/binary-tree-maximum-path-sum/>
@@ -126,10 +131,37 @@ Tree
 - [ ] Add and Search Word - <https://leetcode.com/problems/add-and-search-word-data-structure-design/>
 - [ ] Word Search II - <https://leetcode.com/problems/word-search-ii/>
 
----
-
-Heap
+### Heap
 
 - [ ] Merge K Sorted Lists - <https://leetcode.com/problems/merge-k-sorted-lists/>
 - [ ] Top K Frequent Elements - <https://leetcode.com/problems/top-k-frequent-elements/>
 - [ ] Find Median from Data Stream - <https://leetcode.com/problems/find-median-from-data-stream/>
+
+---
+
+## 개인적으로 풀어 본 것
+
+### Array
+
+- [x] O(n) 반복 O, 재귀 X 344. Reverse String <https://leetcode.com/problems/reverse-string/>
+- [x] O(n) 977. Squares of a Sorted Array https://leetcode.com/problems/squares-of-a-sorted-array/
+
+### Binary
+
+### Dynamic Programming
+
+### Graph
+
+### Interval
+
+### Linked List
+
+### Matrix
+
+### String
+
+- [x] O(nlogn) 179. Largest Number <https://leetcode.com/problems/largest-number/>
+
+### Tree
+
+### Heap

@@ -1,7 +1,11 @@
+# 344. Reverse String
+# https://leetcode.com/problems/reverse-string/
+
+
 from typing import List
 
 
-# O(n) fail
+# O(n) 재귀 fail
 class Solution:
     def reverseString(self, s: List[str]) -> List[str]:
         l = len(s)
@@ -10,7 +14,7 @@ class Solution:
         return self.reverseString(s[l // 2 :]) + self.reverseString(s[: l // 2])
 
 
-# O(n)
+# O(n) 반복
 class Solution2:
     def reverseString(self, s: List[str]) -> None:
         self._reverseString(s, 0)
