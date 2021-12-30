@@ -33,7 +33,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Array
 
-- [x] O(n) Two Sum - <https://leetcode.com/problems/two-sum/>
+- [x] O(n) 1. Two Sum - <https://leetcode.com/problems/two-sum/>
 - [x] O(n) Best Time to Buy and Sell Stock - <https://leetcode.com/problems/best-time-to-buy-and-sell-stock/>
 - [x] O(n) Contains Duplicate - <https://leetcode.com/problems/contains-duplicate/>
 - [x] O(n) Product of Array Except Self - <https://leetcode.com/problems/product-of-array-except-self/>
@@ -54,11 +54,11 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Dynamic Programming
 
-- [x] O(n) Climbing Stairs - <https://leetcode.com/problems/climbing-stairs/>
-- [x] O(m\*n) Coin Change - <https://leetcode.com/problems/coin-change/>
-- [x] O(n^2) Longest Increasing Subsequence - <https://leetcode.com/problems/longest-increasing-subsequence/>
-- [x] O(m\*n^2) Longest Common Subsequence - <https://leetcode.com/problems/longest-common-subsequence/>
-- [x] O(m\*n) Word Break Problem - <https://leetcode.com/problems/word-break/>
+- [x] O(n) 70. Climbing Stairs - <https://leetcode.com/problems/climbing-stairs/>
+- [x] O(m\*n) 322. Coin Change - <https://leetcode.com/problems/coin-change/>
+- [x] O(n^2) 300. Longest Increasing Subsequence - <https://leetcode.com/problems/longest-increasing-subsequence/>
+- [x] O(m\*n^2) 1143. Longest Common Subsequence - <https://leetcode.com/problems/longest-common-subsequence/>
+- [x] O(m\*n) 139. Word Break Problem - <https://leetcode.com/problems/word-break/>
 - [ ] Combination Sum - <https://leetcode.com/problems/combination-sum-iv/>
 - [ ] House Robber - <https://leetcode.com/problems/house-robber/>
 - [ ] House Robber II - <https://leetcode.com/problems/house-robber-ii/>
@@ -79,7 +79,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Interval
 
-- [ ] Insert Interval - <https://leetcode.com/problems/insert-interval/>
+- [x] O(n) 57. Insert Interval - <https://leetcode.com/problems/insert-interval/>
 - [ ] Merge Intervals - <https://leetcode.com/problems/merge-intervals/>
 - [ ] Non-overlapping Intervals - <https://leetcode.com/problems/non-overlapping-intervals/>
 - [ ] Meeting Rooms (Leetcode Premium) - <https://leetcode.com/problems/meeting-rooms/>

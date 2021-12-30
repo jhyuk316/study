@@ -15,7 +15,7 @@ class Solution:
                         temp[0] = 1
                     else:
                         temp[j] = max(dp[:j]) + 1
-            # print(temp)
+            print(temp)
             dp = temp.copy()
 
         # print(list(text1))
@@ -27,11 +27,11 @@ class Solution:
 if __name__ == "__main__":
     sol = Solution()
     print(sol.longestCommonSubsequence("abcde", "ace"))
-    print(sol.longestCommonSubsequence("bcdef", "ace"))
-    print(sol.longestCommonSubsequence("abcbbaba", "aaabbbbba"))
-    print(sol.longestCommonSubsequence("abcbabab", "ab"))
-    print(sol.longestCommonSubsequence("cabdeee", "aceee"))
-    print(sol.longestCommonSubsequence("ezupkr", "ubmrapg"))
-    print(sol.longestCommonSubsequence("ezupkrbmapg", "ubmrapg"))
-    print(sol.longestCommonSubsequence("pmjghexybyrgzczy", "hafcdqbgncrcbihkd"))
-    print(sol.longestCommonSubsequence("hafcdqbgncrcbihkd", "pmjghexybyrgzczy"))
+    # print(sol.longestCommonSubsequence("bcdef", "ace"))
+    # print(sol.longestCommonSubsequence("abcbbaba", "aaabbbbba"))
+    # print(sol.longestCommonSubsequence("abcbabab", "ab"))
+    # print(sol.longestCommonSubsequence("cabdeee", "aceee"))
+    # print(sol.longestCommonSubsequence("ezupkr", "ubmrapg"))
+    # print(sol.longestCommonSubsequence("ezupkrbmapg", "ubmrapg"))
+    # print(sol.longestCommonSubsequence("pmjghexybyrgzczy", "hafcdqbgncrcbihkd"))
+    # print(sol.longestCommonSubsequence("hafcdqbgncrcbihkd", "pmjghexybyrgzczy"))
