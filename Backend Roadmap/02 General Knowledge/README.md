@@ -8,9 +8,10 @@
 5. [Deadlock](02.5%20Deadlock.md)
 6. [Main Memory Management](02.6%20Main%20Memory%20Management.md)
 7. [Virtual Memory Management](02.7%20Virtual%20Memory%20Main%20Management.md)
-8. I/O management
-9. POSIX
-10. Basic Networking Concepts
+8. File-System Management
+9. I/O management
+10. POSIX
+11. Basic Networking Concepts
 
 A. terminal Usage
 
