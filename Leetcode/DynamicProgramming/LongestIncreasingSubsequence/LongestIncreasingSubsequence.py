@@ -19,7 +19,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    # print(sol.lengthOfLIS([3, 1, 4, 2]))
-    # print(sol.lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
+    print(sol.lengthOfLIS([3, 1, 4, 2]))
+    print(sol.lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
     print(sol.lengthOfLIS([10, 9, 4, 5, 3, 7, 101, 18]))
     print(sol.lengthOfLIS([5, 2, 3, 7, 1, 4, 6]))

@@ -38,6 +38,28 @@ def makeCycleList(list: List[int], pos: int) -> ListNode:
 # speed: O(n), space: O(1)
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head:
+            return False
+
+        slow = head
+        fast = head
+
+        while slow and fast:
+            if fast.next and fast.next.next:
+                slow = slow.next
+                fast = fast.next.next
+            else:
+                return False
+
+            if slow == fast:
+                return True
+
+        return False
+
+
+# speed: O(n), space: O(1), 예외처리
+class Solution1:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
         try:
             slow = head
             fast = head.next
@@ -52,11 +74,11 @@ class Solution:
                 fast = fast.next.next
             except:
                 return False
-                
+
         return False
 
 
-# speed: O(n), space: O(n)
+# speed: O(n), space: O(n), set을 이용한 체크
 class Solution1:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         address = set()
@@ -71,7 +93,7 @@ class Solution1:
 
 if __name__ == "__main__":
     sol = Solution()
-    a = makeCycleList([1, 2, 3, 4, 5], 1)
+    a = makeCycleList([1, 2, 3, 4, 5], 2)
     print(sol.hasCycle(a))
     b = makeCycleList([1], -1)
     print(sol.hasCycle(b))
