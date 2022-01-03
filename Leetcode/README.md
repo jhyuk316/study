@@ -59,7 +59,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n^2) 300. Longest Increasing Subsequence - <https://leetcode.com/problems/longest-increasing-subsequence/>
 - [x] O(m\*n) 1143. Longest Common Subsequence - <https://leetcode.com/problems/longest-common-subsequence/>
 - [x] O(m\*n) 139. Word Break Problem - <https://leetcode.com/problems/word-break/>
-- [ ] Combination Sum - <https://leetcode.com/problems/combination-sum-iv/>
+- [x] O(m\*n) 377. Combination Sum - <https://leetcode.com/problems/combination-sum-iv/>
 - [ ] House Robber - <https://leetcode.com/problems/house-robber/>
 - [ ] House Robber II - <https://leetcode.com/problems/house-robber-ii/>
 - [ ] Decode Ways - <https://leetcode.com/problems/decode-ways/>
