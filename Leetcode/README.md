@@ -97,7 +97,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Matrix
 
 - [x] space: O(1) Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
-- [ ] Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
+- [x] O(mn) Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
 - [ ] Rotate Image - <https://leetcode.com/problems/rotate-image/>
 - [ ] Word Search - <https://leetcode.com/problems/word-search/>
 
