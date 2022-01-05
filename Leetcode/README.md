@@ -68,7 +68,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Graph
 
-- [x] O(n) Clone Graph - <https://leetcode.com/problems/clone-graph/>
+- [x] O(n) 133. Clone Graph - <https://leetcode.com/problems/clone-graph/>
 - [ ] Course Schedule - <https://leetcode.com/problems/course-schedule/>
 - [ ] Pacific Atlantic Water Flow - <https://leetcode.com/problems/pacific-atlantic-water-flow/>
 - [ ] Number of Islands - <https://leetcode.com/problems/number-of-islands/>
@@ -107,7 +107,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n) Longest Repeating Character Replacement - <https://leetcode.com/problems/longest-repeating-character-replacement/>
 - [x] O(??) Minimum Window Substring - <https://leetcode.com/problems/minimum-window-substring/>
 - [x] O(m+n) Valid Anagram - <https://leetcode.com/problems/valid-anagram/>
-- [ ] Group Anagrams - <https://leetcode.com/problems/group-anagrams/>
+- [x] O(m \* nlogn) 49. Group Anagrams - <https://leetcode.com/problems/group-anagrams/>
 - [ ] Valid Parentheses - <https://leetcode.com/problems/valid-parentheses/>
 - [ ] Valid Palindrome - <https://leetcode.com/problems/valid-palindrome/>
 - [ ] Longest Palindromic Substring - <https://leetcode.com/problems/longest-palindromic-substring/>
