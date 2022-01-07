@@ -69,7 +69,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Graph
 
 - [x] O(n) 133. Clone Graph - <https://leetcode.com/problems/clone-graph/>
-- [ ] Course Schedule - <https://leetcode.com/problems/course-schedule/>
+- [x] O(n) 207. Course Schedule - <https://leetcode.com/problems/course-schedule/>
 - [ ] Pacific Atlantic Water Flow - <https://leetcode.com/problems/pacific-atlantic-water-flow/>
 - [ ] Number of Islands - <https://leetcode.com/problems/number-of-islands/>
 - [ ] Longest Consecutive Sequence - <https://leetcode.com/problems/longest-consecutive-sequence/>
