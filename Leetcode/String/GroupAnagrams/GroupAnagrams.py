@@ -1,14 +1,14 @@
 # 49. Group Anagrams
 # https://leetcode.com/problems/group-anagrams/
 
-from typing import *
+from typing import Dict, List, Tuple
 
 
 # 문자의 개수를 키로
 # O(m * n), m : number of strs, n : length of str
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        strDic: dict[tuple[int], list[str]] = {}
+        strDic: Dict[Tuple[int], List[str]] = {}
 
         for str in strs:
             key = self.makeKey(str)
@@ -30,7 +30,7 @@ class Solution:
 # O(m * nlogn), m : number of strs, n : length of str
 class Solution2:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        strDic: dict[str, list[str]] = {}
+        strDic: Dict[str, list[str]] = {}
 
         for str in strs:
             key = "".join(sorted(str))

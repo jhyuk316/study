@@ -18,6 +18,25 @@ from typing import List
 # O(mn) : n = length of s, m = number of wordDict
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        checkList = [False] * (len(s) + 1)
+        checkList[len(s)] = True
+
+        for i in reversed(range(len(s))):
+            for word in wordDict:
+                if i + len(word) > len(s):
+                    continue
+
+                if checkList[i + len(word)] and word == s[i : i + len(word)]:
+                    checkList[i] = checkList[i + len(word)]
+                    break
+
+        # print(checkList)
+        return checkList[0]
+
+
+# O(mn) : n = length of s, m = number of wordDict
+class Solution1:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         checkList = [False] * len(s)
 
         for word in wordDict:
@@ -38,7 +57,7 @@ class Solution:
 
 # 문제 해석 오류 ㅡㅡ;;
 # 모든 단어가 한번씩 들어가야하는 줄 알았음.
-class Solution1:
+class SolutionError:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         return self._wordBreak(s, wordDict, [0] * len(wordDict))
 

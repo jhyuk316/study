@@ -22,6 +22,8 @@
   - [String](#string-1)
   - [Tree](#tree-1)
   - [Heap](#heap-1)
+  - [Math](#math)
+  - [backtracking](#backtracking)
 
 아래의 추천 문제를 모두 풀어 보는 것을 목표로 함.
 
@@ -34,23 +36,23 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Array
 
 - [x] O(n) 1. Two Sum - <https://leetcode.com/problems/two-sum/>
-- [x] O(n) Best Time to Buy and Sell Stock - <https://leetcode.com/problems/best-time-to-buy-and-sell-stock/>
-- [x] O(n) Contains Duplicate - <https://leetcode.com/problems/contains-duplicate/>
-- [x] O(n) Product of Array Except Self - <https://leetcode.com/problems/product-of-array-except-self/>
-- [x] O(n) Maximum Subarray - <https://leetcode.com/problems/maximum-subarray/>
-- [x] O(n) Maximum Product Subarray - <https://leetcode.com/problems/maximum-product-subarray/>
-- [x] O(logn) Find Minimum in Rotated Sorted Array - <https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/>
-- [x] O(logn) Search in Rotated Sorted Array - <https://leetcode.com/problems/search-in-rotated-sorted-array/>
-- [x] O(n^2) 3Sum - <https://leetcode.com/problems/3sum/>
-- [x] O(n) Container With Most Water - <https://leetcode.com/problems/container-with-most-water/>
+- [x] O(n) 121. Best Time to Buy and Sell Stock - <https://leetcode.com/problems/best-time-to-buy-and-sell-stock/>
+- [x] O(n) 217. Contains Duplicate - <https://leetcode.com/problems/contains-duplicate/>
+- [x] O(n) 238. Product of Array Except Self - <https://leetcode.com/problems/product-of-array-except-self/>
+- [x] O(n) 53. Maximum Subarray - <https://leetcode.com/problems/maximum-subarray/>
+- [x] O(n) 152. Maximum Product Subarray - <https://leetcode.com/problems/maximum-product-subarray/>
+- [x] O(logn) 153. Find Minimum in Rotated Sorted Array - <https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/>
+- [x] O(logn) 33. Search in Rotated Sorted Array - <https://leetcode.com/problems/search-in-rotated-sorted-array/>
+- [x] O(n^2) 15. 3Sum - <https://leetcode.com/problems/3sum/>
+- [x] O(n) 11. Container With Most Water - <https://leetcode.com/problems/container-with-most-water/>
 
 ### Binary
 
-- [x] O(1?) Sum of Two Integers - <https://leetcode.com/problems/sum-of-two-integers/>
-- [x] O(n) Number of 1 Bits - <https://leetcode.com/problems/number-of-1-bits/>
-- [x] O(n) Counting Bits - <https://leetcode.com/problems/counting-bits/>
-- [x] O(n) Missing Number - <https://leetcode.com/problems/missing-number/>
-- [x] O(n) Reverse Bits - <https://leetcode.com/problems/reverse-bits/>
+- [x] O(1?) 371. Sum of Two Integers - <https://leetcode.com/problems/sum-of-two-integers/>
+- [x] O(n) 191. Number of 1 Bits - <https://leetcode.com/problems/number-of-1-bits/>
+- [x] O(n) 338. Counting Bits - <https://leetcode.com/problems/counting-bits/>
+- [x] O(n) 268. Missing Number - <https://leetcode.com/problems/missing-number/>
+- [x] O(n) 190. Reverse Bits - <https://leetcode.com/problems/reverse-bits/>
 
 ### Dynamic Programming
 
@@ -60,7 +62,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(m\*n) 1143. Longest Common Subsequence - <https://leetcode.com/problems/longest-common-subsequence/>
 - [x] O(m\*n) 139. Word Break Problem - <https://leetcode.com/problems/word-break/>
 - [x] O(m\*n) 377. Combination Sum - <https://leetcode.com/problems/combination-sum-iv/>
-- [ ] House Robber - <https://leetcode.com/problems/house-robber/>
+- [x] O(n) 198. House Robber - <https://leetcode.com/problems/house-robber/>
 - [ ] House Robber II - <https://leetcode.com/problems/house-robber-ii/>
 - [ ] Decode Ways - <https://leetcode.com/problems/decode-ways/>
 - [ ] Unique Paths - <https://leetcode.com/problems/unique-paths/>
@@ -87,8 +89,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Linked List
 
-- [x] O(n) Reverse a Linked List - <https://leetcode.com/problems/reverse-linked-list/>
-- [x] O(n^2?) Detect Cycle in a Linked List - <https://leetcode.com/problems/linked-list-cycle/>
+- [x] O(n) 206. Reverse a Linked List - <https://leetcode.com/problems/reverse-linked-list/>
+- [x] O(n^2?) 141. Detect Cycle in a Linked List - <https://leetcode.com/problems/linked-list-cycle/>
 - [ ] Merge Two Sorted Lists - <https://leetcode.com/problems/merge-two-sorted-lists/>
 - [ ] Merge K Sorted Lists - <https://leetcode.com/problems/merge-k-sorted-lists/>
 - [ ] Remove Nth Node From End Of List - <https://leetcode.com/problems/remove-nth-node-from-end-of-list/>
@@ -96,17 +98,17 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Matrix
 
-- [x] space: O(1) Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
-- [x] O(mn) Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
+- [x] 73. space: O(1) Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
+- [x] 54. O(mn) Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
 - [ ] Rotate Image - <https://leetcode.com/problems/rotate-image/>
 - [ ] Word Search - <https://leetcode.com/problems/word-search/>
 
 ### String
 
-- [x] O(n) Longest Substring Without Repeating Characters - <https://leetcode.com/problems/longest-substring-without-repeating-characters/>
-- [x] O(n) Longest Repeating Character Replacement - <https://leetcode.com/problems/longest-repeating-character-replacement/>
-- [x] O(??) Minimum Window Substring - <https://leetcode.com/problems/minimum-window-substring/>
-- [x] O(m+n) Valid Anagram - <https://leetcode.com/problems/valid-anagram/>
+- [x] O(n) 3. Longest Substring Without Repeating Characters - <https://leetcode.com/problems/longest-substring-without-repeating-characters/>
+- [x] O(n) 424. Longest Repeating Character Replacement - <https://leetcode.com/problems/longest-repeating-character-replacement/>
+- [x] O(??) 76. Minimum Window Substring - <https://leetcode.com/problems/minimum-window-substring/>
+- [x] O(m+n) 242. Valid Anagram - <https://leetcode.com/problems/valid-anagram/>
 - [x] O(m \* nlogn) 49. Group Anagrams - <https://leetcode.com/problems/group-anagrams/>
 - [ ] Valid Parentheses - <https://leetcode.com/problems/valid-parentheses/>
 - [ ] Valid Palindrome - <https://leetcode.com/problems/valid-palindrome/>
@@ -116,7 +118,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Tree
 
-- [x] O(n) Maximum Depth of Binary Tree - <https://leetcode.com/problems/maximum-depth-of-binary-tree/>
+- [x] O(n) 104. Maximum Depth of Binary Tree - <https://leetcode.com/problems/maximum-depth-of-binary-tree/>
 - [ ] Same Tree - <https://leetcode.com/problems/same-tree/>
 - [ ] Invert/Flip Binary Tree - <https://leetcode.com/problems/invert-binary-tree/>
 - [ ] Binary Tree Maximum Path Sum - <https://leetcode.com/problems/binary-tree-maximum-path-sum/>
@@ -145,6 +147,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 - [x] O(n) 반복 O, 재귀 X 344. Reverse String <https://leetcode.com/problems/reverse-string/>
 - [x] O(n) 977. Squares of a Sorted Array https://leetcode.com/problems/squares-of-a-sorted-array/
+- [x] O(n) 134. https://leetcode.com/problems/gas-station/
 
 ### Binary
 
@@ -165,3 +168,9 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Tree
 
 ### Heap
+
+### Math
+
+### backtracking
+
+- [] 52. N-Queens II <https://leetcode.com/problems/n-queens-ii/>
