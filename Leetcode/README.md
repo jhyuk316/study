@@ -173,4 +173,4 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### backtracking
 
-- [] 52. N-Queens II <https://leetcode.com/problems/n-queens-ii/>
+- [x] 52. N-Queens II <https://leetcode.com/problems/n-queens-ii/>

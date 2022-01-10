@@ -42,6 +42,7 @@ class Solution2:
 
 
 # too slow 6032ms
+# 정렬된 문자열 리스트를 만들고, 그 리스트의 인덱스로 원래 문자를 찾아 답 반환
 class Solution1:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
 
