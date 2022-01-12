@@ -176,9 +176,9 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Matrix
 
-- [x] 73. space: O(1) Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
-- [x] 54. O(m\*n) Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
-- [ ] Rotate Image - <https://leetcode.com/problems/rotate-image/>
+- [x] space: O(1) 73. Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
+- [x] O(m\*n) 54. Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
+- [x] O(n^2) 48. Rotate Image - <https://leetcode.com/problems/rotate-image/>
 - [ ] Word Search - <https://leetcode.com/problems/word-search/>
 
 ### String
@@ -224,8 +224,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Array
 
 - [x] O(n) 반복 O, 재귀 X 344. Reverse String <https://leetcode.com/problems/reverse-string/>
-- [x] O(n) 977. Squares of a Sorted Array https://leetcode.com/problems/squares-of-a-sorted-array/
-- [x] O(n) 134. https://leetcode.com/problems/gas-station/
+- [x] O(n) 977. Squares of a Sorted Array <https://leetcode.com/problems/squares-of-a-sorted-array/>
+- [x] O(n) 134. <https://leetcode.com/problems/gas-station/>
 
 ### Binary
 
