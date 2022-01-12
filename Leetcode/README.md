@@ -1,5 +1,17 @@
 # LeetCode 풀어보기
 
+- [알고리즘 전략](#알고리즘-전략)
+  - [완전탐색(Brute force)](#완전탐색brute-force)
+  - [정렬](#정렬)
+  - [이분 탐색(Binary Search)](#이분-탐색binary-search)
+  - [해싱](#해싱)
+  - [탐욕법(Greedy)](#탐욕법greedy)
+  - [동적계획법(Dynamic Programing)](#동적계획법dynamic-programing)
+  - [분할정복(Divide and Conquer)](#분할정복divide-and-conquer)
+  - [스택/큐](#스택큐)
+  - [힙](#힙)
+  - [깊이/너비 우선 탐색(DFS/BFS)](#깊이너비-우선-탐색dfsbfs)
+  - [그래프](#그래프)
 - [추천 문제 75선](#추천-문제-75선)
   - [Array](#array)
   - [Binary](#binary)
@@ -25,9 +37,75 @@
   - [Math](#math)
   - [backtracking](#backtracking)
 
-아래의 추천 문제를 모두 풀어 보는 것을 목표로 함.
+## 알고리즘 전략
+
+- 알고리즘이란?
+
+  인간이 문제 해결을 위해서 사용하는 모호한 방법과 사고를 논리적으로 절차에 따라 기술하는 것.
+
+### 완전탐색(Brute force)
+
+- 모든 경우의 수를 탐색
+
+### 정렬
+
+- 정렬을 이용하여 해결
+
+### 이분 탐색(Binary Search)
+
+- 정렬된 데이터를 빠르게 탐색
+
+### 해싱
+
+- 키를 이용해 빠른 탐색
+
+### 탐욕법(Greedy)
+
+- 부분 최적해가 전체의 최적해가 됨.
+- 지금 이 순간의 최선의 선택이 최종적으로 최선의 답.
+
+- 그리디 알고리즘이 적용 가능한 곳
+
+  - 탐욕 선택 속성(greedy choice property)
+    - 이전 선택과 무관하게 현재의 선택이 매 순간 최적해.
+  - 최적 부분 구조(optimal substructure)
+    - 부분 최적해의 집합이 전체 최적해.
+
+- 문제를 작은 문제로 분할 하여 부분해 찾음.
+
+- 장점 : 직관적인 해결이 가능?
+- 단점 : 일반적으로 부분 최적해가 전체 최적해가 되지 않으므로 현실적이지 않음. 그 것이 가능한 문제에서만 사용해야함.
+
+### 동적계획법(Dynamic Programing)
+
+- 비효율적인 게산을 줄여 효율적으로 해를 찾음.
+- 메모이제이션 - 반복적인 계산의 결과를 저장해 둠으로써 연산을 줄임.
+
+### 분할정복(Divide and Conquer)
+
+- 큰 문제를 분할하여 작은 문제로 만들어 해결 후 결과를 합치는 것.
+- 분할 - 정복 - 조합의 과정을 거침.
+
+### 스택/큐
+
+- LIFO, FIFO 문제를 해결하기 위한 자료구조.
+
+### 힙
+
+- 특정한 규칙을 가진 트리 구조로 빠른 삽입, 제거, 정렬 가능.
+
+### 깊이/너비 우선 탐색(DFS/BFS)
+
+- 그래프를 올바르게 탐색하기 위한 방법
+- Backtracking
+
+### 그래프
+
+- 노드와 엣지로 이루어진 자유구조.
 
 ## 추천 문제 75선
+
+아래의 추천 문제를 모두 풀어 보는 것을 목표로 함.
 
 New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
@@ -63,8 +141,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(m\*n) 139. Word Break Problem - <https://leetcode.com/problems/word-break/>
 - [x] O(m\*n) 377. Combination Sum - <https://leetcode.com/problems/combination-sum-iv/>
 - [x] O(n) 198. House Robber - <https://leetcode.com/problems/house-robber/>
-- [ ] House Robber II - <https://leetcode.com/problems/house-robber-ii/>
-- [ ] Decode Ways - <https://leetcode.com/problems/decode-ways/>
+- [x] O(n) 213. House Robber II - <https://leetcode.com/problems/house-robber-ii/>
+- [x] O(n) 91. Decode Ways - <https://leetcode.com/problems/decode-ways/>
 - [ ] Unique Paths - <https://leetcode.com/problems/unique-paths/>
 - [ ] Jump Game - <https://leetcode.com/problems/jump-game/>
 
@@ -99,7 +177,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Matrix
 
 - [x] 73. space: O(1) Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
-- [x] 54. O(mn) Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
+- [x] 54. O(m\*n) Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
 - [ ] Rotate Image - <https://leetcode.com/problems/rotate-image/>
 - [ ] Word Search - <https://leetcode.com/problems/word-search/>
 
@@ -109,8 +187,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n) 424. Longest Repeating Character Replacement - <https://leetcode.com/problems/longest-repeating-character-replacement/>
 - [x] O(??) 76. Minimum Window Substring - <https://leetcode.com/problems/minimum-window-substring/>
 - [x] O(m+n) 242. Valid Anagram - <https://leetcode.com/problems/valid-anagram/>
-- [x] O(m \* nlogn) 49. Group Anagrams - <https://leetcode.com/problems/group-anagrams/>
-- [ ] Valid Parentheses - <https://leetcode.com/problems/valid-parentheses/>
+- [x] O(m\*nlogn) 49. Group Anagrams - <https://leetcode.com/problems/group-anagrams/>
+- [x] O(n) 20. Valid Parentheses - <https://leetcode.com/problems/valid-parentheses/>
 - [ ] Valid Palindrome - <https://leetcode.com/problems/valid-palindrome/>
 - [ ] Longest Palindromic Substring - <https://leetcode.com/problems/longest-palindromic-substring/>
 - [ ] Palindromic Substrings - <https://leetcode.com/problems/palindromic-substrings/>
@@ -119,7 +197,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Tree
 
 - [x] O(n) 104. Maximum Depth of Binary Tree - <https://leetcode.com/problems/maximum-depth-of-binary-tree/>
-- [ ] Same Tree - <https://leetcode.com/problems/same-tree/>
+- [x] O(n) 100. Same Tree - <https://leetcode.com/problems/same-tree/>
 - [ ] Invert/Flip Binary Tree - <https://leetcode.com/problems/invert-binary-tree/>
 - [ ] Binary Tree Maximum Path Sum - <https://leetcode.com/problems/binary-tree-maximum-path-sum/>
 - [ ] Binary Tree Level Order Traversal - <https://leetcode.com/problems/binary-tree-level-order-traversal/>
@@ -163,7 +241,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### String
 
-- [x] O(nlogn) 179. Largest Number <https://leetcode.com/problems/largest-number/>
+- [x] O(n\*logn) 179. Largest Number <https://leetcode.com/problems/largest-number/>
 
 ### Tree
 

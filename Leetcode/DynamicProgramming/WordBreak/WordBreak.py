@@ -1,6 +1,5 @@
 # 139. Word Break
 # https://leetcode.com/problems/word-break/
-#
 
 """
 문제에 대한 생각.
@@ -56,7 +55,8 @@ class Solution1:
 
 
 # 문제 해석 오류 ㅡㅡ;;
-# 모든 단어가 한번씩 들어가야하는 줄 알았음.
+# 모든 단어가 최소 한번씩 들어가야하는 줄 알았음.
+"""
 class SolutionError:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         return self._wordBreak(s, wordDict, [0] * len(wordDict))
@@ -86,7 +86,7 @@ class SolutionError:
                 tempCount[pos] -= 1
 
         return False
-
+"""
 
 if __name__ == "__main__":
     sol = Solution()

@@ -19,6 +19,7 @@ class Solution:
 
         return strDic.values()
 
+    # 기수 정렬
     def makeKey(self, str):
         char = [0] * 26
         for c in str:
