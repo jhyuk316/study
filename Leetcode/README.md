@@ -1,13 +1,13 @@
 # LeetCode 풀어보기
 
 - [알고리즘 전략](#알고리즘-전략)
-  - [완전탐색(Brute force)](#완전탐색brute-force)
+  - [완전 탐색(Brute force)](#완전-탐색brute-force)
   - [정렬](#정렬)
   - [이분 탐색(Binary Search)](#이분-탐색binary-search)
   - [해싱](#해싱)
   - [탐욕법(Greedy)](#탐욕법greedy)
-  - [동적계획법(Dynamic Programing)](#동적계획법dynamic-programing)
-  - [분할정복(Divide and Conquer)](#분할정복divide-and-conquer)
+  - [동적 계획법(Dynamic Programing)](#동적-계획법dynamic-programing)
+  - [분할 정복(Divide and Conquer)](#분할-정복divide-and-conquer)
   - [스택/큐](#스택큐)
   - [힙](#힙)
   - [깊이/너비 우선 탐색(DFS/BFS)](#깊이너비-우선-탐색dfsbfs)
@@ -43,9 +43,13 @@
 
   인간이 문제 해결을 위해서 사용하는 모호한 방법과 사고를 논리적으로 절차에 따라 기술하는 것.
 
-### 완전탐색(Brute force)
+  문제를 해결하기 위한 절차나 방법.
+
+### 완전 탐색(Brute force)
 
 - 모든 경우의 수를 탐색
+- 수행 속도는 느리지만 해답을 찾기는 쉬움.
+- 다른 알고리즘의 해답으로 사용
 
 ### 정렬
 
@@ -61,6 +65,8 @@
 
 ### 탐욕법(Greedy)
 
+- 최적해를 구하는 데 사용되는 근시안적인 방법, 직관.
+
 - 부분 최적해가 전체의 최적해가 됨.
 - 지금 이 순간의 최선의 선택이 최종적으로 최선의 답.
 
@@ -71,17 +77,17 @@
   - 최적 부분 구조(optimal substructure)
     - 부분 최적해의 집합이 전체 최적해.
 
-- 문제를 작은 문제로 분할 하여 부분해 찾음.
+- 문제를 작은 문제로 분할하여 부분해 찾음.
 
 - 장점 : 직관적인 해결이 가능?
-- 단점 : 일반적으로 부분 최적해가 전체 최적해가 되지 않으므로 현실적이지 않음. 그 것이 가능한 문제에서만 사용해야함.
+- 단점 : 일반적으로 부분 최적해가 전체 최적해가 되지 않으므로 현실적이지 않음. 그것이 가능한 문제에서만 사용해야 함.
 
-### 동적계획법(Dynamic Programing)
+### 동적 계획법(Dynamic Programing)
 
 - 비효율적인 게산을 줄여 효율적으로 해를 찾음.
 - 메모이제이션 - 반복적인 계산의 결과를 저장해 둠으로써 연산을 줄임.
 
-### 분할정복(Divide and Conquer)
+### 분할 정복(Divide and Conquer)
 
 - 큰 문제를 분할하여 작은 문제로 만들어 해결 후 결과를 합치는 것.
 - 분할 - 정복 - 조합의 과정을 거침.
@@ -99,9 +105,16 @@
 - 그래프를 올바르게 탐색하기 위한 방법
 - Backtracking
 
+- DFS : 그래프를 깊게 들어가서 끝에서부터 처리. Bottom-up?
+- BFS : 그래프 위에서부터 모든 노드들을 처리해가면서 내려감. Top-Down?
+
+- 구현
+  - DFS : 문제를 'Stack'에 넣고 빼면서 처리
+  - BFS : 문제를 'Queue'에 넣고 빼면서 처리
+
 ### 그래프
 
-- 노드와 엣지로 이루어진 자유구조.
+- 노드와 에지로 이루어진 자료구조.
 
 ## 추천 문제 75선
 
@@ -187,7 +200,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n) 424. Longest Repeating Character Replacement - <https://leetcode.com/problems/longest-repeating-character-replacement/>
 - [x] O(??) 76. Minimum Window Substring - <https://leetcode.com/problems/minimum-window-substring/>
 - [x] O(m+n) 242. Valid Anagram - <https://leetcode.com/problems/valid-anagram/>
-- [x] O(m\*nlogn) 49. Group Anagrams - <https://leetcode.com/problems/group-anagrams/>
+- [x] O(m\*n\*logn) 49. Group Anagrams - <https://leetcode.com/problems/group-anagrams/>
 - [x] O(n) 20. Valid Parentheses - <https://leetcode.com/problems/valid-parentheses/>
 - [ ] Valid Palindrome - <https://leetcode.com/problems/valid-palindrome/>
 - [ ] Longest Palindromic Substring - <https://leetcode.com/problems/longest-palindromic-substring/>
@@ -203,7 +216,42 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [ ] Binary Tree Level Order Traversal - <https://leetcode.com/problems/binary-tree-level-order-traversal/>
 - [ ] Serialize and Deserialize Binary Tree - <https://leetcode.com/problems/serialize-and-deserialize-binary-tree/>
 - [ ] Subtree of Another Tree - <https://leetcode.com/problems/subtree-of-another-tree/>
-- [ ] Construct Binary Tree from Preorder and Inorder Traversal - <https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/>
+- [ ] Construct Binary Tree from Pre- [알고리즘 전략](#알고리즘-전략)
+  - [완전 탐색(Brute force)](#완전-탐색brute-force)
+  - [정렬](#정렬)
+  - [이분 탐색(Binary Search)](#이분-탐색binary-search)
+  - [해싱](#해싱)
+  - [탐욕법(Greedy)](#탐욕법greedy)
+  - [동적 계획법(Dynamic Programing)](#동적-계획법dynamic-programing)
+  - [분할 정복(Divide and Conquer)](#분할-정복divide-and-conquer)
+  - [스택/큐](#스택큐)
+  - [힙](#힙)
+  - [깊이/너비 우선 탐색(DFS/BFS)](#깊이너비-우선-탐색dfsbfs)
+  - [그래프](#그래프)
+- [추천 문제 75선](#추천-문제-75선)
+  - [Array](#array)
+  - [Binary](#binary)
+  - [Dynamic Programming](#dynamic-programming)
+  - [Graph](#graph)
+  - [Interval](#interval)
+  - [Linked List](#linked-list)
+  - [Matrix](#matrix)
+  - [String](#string)
+  - [Tree](#tree)
+  - [Heap](#heap)
+- [개인적으로 풀어 본 것](#개인적으로-풀어-본-것)
+  - [Array](#array-1)
+  - [Binary](#binary-1)
+  - [Dynamic Programming](#dynamic-programming-1)
+  - [Graph](#graph-1)
+  - [Interval](#interval-1)
+  - [Linked List](#linked-list-1)
+  - [Matrix](#matrix-1)
+  - [String](#string-1)
+  - [Tree](#tree-1)
+  - [Heap](#heap-1)
+  - [Math](#math)
+  - [backtracking](#backtracking)order and Inorder Traversal - <https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/>
 - [ ] Validate Binary Search Tree - <https://leetcode.com/problems/validate-binary-search-tree/>
 - [ ] Kth Smallest Element in a BST - <https://leetcode.com/problems/kth-smallest-element-in-a-bst/>
 - [ ] Lowest Common Ancestor of BST - <https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/>
@@ -236,6 +284,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Interval
 
 ### Linked List
+
+- [x] O(n) 2. Add Two Numbers <https://leetcode.com/problems/add-two-numbers/>
 
 ### Matrix
 

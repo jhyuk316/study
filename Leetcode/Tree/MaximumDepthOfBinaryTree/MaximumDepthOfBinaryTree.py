@@ -2,7 +2,8 @@
 # https://leetcode.com/problems/maximum-depth-of-binary-tree/
 
 
-from typing import Optional
+from collections import deque
+from typing import Deque, Optional
 
 
 # Definition for a binary tree node.
@@ -13,8 +14,32 @@ class TreeNode:
         self.right = right
 
 
-# O(n)
+# O(n) BFS, top-down
 class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        nodeQueue: Deque[TreeNode] = deque()
+        count = 0
+
+        if root:
+            nodeQueue.append(root)
+
+        while nodeQueue:
+            tempQueue = deque()
+            while nodeQueue:
+                node: TreeNode = nodeQueue.popleft()
+                if node.left:
+                    tempQueue.append(node.left)
+                if node.right:
+                    tempQueue.append(node.right)
+
+            nodeQueue = tempQueue
+            count += 1
+
+        return count
+
+
+# O(n) DFS, bottom-up
+class Solution1:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if root:
             return self._maxDepth(root, 1)
