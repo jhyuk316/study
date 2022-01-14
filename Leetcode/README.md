@@ -202,8 +202,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(m+n) 242. Valid Anagram - <https://leetcode.com/problems/valid-anagram/>
 - [x] O(m\*n\*logn) 49. Group Anagrams - <https://leetcode.com/problems/group-anagrams/>
 - [x] O(n) 20. Valid Parentheses - <https://leetcode.com/problems/valid-parentheses/>
-- [ ] Valid Palindrome - <https://leetcode.com/problems/valid-palindrome/>
-- [ ] Longest Palindromic Substring - <https://leetcode.com/problems/longest-palindromic-substring/>
+- [x] O(n) 125. Valid Palindrome - <https://leetcode.com/problems/valid-palindrome/>
+- [x] O(n^2) 5. Longest Palindromic Substring - <https://leetcode.com/problems/longest-palindromic-substring/>
 - [ ] Palindromic Substrings - <https://leetcode.com/problems/palindromic-substrings/>
 - [ ] Encode and Decode Strings (Leetcode Premium) - <https://leetcode.com/problems/encode-and-decode-strings/>
 
@@ -216,42 +216,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [ ] Binary Tree Level Order Traversal - <https://leetcode.com/problems/binary-tree-level-order-traversal/>
 - [ ] Serialize and Deserialize Binary Tree - <https://leetcode.com/problems/serialize-and-deserialize-binary-tree/>
 - [ ] Subtree of Another Tree - <https://leetcode.com/problems/subtree-of-another-tree/>
-- [ ] Construct Binary Tree from Pre- [알고리즘 전략](#알고리즘-전략)
-  - [완전 탐색(Brute force)](#완전-탐색brute-force)
-  - [정렬](#정렬)
-  - [이분 탐색(Binary Search)](#이분-탐색binary-search)
-  - [해싱](#해싱)
-  - [탐욕법(Greedy)](#탐욕법greedy)
-  - [동적 계획법(Dynamic Programing)](#동적-계획법dynamic-programing)
-  - [분할 정복(Divide and Conquer)](#분할-정복divide-and-conquer)
-  - [스택/큐](#스택큐)
-  - [힙](#힙)
-  - [깊이/너비 우선 탐색(DFS/BFS)](#깊이너비-우선-탐색dfsbfs)
-  - [그래프](#그래프)
-- [추천 문제 75선](#추천-문제-75선)
-  - [Array](#array)
-  - [Binary](#binary)
-  - [Dynamic Programming](#dynamic-programming)
-  - [Graph](#graph)
-  - [Interval](#interval)
-  - [Linked List](#linked-list)
-  - [Matrix](#matrix)
-  - [String](#string)
-  - [Tree](#tree)
-  - [Heap](#heap)
-- [개인적으로 풀어 본 것](#개인적으로-풀어-본-것)
-  - [Array](#array-1)
-  - [Binary](#binary-1)
-  - [Dynamic Programming](#dynamic-programming-1)
-  - [Graph](#graph-1)
-  - [Interval](#interval-1)
-  - [Linked List](#linked-list-1)
-  - [Matrix](#matrix-1)
-  - [String](#string-1)
-  - [Tree](#tree-1)
-  - [Heap](#heap-1)
-  - [Math](#math)
-  - [backtracking](#backtracking)order and Inorder Traversal - <https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/>
+- [ ] Construct Binary Tree from Preorder and Inorder Traversal - <https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/>
 - [ ] Validate Binary Search Tree - <https://leetcode.com/problems/validate-binary-search-tree/>
 - [ ] Kth Smallest Element in a BST - <https://leetcode.com/problems/kth-smallest-element-in-a-bst/>
 - [ ] Lowest Common Ancestor of BST - <https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/>
