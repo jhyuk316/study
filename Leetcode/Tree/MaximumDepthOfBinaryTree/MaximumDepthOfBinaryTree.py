@@ -15,7 +15,7 @@ class TreeNode:
 
 
 # O(n) BFS, top-down
-class Solution:
+class Solution1:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         nodeQueue: Deque[TreeNode] = deque()
         count = 0
@@ -39,6 +39,18 @@ class Solution:
 
 
 # O(n) DFS, bottom-up
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
+
+        return max(left, right) + 1
+
+
+# O(n) DFS, top-down
 class Solution1:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if root:

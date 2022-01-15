@@ -9,7 +9,7 @@ class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
         # 특정 숫자를 만드는 조합 수 저장
         dp = [0] * (target + 1)
-        dp[0] = 1
+        dp[0] = 1  # target > 0이기 때문에 가능.
 
         for i in range(target + 1):
             sumDp = sum(dp[i - num] for num in nums if i - num >= 0)
@@ -34,7 +34,6 @@ class Solution1:
             for num in nums:
                 if i - num < 0:
                     continue
-
                 sum += dp[i - num]
 
             dp[i] += sum

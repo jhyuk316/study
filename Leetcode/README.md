@@ -108,6 +108,9 @@
 - DFS : 그래프를 깊게 들어가서 끝에서부터 처리. Bottom-up?
 - BFS : 그래프 위에서부터 모든 노드들을 처리해가면서 내려감. Top-Down?
 
+- top-down - pre order
+- bottom-up - post order
+
 - 구현
   - DFS : 문제를 'Stack'에 넣고 빼면서 처리
   - BFS : 문제를 'Queue'에 넣고 빼면서 처리
