@@ -3,8 +3,24 @@
 
 from typing import List
 
-
+# O(n), dp[n] = sum(dp[n - num] for num in nums if n - nums >= 0)
+# dp[0] = 1
 class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        # 특정 숫자를 만드는 조합 수 저장
+        dp = [0] * (target + 1)
+        dp[0] = 1
+
+        for i in range(target + 1):
+            sumDp = sum(dp[i - num] for num in nums if i - num >= 0)
+            dp[i] += sumDp
+
+        print(dp)
+        return dp[target]
+
+
+# O(n) dp[n] = sum(dp[n - num] for num in nums if n - nums >= 0)
+class Solution1:
     def combinationSum4(self, nums: List[int], target: int) -> int:
         # 특정 숫자를 만드는 조합 수 저장
         dp = [0] * (target + 1)
