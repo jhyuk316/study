@@ -3,7 +3,7 @@
 
 
 from collections import deque
-from typing import Deque, Optional
+from typing import Deque, List, Optional
 
 
 # Definition for a binary tree node.
@@ -14,8 +14,8 @@ class TreeNode:
         self.right = right
 
 
-# O(n) BFS, top-down
-class Solution1:
+# O(n) BFS, bottom-up? top-down? 따지고 보면 후치 연산 아닌가?
+class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         nodeQueue: Deque[TreeNode] = deque()
         count = 0
@@ -38,8 +38,30 @@ class Solution1:
         return count
 
 
+# 이렇게 짜도 과연 괜찮은 것인가? ㅋㅋㅋ
+# java에서 해봤더니 ConcurrentModificationException 발생.
+class Solution3:
+    def maxDepth(self, root):
+        if not root:
+            return 0
+
+        queue = [root]
+        depth = 0
+        while queue:
+            depth += 1
+            # list는 for 내부에서 변경해도 for문이 바뀌지 않음.
+            for node in queue:
+                queue.pop(0)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+
+        return depth
+
+
 # O(n) DFS, bottom-up
-class Solution:
+class Solution2:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
@@ -74,17 +96,31 @@ class Solution1:
         return max(left, right)
 
 
-## TODO - 자체적으로 테스트 가능하게 만들기
+def testSol(func, input, output):
+    res = func(input)
+    if res == output:
+        print(f"O : {res}")
+    else:
+        print(f"X : {res}	excpet : {output}")
+
+
 if __name__ == "__main__":
     sol = Solution()
 
-    tree1 = [3, 9, 20, None, None, 15, 7]
+    def makeTree(tree: List[int], pos: int = 0) -> TreeNode:
+        if pos >= len(tree):
+            return None
 
-    head = TreeNode
-    for i, val in enumerate(tree1):
-        tempTree = TreeNode(val)
-        tempTree.left = TreeNode(tree1[2 * i + 1])
-        tempTree.right = TreeNode(tree1[2 * i + 1])
+        node = TreeNode(tree[pos])
+        node.left = makeTree(tree, 2 * pos + 1)
+        node.right = makeTree(tree, 2 * pos + 2)
 
-    print(sol.maxDepth())
-    pass
+        return node
+
+    testSol(sol.maxDepth, makeTree([3, 9, 20, None, None, 15, 7]), 3)
+    testSol(sol.maxDepth, makeTree([1, None, 2]), 2)
+    testSol(
+        sol.maxDepth,
+        makeTree([1, 2, 3, 4, 5, 6, None, None, None, None, None, 7, 8]),
+        4,
+    )
