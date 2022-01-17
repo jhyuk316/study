@@ -105,11 +105,11 @@
 - 그래프를 올바르게 탐색하기 위한 방법
 - Backtracking
 
-- DFS : 그래프를 깊게 들어가서 끝에서부터 처리. Bottom-up?
-- BFS : 그래프 위에서부터 모든 노드들을 처리해가면서 내려감. Top-Down?
+- DFS : 그래프를 깊게 들어가서 끝에서부터 처리.
+- BFS : 그래프 위에서부터 모든 노드들을 처리해가면서 내려감.
 
-- top-down - pre order
-- bottom-up - post order
+- top-down - pre order, 계산을 하고 하위 노드 재귀.
+- bottom-up - post order, 재귀를 하고 계산.
 
 - 구현
   - DFS : 문제를 'Stack'에 넣고 빼면서 처리
@@ -159,14 +159,14 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n) 198. House Robber - <https://leetcode.com/problems/house-robber/>
 - [x] O(n) 213. House Robber II - <https://leetcode.com/problems/house-robber-ii/>
 - [x] O(n) 91. Decode Ways - <https://leetcode.com/problems/decode-ways/>
-- [ ] Unique Paths - <https://leetcode.com/problems/unique-paths/>
+- [x] O(m\*n) 62. Unique Paths - <https://leetcode.com/problems/unique-paths/>
 - [ ] Jump Game - <https://leetcode.com/problems/jump-game/>
 
 ### Graph
 
 - [x] O(n) 133. Clone Graph - <https://leetcode.com/problems/clone-graph/>
 - [x] O(n) 207. Course Schedule - <https://leetcode.com/problems/course-schedule/>
-- [ ] Pacific Atlantic Water Flow - <https://leetcode.com/problems/pacific-atlantic-water-flow/>
+- [x] O(m\*n) 417. Pacific Atlantic Water Flow - <https://leetcode.com/problems/pacific-atlantic-water-flow/>
 - [ ] Number of Islands - <https://leetcode.com/problems/number-of-islands/>
 - [ ] Longest Consecutive Sequence - <https://leetcode.com/problems/longest-consecutive-sequence/>
 - [ ] Alien Dictionary (Leetcode Premium) - <https://leetcode.com/problems/alien-dictionary/>
@@ -266,6 +266,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Heap
 
 ### Math
+
+- [x] O(logn) 69. Sqrt(x) https://leetcode.com/problems/sqrtx/
 
 ### backtracking
 
