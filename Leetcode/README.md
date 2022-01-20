@@ -167,7 +167,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n) 133. Clone Graph - <https://leetcode.com/problems/clone-graph/>
 - [x] O(n) 207. Course Schedule - <https://leetcode.com/problems/course-schedule/>
 - [x] O(m\*n) 417. Pacific Atlantic Water Flow - <https://leetcode.com/problems/pacific-atlantic-water-flow/>
-- [ ] Number of Islands - <https://leetcode.com/problems/number-of-islands/>
+- [x] O(m\*n) 200. Number of Islands - <https://leetcode.com/problems/number-of-islands/>
 - [ ] Longest Consecutive Sequence - <https://leetcode.com/problems/longest-consecutive-sequence/>
 - [ ] Alien Dictionary (Leetcode Premium) - <https://leetcode.com/problems/alien-dictionary/>
 - [ ] Graph Valid Tree (Leetcode Premium) - <https://leetcode.com/problems/graph-valid-tree/>
@@ -176,8 +176,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Interval
 
 - [x] O(n) 57. Insert Interval - <https://leetcode.com/problems/insert-interval/>
-- [ ] Merge Intervals - <https://leetcode.com/problems/merge-intervals/>
-- [ ] Non-overlapping Intervals - <https://leetcode.com/problems/non-overlapping-intervals/>
+- [x] O(n\*logn) 56. Merge Intervals - <https://leetcode.com/problems/merge-intervals/>
+- [x] O(n\*logn) 435. Non-overlapping Intervals - <https://leetcode.com/problems/non-overlapping-intervals/>
 - [ ] Meeting Rooms (Leetcode Premium) - <https://leetcode.com/problems/meeting-rooms/>
 - [ ] Meeting Rooms II (Leetcode Premium) - <https://leetcode.com/problems/meeting-rooms-ii/>
 
