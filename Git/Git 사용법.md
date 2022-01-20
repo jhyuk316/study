@@ -21,9 +21,28 @@
     - [2.2.10. 파일 이름 변경하기](#2210-파일-이름-변경하기)
   - [2.3. 커밋 히스토리 조회하기](#23-커밋-히스토리-조회하기)
   - [2.4. 되돌리기](#24-되돌리기)
+    - [커밋 수정](#커밋-수정)
+    - [파일 상태를 Unstage로 변경](#파일-상태를-unstage로-변경)
+    - [Modified 파일 되돌리기](#modified-파일-되돌리기)
   - [2.5. 리모트 저장소](#25-리모트-저장소)
+    - [리모트 저장소 확인하기](#리모트-저장소-확인하기)
+    - [리모트 저장소 추가하기](#리모트-저장소-추가하기)
+    - [리모트 저장소를 Pull 하거나 Fetch 하기](#리모트-저장소를-pull-하거나-fetch-하기)
+    - [리모트 저장소에 Push 하기](#리모트-저장소에-push-하기)
+    - [리모트 저장소 살펴보기](#리모트-저장소-살펴보기)
+    - [리모트 저장소 이름을 바꾸거나 리모트 저장소를 삭제하기](#리모트-저장소-이름을-바꾸거나-리모트-저장소를-삭제하기)
   - [2.6. 태그](#26-태그)
+    - [태그 조회하기](#태그-조회하기)
+  - [태그 붙이기](#태그-붙이기)
+    - [나중에 태그하기](#나중에-태그하기)
+    - [태그 공유하기](#태그-공유하기)
+    - [태그를 Checkout 하기](#태그를-checkout-하기)
   - [2.7. Git Alias](#27-git-alias)
+  - [Git 브랜치](#git-브랜치)
+    - [브랜치란 무엇인가?](#브랜치란-무엇인가)
+    - [새 브랜치 생성하기](#새-브랜치-생성하기)
+    - [브랜치 이동하기](#브랜치-이동하기)
+    - [브랜치와 Merge 의 기초](#브랜치와-merge-의-기초)
   - [2.8. Git 명령어](#28-git-명령어)
   - [2.9. 실용편](#29-실용편)
     - [2.9.1. amend](#291-amend)
@@ -443,13 +462,397 @@ doc/**/*.pdf
 
 ### 2.3. 커밋 히스토리 조회하기
 
+- `git log`
+
+  - 최신 내역이 위에 나옴.
+  - SHA-1 체크섬, 저자 이름, 메일, 커밋한 날짜, 메시지
+
+  ```shell
+  $ git log
+  commit ca82a6dff817ec66f44342007202690a93763949
+  Author: Scott Chacon <schacon@gee-mail.com>
+  Date:   Mon Mar 17 21:52:11 2008 -0700
+
+      changed the version number
+
+  commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+  Author: Scott Chacon <schacon@gee-mail.com>
+  Date:   Sat Mar 15 16:40:33 2008 -0700
+
+      removed unnecessary test
+
+  commit a11bef06a3f659402fe7563abf99ad00de2209e6
+  Author: Scott Chacon <schacon@gee-mail.com>
+  Date:   Sat Mar 15 10:31:28 2008 -0700
+
+      first commit
+  ```
+
+- `git log -p` or `git log -patch` - 각 커밋의 diff를 보여줌.
+- `git log -2` - 최근 두 개의 결과만 보여줌.
+- `git log -stat` - 각 커밋의 통계 정보 조회.
+- `git log --pretty` - 로그 출력 형식 변경
+  - `git log --pretty=oneline`
+  - `git log --pretty=format:"%h %s" --graph`
+    - 브랜치와 머치 히스토리를 아스키 그래프로 출력.
+    - %h 짧은 해시, %s 요약
+
 ### 2.4. 되돌리기
+
+- 되돌린 것은 복구 할 수 없음.
+
+#### 커밋 수정
+
+- `git commit --amend`
+
+  - 마지막 커밋 수정.
+  - 메시지를 잘못 적은 경우 - 메시지를 재설정 후 실행
+  - 파일을 빼먹었을 경우 - Staging Area에 추가 후 실행
+
+  ```shell
+  $ git commit -m 'initial commit'  // 실수한 커밋
+  $ git add forgotten_file          // 빠진 파일 스테이징
+  $ git commit --amend              // 커밋 수정
+  ```
+
+#### 파일 상태를 Unstage로 변경
+
+- 모든 파일을 스테이징 한 상황
+
+  ```shell
+  $ git add *
+  $ git status
+  On branch master
+  Changes to be committed:
+    (use "git reset HEAD <file>..." to unstage)
+
+      renamed:    README.md -> README
+      modified:   CONTRIBUTING.md
+  ```
+
+- `git reset HEAD <file>` - file을 Unstage
+
+  ```shell
+  $ git reset HEAD CONTRIBUTING.md
+  Unstaged changes after reset:
+  M CONTRIBUTING.md
+  $ git status
+  On branch master
+  Changes to be committed:
+    (use "git reset HEAD <file>..." to unstage)
+
+      renamed:    README.md -> README
+
+  Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git checkout -- <file>..." to discard changes in working directory)
+
+      modified:   CONTRIBUTING.md
+  ```
+
+#### Modified 파일 되돌리기
+
+- `git checkout -- <file>` - 파일을 커밋 시점으로 되돌리기.
+
+  ```shell
+  $ git checkout -- CONTRIBUTING.md
+  $ git status
+  On branch master
+  Changes to be committed:
+    (use "git reset HEAD <file>..." to unstage)
+
+      renamed:    README.md -> README
+  ```
 
 ### 2.5. 리모트 저장소
 
+- 인터넷이나 네트워크 어딘가에 있는 저장소
+
+#### 리모트 저장소 확인하기
+
+- `git remote`
+  - 현재 프로젝트에 등록된 리모트 저장소 확인.
+  - Clone하면 origin이라는 리모트 저장소가 등록됨.
+- `git remote -v` - 리모트 저장소의 URL을 확인.
+
+#### 리모트 저장소 추가하기
+
+- `git remote add <단축이름> <url>`
+
+  ```shell
+  $ git remote
+  origin
+  $ git remote add pb https://github.com/paulboone/ticgit
+  $ git remote -v
+  origin  https://github.com/schacon/ticgit (fetch)
+  origin  https://github.com/schacon/ticgit (push)
+  pb  https://github.com/paulboone/ticgit (fetch)
+  pb  https://github.com/paulboone/ticgit (push)
+  ```
+
+#### 리모트 저장소를 Pull 하거나 Fetch 하기
+
+- `git fetch <remote>`
+
+  - 리모트의 저장소의 데이터를 모두 가져옴.
+  - Merge는 하지 않음.
+  - 로컬의 작업 파일을 정리하고 수동으로 merge해야 함.
+
+- `git pull` - 데이터를 가져오고 로컬 브랜치와 Merge함.
+
+#### 리모트 저장소에 Push 하기
+
+- `git push <리모트 저장소 이름> <브랜치 이름>`
+  - git push origin master
+  - master 브랜치를 origin 서버에 Push
+  - 다른 사람이 작업을 했으면 Merge 후에 Push 가능.
+
+#### 리모트 저장소 살펴보기
+
+- `git remote show <리모트 저장소 이름>` - 리모트 저장소의 구체적인 정보 확인.
+
+  - Pull시 master 브랜치와 머지할 브랜치를 알려줌.
+
+  ```shell
+  $ git remote show origin
+  * remote origin
+    Fetch URL: https://github.com/schacon/ticgit
+    Push  URL: https://github.com/schacon/ticgit
+    HEAD branch: master
+    Remote branches:
+      master                               tracked
+      dev-branch                           tracked
+    Local branch configured for 'git pull':
+      master merges with remote master
+    Local ref configured for 'git push':
+      master pushes to master (up to date)
+  ```
+
+#### 리모트 저장소 이름을 바꾸거나 리모트 저장소를 삭제하기
+
+- ` git remote rename pb paul` - 원격 저장소 이름을 pb에서 paul로 변경.
+- `git remote remove paul` - 원격 저장소 paul을 삭제
+
 ### 2.6. 태그
 
+- 보통 릴리즈 할 때 사용.
+
+#### 태그 조회하기
+
+- `git tag`
+- `git tag -l "검색 패턴"` - 검색 패턴의 태그들 표시
+
+  ```
+  $ git tag -l "v1.8.5*"
+  v1.8.5
+  v1.8.5-rc0
+  v1.8.5-rc1
+  v1.8.5-rc2
+  v1.8.5-rc3
+  v1.8.5.1
+  v1.8.5.2
+  v1.8.5.3
+  v1.8.5.4
+  v1.8.5.5
+  ```
+
+### 태그 붙이기
+
+- Lightweight 태그 - 특정 커밋에 대한 포인터
+- Annotated 태그 - 태그를 만든 사람의 이름, 이메일, 만든 날짜, 메시지도 저장.
+
+- Annotated 태그
+
+  - `git tag -a v1.4 -m "my version 1.4"` - -a 옵션
+
+  ```shell
+  $ git tag -a v1.4 -m "my version 1.4"
+  $ git tag
+  v0.1
+  v1.3
+  v1.4
+  ```
+
+  - `git show v1.4` - 태그 정보와 커밋 정보 확인
+
+```shell
+$ git show v1.4
+tag v1.4
+Tagger: Ben Straub <ben@straub.cc>
+Date:   Sat May 3 20:19:12 2014 -0700
+
+my version 1.4
+
+commit ca82a6dff817ec66f44342007202690a93763949
+Author: Scott Chacon <schacon@gee-mail.com>
+Date:   Mon Mar 17 21:52:11 2008 -0700
+
+    changed the version number
+```
+
+- Lightweight 태그
+  - `$ git tag v1.4-lw`
+
+#### 나중에 태그하기
+
+- `git tag -a v1.2 9fceb02` - 체크섬 번호를 쓰면 커밋에 태그를 설정 가능.
+
+#### 태그 공유하기
+
+- git push는 태그를 원격 저장소로 보내지 않음.
+- `git push origin <태그 이름>` - 태그 이름 푸시
+- `git push origin --tags' - 모든 태그 이름 푸시
+
+#### 태그를 Checkout 하기
+
+- `git checkout 2.0.0` - 2.0.0 태그를 체크아웃
+  - detached HEAD(HEAD에서 떨어짐) 상태가 되어 브랜치에서 작업하는 것과 다르게 동작할 수 있음.
+
 ### 2.7. Git Alias
+
+- Git의 단축키
+- Alias 예시
+
+  ```shell
+  $ git config --global alias.co checkout
+  $ git config --global alias.br branch
+  $ git config --global alias.ci commit
+  $ git config --global alias.st status
+  ```
+
+  - git commit 대신 git ci로 커밋 가능.
+
+- 활용 : unstage 명령어 만들기
+
+  ```shell
+  $ git config --global alias.unstage 'reset HEAD --'
+  $ git unstage fileA
+  //$ git reset HEAD -- fileA와 동일
+  ```
+
+### Git 브랜치
+
+#### 브랜치란 무엇인가?
+
+- 브랜치 - 코드를 통째로 복사하고 나서 원래 코드와는 상관없이 독립적으로 개발을 진행
+
+- Git이 데이터를 저장하는 법
+
+  - 일련의 스냅샷으로 기록
+  - 커밋 Object
+    - 현 Staging Area에 있는 데이터의 스냅샷에 대한 포인터.
+    - 저자나 커밋 메시지 같은 메타데이터.
+    - 이전 커밋에 대한 포인터 등.
+  - Blob - 파일을 Stage해서 Git 저장소에 파일, 체크섬을 저장한 것.
+
+  ```shell
+  $ git add README test.rb LICENSE
+  $ git commit -m 'The initial commit of my project'
+  ```
+
+  commit and tree
+
+  ![commit-and-tree](images/Git%20사용법_commit-and-tree.png)
+
+  - 루트 디렉터리와 각 하위 디렉터리의 트리 개체를 체크섬과 함께 저장소에 저장.
+  - 커밋 객체를 만들고 메타데이터와 루트 디렉터리 트리 개체를 가리키는 포인터 정보를 커밋 개체에 저장.
+
+  commits and parents
+
+  ![commits-and-parents](images/Git%20사용법_commits-and-parents.png)
+
+  - 파일을 수정하고 커밋하면 이전 커밋이 무엇인지도 저장.
+
+  branch and history
+
+  ![branch-and-history](images/Git%20사용법_branch-and-history.png)
+
+  - 브랜치는 커밋 사이를 가볍게 이동할 수 있는 포인터.
+  - master/main - git을 처음 만들면 만들어지는 기본 브랜치.
+
+#### 새 브랜치 생성하기
+
+- `git branch <이름>`
+
+  ```shell
+  $ git branch testing
+  ```
+
+  한 커밋 히스토리를 가리키는 두 브랜치
+
+  ![two-branches](images/Git%20사용법_two-branches.png)
+
+  - HEAD - 현재 작업중인 로컬 브랜치를 가리키는 포인터.
+  - 새 브랜치를 만들었지만 HEAD를 옮기지는 않음.
+
+- 현재 브랜치를 확인하기
+
+  - `git log --decorate`
+
+  ```shell
+  $ git log --oneline --decorate
+  f30ab (HEAD -> master, testing) add feature #32 - ability to add new formats to the central interface
+  34ac2 Fixed bug #1328 - stack overflow under certain conditions
+  98ca9 The initial commit of my project
+  ```
+
+  - master, testing 브랜치가 f30ab 커밋을 가리킴.
+  - HEAD는 master를 가리킴.
+
+#### 브랜치 이동하기
+
+- `git checkout <브랜치 이름>` - 브랜치 이동.
+
+1. testing 브랜치로 이동.
+
+```shell
+git checkout testing
+```
+
+![head-to-testing](images/Git%20사용법_head-to-testing.png)
+
+2. 커밋 해보기
+
+```shell
+$ vim test.rb
+$ git commit -a -m 'made a change'
+```
+
+![advance-testing](images/Git%20사용법_advance-testing.png)
+
+3. master로 이동
+
+```shell
+$ git checkout master
+```
+
+![checkout-master](images/Git%20사용법_checkout-master.png)
+
+4. 파일을 수정하고 다시 커밋
+
+```shell
+$ vim test.rb
+$ git commit -a -m 'made other changes'
+```
+
+![advance-master](images/Git%20사용법_advance-master.png)
+
+#### 브랜치와 Merge 의 기초
+
+- 실제 개발 시나리오
+
+1. 웹사이트가 있고 뭔가 작업을 진행중.
+
+   1. 새로운 이슈를 처리할 새 Branch를 하나 생성한다.
+   2. 새로 만든 Branch에서 작업을 진행한다.
+
+2. 이때 중요한 문제가 생겨서 그것을 해결하는 Hotfix를 먼저 만들어야 한다. 그러면 아래와 같이 할 수 있다.
+
+   1. 새로운 이슈를 처리하기 이전의 운영(Production) 브랜치로 이동한다.
+   2. Hotfix 브랜치를 새로 하나 생성한다.
+   3. 수정한 Hotfix 테스트를 마치고 운영 브랜치로 Merge 한다.
+
+3. 다시 작업하던 브랜치로 옮겨가서 하던 일 진행한다.
 
 ### 2.8. Git 명령어
 
