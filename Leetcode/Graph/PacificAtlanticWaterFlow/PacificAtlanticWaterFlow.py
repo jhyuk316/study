@@ -1,6 +1,9 @@
 # 417. Pacific Atlantic Water Flow
 # https://leetcode.com/problems/pacific-atlantic-water-flow/
 
+"""
+큰 문제는 쪼개자! 한 번에 해결하려고 하면 안 된다.
+"""
 
 from enum import Enum
 from typing import Dict, List
@@ -61,7 +64,7 @@ class Solution:
         return res
 
 
-# O(m*n???) FAIL 두 개를 동시에하는 것은 말이 안되는 것이었음.
+# O(m*n???) FAIL 두 개를 동시에 하는 것은 말이 안 되는 것이었음.
 class SolutionFAIL:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         class Visit(Enum):
@@ -122,7 +125,7 @@ class SolutionFAIL:
         return res
 
 
-# O(m*n) FAIL bottom-up은 안되는 것인가?
+# O(m*n) FAIL bottom-up은 안 되는 것인가?
 class SolutionFAIL:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         class Visit(Enum):
