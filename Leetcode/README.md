@@ -160,7 +160,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n) 213. House Robber II - <https://leetcode.com/problems/house-robber-ii/>
 - [x] O(n) 91. Decode Ways - <https://leetcode.com/problems/decode-ways/>
 - [x] O(m\*n) 62. Unique Paths - <https://leetcode.com/problems/unique-paths/>
-- [ ] Jump Game - <https://leetcode.com/problems/jump-game/>
+- [x] O(n) 55. Jump Game - <https://leetcode.com/problems/jump-game/>
 
 ### Graph
 
@@ -248,6 +248,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Dynamic Programming
 
 ### Graph
+
+- [x] O(n) 210. Course Schedule II <https://leetcode.com/problems/course-schedule-ii/>
 
 ### Interval
 
