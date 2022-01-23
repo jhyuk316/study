@@ -1,31 +1,32 @@
 # 712. Minimum ASCII Delete Sum for Two Strings
 # https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
 
-# O(n^2) dp[i][j] = max(d[i][j-1] + ord(c), d[i-1][j-1])
+
+# O(n^2)
+# dp[i][j] = max(dp[i][j-1], dp[i-1][j]) if c1 != c2
+# dp[i][j] = d[i][j-1] + ord(c) if c1 = c2
 class Solution:
     def minimumDeleteSum(self, s1: str, s2: str) -> int:
-        dp = [[0] * (len(s2) + 1) for _ in range(len(s1))]
+        s1 = list(map(ord, s1))
+        s2 = list(map(ord, s2))
 
         asciiS1 = 0
         asciiS2 = 0
-
         for c in s1:
-            asciiS1 += ord(c)
+            asciiS1 += c
         for c in s2:
-            asciiS2 += ord(c)
+            asciiS2 += c
 
-        maxAscii = 0
+        dp = [[0] * (len(s2) + 1) for _ in range(len(s1))]
         for i, c1 in enumerate(s1):
             for j, c2 in enumerate(s2):
                 dp[i][j] = max(dp[i][j - 1], dp[i - 1][j])
                 if c1 == c2:
-                    dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + ord(c1))
-                maxAscii = max(maxAscii, dp[i][j])
+                    dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + c1)
 
-        print(asciiS1, asciiS2, maxAscii)
         print(*dp, sep="\n")
 
-        return asciiS1 + asciiS2 - maxAscii * 2
+        return asciiS1 + asciiS2 - dp[-1][-2] * 2
 
 
 def testSol(func, input, output):
