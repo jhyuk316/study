@@ -187,7 +187,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n^2?) 141. Detect Cycle in a Linked List - <https://leetcode.com/problems/linked-list-cycle/>
 - [x] O(m+n) 21. Merge Two Sorted Lists - <https://leetcode.com/problems/merge-two-sorted-lists/>
 - [x] O(m\*n) 23. Merge K Sorted Lists - <https://leetcode.com/problems/merge-k-sorted-lists/>
-- [ ] Remove Nth Node From End Of List - <https://leetcode.com/problems/remove-nth-node-from-end-of-list/>
+- [x] O(n) 19. Remove Nth Node From End Of List - <https://leetcode.com/problems/remove-nth-node-from-end-of-list/>
 - [ ] Reorder List - <https://leetcode.com/problems/reorder-list/>
 
 ### Matrix
@@ -195,7 +195,7 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] space: O(1) 73. Set Matrix Zeroes - <https://leetcode.com/problems/set-matrix-zeroes/>
 - [x] O(m\*n) 54. Spiral Matrix - <https://leetcode.com/problems/spiral-matrix/>
 - [x] O(n^2) 48. Rotate Image - <https://leetcode.com/problems/rotate-image/>
-- [ ] Word Search - <https://leetcode.com/problems/word-search/>
+- [x] O(m\*n) 79. Word Search - <https://leetcode.com/problems/word-search/>
 
 ### String
 
@@ -207,14 +207,14 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 - [x] O(n) 20. Valid Parentheses - <https://leetcode.com/problems/valid-parentheses/>
 - [x] O(n) 125. Valid Palindrome - <https://leetcode.com/problems/valid-palindrome/>
 - [x] O(n^2) 5. Longest Palindromic Substring - <https://leetcode.com/problems/longest-palindromic-substring/>
-- [ ] Palindromic Substrings - <https://leetcode.com/problems/palindromic-substrings/>
+- [x] O(n) 647. Palindromic Substrings - <https://leetcode.com/problems/palindromic-substrings/>
 - [ ] Encode and Decode Strings (Leetcode Premium) - <https://leetcode.com/problems/encode-and-decode-strings/>
 
 ### Tree
 
 - [x] O(n) 104. Maximum Depth of Binary Tree - <https://leetcode.com/problems/maximum-depth-of-binary-tree/>
 - [x] O(n) 100. Same Tree - <https://leetcode.com/problems/same-tree/>
-- [ ] Invert/Flip Binary Tree - <https://leetcode.com/problems/invert-binary-tree/>
+- [x] O(n) 226. Invert/Flip Binary Tree - <https://leetcode.com/problems/invert-binary-tree/>
 - [ ] Binary Tree Maximum Path Sum - <https://leetcode.com/problems/binary-tree-maximum-path-sum/>
 - [ ] Binary Tree Level Order Traversal - <https://leetcode.com/problems/binary-tree-level-order-traversal/>
 - [ ] Serialize and Deserialize Binary Tree - <https://leetcode.com/problems/serialize-and-deserialize-binary-tree/>
@@ -252,7 +252,6 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 ### Graph
 
 - [x] O(n) 210. Course Schedule II <https://leetcode.com/problems/course-schedule-ii/>
-- [x] O(m\*n) 79. Word Search <https://leetcode.com/problems/word-search/>
 
 ### Interval
 
