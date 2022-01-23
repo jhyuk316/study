@@ -247,9 +247,12 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Dynamic Programming
 
+- [x] O(n^2) 712. Minimum ASCII Delete Sum for Two Strings <https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/>
+
 ### Graph
 
 - [x] O(n) 210. Course Schedule II <https://leetcode.com/problems/course-schedule-ii/>
+- [x] O(m\*n) 79. Word Search <https://leetcode.com/problems/word-search/>
 
 ### Interval
 
@@ -269,7 +272,8 @@ New Year Gift - Curated List of Top 75 LeetCode Questions to Save Your Time
 
 ### Math
 
-- [x] O(logn) 69. Sqrt(x) https://leetcode.com/problems/sqrtx/
+- [x] O(logn) 69. Sqrt(x) <https://leetcode.com/problems/sqrtx/>
+- [x] O(n) 224. Basic Calculator <https://leetcode.com/problems/basic-calculator/>
 
 ### backtracking
 
