@@ -613,11 +613,111 @@
 
 ### Rebase의 기초
 
+- Merge
+
+  - 두 개의 브랜치로 나누어진 커밋 히스토리
+
+  ![두 개의 브랜치로 나누어진 커밋 히스토리](images/3%20Git%20브랜치_basic-rebase-1.png)
+
+  - 나뉜 브랜치를 Merge 하기
+
+  ![나뉜 브랜치를 Merge 하기](images/3%20Git%20브랜치_basic-rebase-2.png)
+
+- Rebase
+
+  - C4의 변경사항을 Patch로 만들어 C3에 적용하는 것.
+
+  ```shell
+  $ git checkout experiment
+  $ git rebase master
+  First, rewinding head to replay your work on top of it...
+  Applying: added staged command
+  ```
+
+  - 공통 커밋으로 이동, 지금 checkout한 브랜치가 가리키는 커밋까지 diff를 차례로 만들어서 저장.
+  - Rebase 할 브랜치(experiment)가 합칠 브랜치(master)가 가리키는 커밋을 가리키게 하고 저장해둔 변경사항(diff)을 적용.
+
+  ![C4의 변경사항을 C3에 적용하는 Rebase 과정](images/3%20Git%20브랜치_basic-rebase-3.png)
+
+  - master 브랜치를 Fast-forward 시킴.
+
+  ![master 브랜치를 Fast-forward시키기](images/3%20Git%20브랜치_basic-rebase-4.png)
+
+  - C4'와 C5는 동일함.
+  - Rebase가 좀 더 깨끗한 히스토리.
+  - Log를 보면 히스토리가 선형. 모든 작업이 순차적으로 진행된 것으로 보임.
+
+> Rebase는 보통 리모트 브랜치에 커밋을 깔끔하게 적용하고 싶을 때 사용.
+
+- Rebase와 Merge
+  - 최종 결과물은 같음.
+  - 커밋 히스토리만 다름.
+  - Rebase는 브랜치의 변경 사항을 순서대로 다른 브랜치에 적용.
+  - Merge는 두 브랜치의 최종 결과만 합침.
+
 ### Rebase 활용
+
+- 다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치
+
+  - server 브랜치 - 서버 기능 추가 중인 브랜치
+  - client 브랜치 - 클라이언트 기능 추가 중인 브랜치
+
+  ![다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치](images/3%20Git%20브랜치_interesting-rebase-1.png)
+
+- 테스트 중인 server 브랜치 제외. client 브랜치만 master와 통합하려는 상황.
+
+  - `git rebase --onto master server client`
+    - server 브랜치로부터 갈라진 client 브랜치의 patch를 master에 재적용하여 client 브랜치 생성.
+
+  ![다른 토픽 브랜치에서 갈라져 나온 토픽 브랜치를 Rebase 하기](images/3%20Git%20브랜치_interesting-rebase-2.png)
+
+  - master 브랜치 Fast-forward
+
+  ```shell
+  $ git checkout master
+  $ git merge client
+  ```
+
+  ![master 브랜치를 client 브랜치 위치로 진행 시키기](images/3%20Git%20브랜치_interesting-rebase-3.png)
+
+- master 브랜치에 server 브랜치의 수정 사항을 적용
+
+  - `git rebase <basebranch> <topicbranch>`
+  - checkout하지 않고 server 브랜치를 master 브랜치로 rebase
+
+  ```shell
+  $ git rebase master server
+  ```
+
+  ![master 브랜치에 server 브랜치의 수정 사항을 적용](images/3%20Git%20브랜치_interesting-rebase-4.png)
+
+  - master 브랜치 Fast-forward
+
+  ```shell
+  $ git checkout master
+  $ git merge server
+  ```
+
+- client 나 server 브랜치는 삭제
+
+  ```shell
+  $ git branch -d client
+  $ git branch -d server
+  ```
+
+  ![최종 커밋 히스토리](images/3%20Git%20브랜치_interesting-rebase-5.png)
 
 ### Rebase의 위험성
 
+> 이미 공개 저장소에 Push 한 커밋을 Rebase 하지 마라.
+
+- Rebase는 기존 커밋을 그대로 사용하는 것이 아니라 같은 내용의 다른 커밋을 새로 만듦.
+  - 내가 push한 커밋을 rebase하면 그 사이 누군가 pull해서 작업했을 경우 히스토리와 코드가 엄청 꼬임.
+
 ### Rebase한 것을 다시 Rebase 하기
+
+- Rebase로 꼬인 히스토리를 Rebase로 정리하는 것이지만 생략.
+- (필요할 때 언젠가 보겠지 뭐.)
 
 ### Rebase vs. Merge
 
@@ -625,7 +725,7 @@
 
 1. 작업한 내용의 기록
 
-   - 커밋 히스토리 변경 - 거짓말
+   - 커밋 히스토리 변경을 거짓말로 봄.
    - Merge
 
 2. 프로젝트가 어떻게 진행되었는지 이야기
