@@ -1,3 +1,4 @@
 *.pdf
 Leetcode/TEST/
 Leetcode/Cheat Sheet.md
+.vscode/settings.json
