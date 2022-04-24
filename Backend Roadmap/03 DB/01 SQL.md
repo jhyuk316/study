@@ -1,49 +1,72 @@
 # 1. 기초 SQL
 
 - [1. DB 명령어](#1-db-명령어)
+  - [1.1. SHOW DATABASES](#11-show-databases)
+  - [1.2. SHOW TABLES](#12-show-tables)
+  - [1.3. SHOW COLUMNS](#13-show-columns)
 - [2. SQL](#2-sql)
 - [3. DDL(Data Definition Language)](#3-ddldata-definition-language)
-  - [3.1. CREATE](#31-create)
-  - [3.2. DROP](#32-drop)
-  - [3.3. ALTER](#33-alter)
-- [4. DML(Data Manipulation Language)](#4-dmldata-manipulation-language)
+  - [3.1. SQL Data Types](#31-sql-data-types)
+  - [3.2. CREATE](#32-create)
+  - [3.3. DROP](#33-drop)
+  - [3.4. ALTER](#34-alter)
+- [4. DML(Data Manipulation Language), DQL(Data Query Language)](#4-dmldata-manipulation-language-dqldata-query-language)
   - [4.1. Create](#41-create)
   - [4.2. Read](#42-read)
   - [4.3. Update](#43-update)
   - [4.4. Delete](#44-delete)
   - [4.5. 추가 기능](#45-추가-기능)
-    - [4.5.1. WHERE 조건절](#451-where-조건절)
-    - [4.5.2. 서브 쿼리](#452-서브-쿼리)
-    - [4.5.3. ORDER BY - 정렬](#453-order-by---정렬)
-    - [4.5.4. DISTINCT - 중복제거](#454-distinct---중복제거)
-    - [4.5.5. LIMIT n - 출력 개수 제한](#455-limit-n---출력-개수-제한)
-    - [4.5.6. GRUOP BY - 그룹으로 묶기](#456-gruop-by---그룹으로-묶기)
-    - [4.5.7. HAVING - 그룹의 조건](#457-having---그룹의-조건)
-    - [4.5.8. WITH ROLLUP - 중간 합계도 출력](#458-with-rollup---중간-합계도-출력)
-    - [4.5.9. JOIN - 테이블 조합](#459-join---테이블-조합)
-    - [4.5.10. UNION](#4510-union)
-  - [4.6. MySQL 내장 함수](#46-mysql-내장-함수)
+  - [4.6. Alias](#46-alias)
+    - [4.6.1. WHERE 조건절](#461-where-조건절)
+    - [4.6.2. 서브 쿼리](#462-서브-쿼리)
+    - [4.6.3. ORDER BY - 정렬](#463-order-by---정렬)
+    - [4.6.4. DISTINCT - 중복제거](#464-distinct---중복제거)
+    - [4.6.5. LIMIT & OFFSET - 출력 개수 제한](#465-limit--offset---출력-개수-제한)
+    - [4.6.6. Aggregation](#466-aggregation)
+    - [4.6.7. GRUOP BY - 그룹으로 묶기](#467-gruop-by---그룹으로-묶기)
+    - [4.6.8. HAVING - 그룹의 조건](#468-having---그룹의-조건)
+    - [4.6.9. WITH ROLLUP - 중간 합계도 출력](#469-with-rollup---중간-합계도-출력)
+    - [4.6.10. JOIN - 테이블 조합](#4610-join---테이블-조합)
+    - [4.6.11. UNION & INTERSECT](#4611-union--intersect)
+  - [4.7. MySQL 내장 함수](#47-mysql-내장-함수)
 - [5. DCL(Data Control Language)](#5-dcldata-control-language)
   - [5.1. GRANT](#51-grant)
   - [5.2. REVOKE](#52-revoke)
 - [6. TCL(Transaction Control Language)](#6-tcltransaction-control-language)
   - [6.1. 트랜잭션](#61-트랜잭션)
   - [6.2. 명령어](#62-명령어)
-- [출처](#출처)
+- [7. 출처](#7-출처)
 
 ## 1. DB 명령어
 
-- 데이터 베이스 지정
-- SHOW DB명
-- USE DB명
-- 테이블 리스트 출력
+- `-- 주석은 이렇게`
 
+### 1.1. SHOW DATABASES
+
+- MySQL - `SHOW DATABASES`
+- Oracle - 오라클은 데이터베이스 개념이 없음. 단일 데이터베이스.
+- PostgreSQL - `SELECT datname FROM pg_database;`
+
+### 1.2. SHOW TABLES
+
+- MySQL
   - `SHOW TABLES`
   - `SHOW TABLE STATUS` - 테이블 정보
+- Oracle
+  - `SELECT * FROM ALL_ALL_TABLES`
+  - `SELECT TABLE_NAME FROM TABS WHERE TABLESPACE_NAME = '테이블 스페이스명';`
+- PostgreSQL
+  - `SELECT table_name FROM information_schema.tables WHERE table_schema = '스키마명';`
 
-- `DESCRIBE 테이블명` or `DESC 테이블명` - 테이블 칼럼 보기
+### 1.3. SHOW COLUMNS
 
-- `-- 주석은 이렇게`
+- MySQL
+  - `SHOW COLUMNS FROM 테이블명`
+  - `DESCRIBE 테이블명` or `DESC 테이블명`
+- Oracle
+  - `DESCRIBE 테이블명`
+- PostgreSQL
+  - `SELECT column_name FROM information_schema.columns WHERE table_name = '테이블명';`
 
 ## 2. SQL
 
@@ -61,12 +84,30 @@
 - ROLLBACK, COMMIT 사용 불가
 - DLL문은 즉시 적용.
 
-### 3.1. CREATE
+### 3.1. SQL Data Types
+
+- 문자
+  - CHAR(n) - 고정 길이 문자열, 공간 낭비가 생길 수 있음.
+  - VARCHAR(n) - 가변 길이 문자열, 최대 n개 이내에서 크기를 값에 맞춤. 최댓값이 너무 크면 느림.
+- 숫자
+  - BIT(n)
+  - INT, BIGINT, SMALLINT - 정수형 타입
+  - FLOAT
+  - DECIMAL(p,s)
+    - 정확한 숫자를 저장하기 위한 타입.
+    - p 자릿수의 숫자, s 소수점 이하의 자릿수, 정수 자릿수는 p - s.
+  - REAL(s)
+- 날짜 & 시간
+  - DATE
+  - TIME
+  - TIMESTAMP
+
+### 3.2. CREATE
 
 - CREATE - 데이터베이스 객체 생성 명령어
 
-  - `CREATE DATABASE CITYINFO` - CITYINFO 데이터 베이스 생성
-  - `USE DATABASE CITYINFO` - CITYINFO 데이터 베이스 사용
+  - `CREATE DATABASE CITYINFO` - CITYINFO 데이터베이스 생성
+  - `USE DATABASE CITYINFO` - CITYINFO 데이터베이스 사용
   - CREATE TABLE - 테이블 생성
 
   ```sql
@@ -80,9 +121,11 @@
   ;
   ```
 
-### 3.2. DROP
+### 3.3. DROP
 
-- DROP - 데이터 베이스 객체 삭제
+> DROP과 ALTER는 쓰지 말자!
+
+- DROP - 데이터베이스 객체 삭제
   - `DROP DATABASE CITYINFO`
   - `DROP TABLE USER`
 - TRUNCATE - 테이블의 내용을 지움, DROP 후 CREATE
@@ -97,7 +140,9 @@
 
 - `FLASHBACK TABLE 테이블명 TO BEFORE DROP` - 테이블을 DROP 전으로 되돌기.
 
-### 3.3. ALTER
+### 3.4. ALTER
+
+> DROP과 ALTER는 쓰지 말자!
 
 - 테이블 수정 명령
 
@@ -122,15 +167,12 @@ ALTER TABLE USER
 DROP NUMBER INT NULL;
 ```
 
-## 4. DML(Data Manipulation Language)
+## 4. DML(Data Manipulation Language), DQL(Data Query Language)
 
 - 데이터 조작 언어
 - 데이터를 선택, 삽입, 수정, 삭제
 - DML의 대상은 테이블의 행, 테이블이 미리 정의되어 있어야 함.
 - 트랜잭션 발생.
-
-  - 실제 테이블에 적용하지 않고 임시로 적용.
-  - ROLLBACK, COMMIT 가능
 
 - SQL 구문 순서
 
@@ -143,6 +185,10 @@ DROP NUMBER INT NULL;
   ORDER BY 칼럼명
   LIMIT 개수
   ```
+
+- SQL 실행 순서
+
+  - `FROM` -> `WHERE` -> `GROUP BY` -> `HAVING` -> `SELECT` -> `ORDER BY` -> `LIMIT`
 
 - CRUD
 
@@ -161,12 +207,10 @@ DROP NUMBER INT NULL;
 
 ```sql
 INSERT INTO USER (ID, PASSWORD, NAME, ADDRESS, PHONE)
-    VALUES ('user1', '1234', '김철수', '서울', '010-1234-1234')
-;
+    VALUES ('user1', '1234', '김철수', '서울', '010-1234-1234');
 
 INSERT INTO USER
-    VALUES ('user1', '1234', '김철수', '서울', '010-1234-1234')
-;
+    VALUES ('user1', '1234', '김철수', '서울', '010-1234-1234');
 ```
 
 ### 4.2. Read
@@ -177,63 +221,93 @@ INSERT INTO USER
 
 ```sql
 SELECT *
-FROM USER
-;
+FROM USER;
 
-SELECT ID, NAME, ADDRESS
-FROM USER
-;
+SELECT
+  ID,
+  NAME,
+  ADDRESS
+FROM USER;
 ```
 
 ### 4.3. Update
 
 - UPDATE - 테이블에 저장되어있는 데이터를 수정하는 명령어
 - `UPDATE 테이블명 SET 칼럼명 1 = 변경할 값 1, 칼럼명 2 = 변경할 값 2 WHERE 조건`
-- 조건(WHERE) 절이 없으면 모든 행에 적용됨.
+- 조건(WHERE)절이 없으면 모든 행에 적용됨.
 
 ```sql
 UPDATE USER
-    SET ID = 'user2',
-        PASSWORD = '4567',
-        ADDRESS = '경기'
+  SET
+    ID = 'user2',
+    PASSWORD = '4567',
+    ADDRESS = '경기'
 ;
 ```
 
 ```sql
 UPDATE USER
-    SET PASSWORD = '4567',
-        ADDRESS = '경기'
-    WHERE ID = 'user2'
-;
+  SET
+    PASSWORD = '4567',
+    ADDRESS = '경기'
+WHERE ID = 'user2';
 ```
 
 ### 4.4. Delete
 
-- DELETE - 테이블에 저장되어 있는 데이터를 삭제하는 명령어.
+- DELETE - 테이블에 저장된 데이터를 삭제하는 명령어.
 - `DELETE FROM 테이블명 WHERE 조건`
 - 조건절이 없으면 모든 데이터 삭제.
 
 ```sql
-DELETE FROM USER WHERE ID = 'user2'
-;
+DELETE
+FROM USER
+WHERE ID = 'user2';
 ```
 
 ### 4.5. 추가 기능
 
-#### 4.5.1. WHERE 조건절
+### 4.6. Alias
+
+- 테이블이나 칼럼의 별칭을 지정하여 사용, 출력 가능.
+- SQL 실행 순서 때문에 SELECT에서 지정한 alias 이름을 WHERE 조건에 쓸 수 없음.
+  마찬가지 이유로 ORDER BY에는 가능.
+- Column aliases
+
+  ```sql
+  SELECT
+    inv_no AS invoice_no,
+    amount,
+    due_date AS 'Due date',
+    cust_no 'Customer No' -- 생략 가능, 하지만 혼용하지 말 것.
+  FROM
+    invoices;
+  ```
+
+- Table alias
+
+  ```sql
+  SELECT
+    e.first_name,
+    e.last_name
+  FROM
+    employees AS e;
+  ```
+
+#### 4.6.1. WHERE 조건절
 
 - 특정 조건을 만족하는 결과만 보고 싶을 때
-- 조건 연산자 - =, <, >, <=, >=, <>,!=
+- 조건 연산자 - =, <, >, <=, >=, <>, !=
 - 관계 연산자 - OR, AND, NOT
 - 범위 지정 - BETWEEN(연속 값), IN(이산 값)
   - `WHERE COST BETWEEN 100 AND 200` - 100 이상 200 이하
   - `WHERE COUNTRY IN('KOR', 'USA', 'JPN')
 - LIKE - 문자열 검색
-- % - 여러 문자
-- \_ - 한 문자
-- `WHERE COUNTRY LIKE 'K%'` - K로 시작하는 나라들
+  - % - 여러 문자
+  - \_ - 한 문자
+  - `WHERE COUNTRY LIKE 'K%'` - K로 시작하는 나라들
 
-#### 4.5.2. 서브 쿼리
+#### 4.6.2. 서브 쿼리
 
 - 쿼리문 안에 또 쿼리문을 넣는 것
 - 서브 쿼리 결과가 둘 이상이면 에러
@@ -277,76 +351,129 @@ WHERE COUNTRY = (
   );
   ```
 
-#### 4.5.3. ORDER BY - 정렬
+#### 4.6.3. ORDER BY - 정렬
 
 - ASC - ASCENDING, 오름차순, 생략 가능.
 - DESC - DESCENDING, 내림차순.
-- `ORDER BY COUNTRY, POPULATION DESC` - 나라 오름차순, 인구수 내림차순 정렬.
 
-#### 4.5.4. DISTINCT - 중복제거
+```sql
+ORDER BY
+  COUNTRY,
+  POPULATION DESC; -- 나라 오름차순, 인구수 내림차순 정렬.
+```
 
-- `SELECT DISTINCT COUNTRY FROM CITY` - 나라를 중복 없이 검색
+#### 4.6.4. DISTINCT - 중복제거
 
-#### 4.5.5. LIMIT n - 출력 개수 제한
+```sql
+SELECT DISTINCT COUNTRY
+FROM CITY; -- 나라를 중복 없이 검색
+```
 
-- `LIMIT 10` - 10개로 출력 제한
+#### 4.6.5. LIMIT & OFFSET - 출력 개수 제한
 
-#### 4.5.6. GRUOP BY - 그룹으로 묶기
+- MySQL, PostgreSQL
 
-- 집계 함수 - Agregate Function과 함께 사용.
-  - AVG() - 평균
-  - MIN() - 최솟값
-  - MAX() - 최댓값
-  - COUNT() - 개수
-  - COUNT(DISTINCT) - 중복되지 않은 개수
-  - STDEV() - 표준편차
-  - VARIANCE() - 분산
-- e.g. 나라 별 도시 평균 인구 검색
+  - `LIMIT 10` - 10개로 출력 제한.
+  - `OFFSET 3` - 3개 skip 하고 출력.
+
+  ```sql
+  SELECT
+      employee_id, first_name, last_name
+  FROM
+      employees
+  ORDER BY first_name
+  LIMIT 5 OFFSET 3;
+  ```
+
+  ![MYSQL LIMIT OFFSET](images/01%20SQL_MYSQL_LIMIT_OFFSET.png)
+
+- Oracle
+
+  ```sql
+  SELECT
+    employee_id, first_name, last_name
+  FROM
+    employees
+  ORDER BY first_name
+  OFFSET 3 ROWS
+  FETCH NEXT 5 ROWS ONLY;
+  ```
+
+#### 4.6.6. Aggregation
+
+- AVG() - 평균
+- MIN() - 최솟값
+- MAX() - 최댓값
+- COUNT() - 개수
+- COUNT(DISTINCT) - 중복되지 않은 개수
+- STDEV() - 표준편차
+- VARIANCE() - 분산
+
+```sql
+SELECT
+  AVG(salary)
+FROM
+  employees;
+```
+
+#### 4.6.7. GRUOP BY - 그룹으로 묶기
+
+- 주로 Aggregation과 함께 사용.
+- e.g. 나라별 도시 평균 인구 검색
 
 ```SQL
-SELECT COUNTRY, AVG(POPULATION) AS '평균 인구'
+SELECT
+  COUNTRY,
+  AVG(POPULATION) AS '평균 인구'
 FROM CITY
 GROUP BY COUNTRY;
 ```
 
-#### 4.5.7. HAVING - 그룹의 조건
+#### 4.6.8. HAVING - 그룹의 조건
 
 - e.g. 도시 평균 인구가 1000000 초과인 나라 검색
+- SELECT 절에서 설정한 Alias를 사용 가능. (왜지?)
 
 ```SQL
-SELECT COUNTRY, AVG(POPULATION) AS '평균 인구'
+SELECT
+  COUNTRY,
+  AVG(POPULATION) AS '평균 인구'
 FROM CITY
 GROUP BY COUNTRY
 HAVING AVG(POPULATION) > 1000000;
 ```
 
-#### 4.5.8. WITH ROLLUP - 중간 합계도 출력
+#### 4.6.9. WITH ROLLUP - 중간 합계도 출력
 
 - 각 도시의 인구와 인구 총합을 함께 검색
 
 ```SQL
-SELECT COUNTRY, NAME, SUM(POPULATION)
+SELECT
+  COUNTRY,
+  NAME,
+  SUM(POPULATION)
 FROM CITY
 GROUP BY COUNTRY, NAME WITH ROLLUP;
 ```
 
-#### 4.5.9. JOIN - 테이블 조합
+#### 4.6.10. JOIN - 테이블 조합
 
 - INNER - 기준 테이블과 조인 테이블 모두에 데이터가 존재해야 함.
 - OUTTER - 기준 테이블에만 데이터가 존재하면 됨.
 
 - JOIN(INNER JOIN)
 
-  - CITY테이블의 COUNTRYCODE와 COUNTRY테이블의 CODED와 COUNTRYLANGUAGE테이블의 CODE가 같은 조합 결과 검색.
+  - CITY 테이블의 COUNTRYCODE와 COUNTRY 테이블의 CODED와 COUNTRYLANGUAGE 테이블의 CODE가 같은 조합 결과 검색.
 
   ```SQL
   SELECT *
-  FROM CITY
-  JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE;
-  JOIN COUNTRYLANGUAGE ON CITY.COUNTRYCODE = COUNTRYLANGUAGE.CODE;
+  FROM
+    CITY
+    JOIN COUNTRY
+      ON CITY.COUNTRYCODE = COUNTRY.CODE;
+    JOIN COUNTRYLANGUAGE
+      ON CITY.COUNTRYCODE = COUNTRYLANGUAGE.CODE;
   ```
-
-  - SELF JOIN - 자기 자신의 테이블과 조인
 
 - LEFT/RIGHT OUTTER JOIN
 
@@ -355,13 +482,15 @@ GROUP BY COUNTRY, NAME WITH ROLLUP;
 
   ```SQL
   SELECT *
-  FROM CITY
-  LEFT JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE;
+  FROM
+    CITY
+    LEFT JOIN COUNTRY
+      ON CITY.COUNTRYCODE = COUNTRY.CODE;
   ```
 
 - CROSS JOIN - 교차 조인
 
-  - A테이블과 B테이블의 모든 조합을 출력, A\*B
+  - A 테이블과 B 테이블의 모든 조합을 출력, A\*B
 
   - e.g. 직원들의 성과 이름의 모든 조합. SELF CROSS JOIN.
 
@@ -372,32 +501,65 @@ GROUP BY COUNTRY, NAME WITH ROLLUP;
   ORDER BY E1.EMPLYEEID;
   ```
 
-#### 4.5.10. UNION
+- SELF JOIN - 자기 자신의 테이블과 조인
 
-- 두 테이블의 합집합 연산함. 칼럼이 일치해야 함.
+```sql
+SELECT
+  e.first_name || ' ' || e.last_name AS employee,
+  m.first_name || ' ' || m.last_name AS manager
+FROM
+  employees e
+  LEFT JOIN employees m
+    ON m.employee_id = e.manager_id
+ORDER BY manager;
+```
 
-- UNION - 합집합, 중복제거
-- UNION ALL - 중복 포함.
+![Self_Join](images/01%20SQL_Self_Join.png)
 
-  ```SQL
-  SELECT NAME, CITY
-  FROM CUSTOMERS
-  UNION
-  SELECT NAME, CITY
-  FROM SUPPLIERS
-  ```
+#### 4.6.11. UNION & INTERSECT
 
-### 4.6. MySQL 내장 함수
+- 두 테이블의 집합 연산. 칼럼이 일치해야 함.
+
+  - UNION - 합집합, 중복제거
+  - UNION ALL - 중복 포함.
+
+    ```SQL
+    SELECT
+      NAME,
+      CITY
+    FROM CUSTOMERS
+    UNION
+    SELECT
+      NAME,
+      CITY
+    FROM SUPPLIERS;
+    ```
+
+  - INTERSECT - 교집합
+
+    ```SQL
+    SELECT
+      NAME,
+      CITY
+    FROM CUSTOMERS
+    INTERSECT
+    SELECT
+      NAME,
+      CITY
+    FROM SUPPLIERS;
+    ```
+
+### 4.7. MySQL 내장 함수
 
 - 문자열
 
   - LENGTH() - 문자열 길이
   - CONCAT() - 문자열 합치기, 인자 중 하나라도 NULL이면 NULL 반환
   - LOCATE('ABC', 'ABCDE') - 문자열의 위치 반환, 1부터 시작
-  - LEFT(5), RIGHT(5) - 각 방향에서 정해진 문자 수(5) 만큼 반환
+  - LEFT(5), RIGHT(5) - 각 방향에서 정해진 문자 수(5)만큼 반환
   - LOWER(), UPPER() - 소문자로, 대문자로 변경
   - REPLECE('MSSQL', 'MS', My') - 문자열 변경, MSSQL을 MySQL로 변경.
-  - TRIM() - 문자열 앞 뒤의 특정 문자(기본값 공백) 제거.
+  - TRIM() - 문자열 앞뒤의 특정 문자(기본값 공백) 제거.
     - BOTH - 양쪽, 기본값
     - LEADING - 앞
     - TRAILING - 뒤
@@ -425,7 +587,7 @@ GROUP BY COUNTRY, NAME WITH ROLLUP;
 ## 5. DCL(Data Control Language)
 
 - 데이터 제어 언어
-- 사용자를 등록하고, 사용자에게 특정 데이터 베이스를 사용할 권리를 부여.
+- 사용자를 등록하고, 사용자에게 특정 데이터베이스를 사용할 권리를 부여.
 
 ### 5.1. GRANT
 
@@ -481,8 +643,9 @@ GROUP BY COUNTRY, NAME WITH ROLLUP;
 
 ---
 
-## 출처
+## 7. 출처
 
+- SQL Tutorial - <https://www.sqltutorial.org/>
 - SQL - <https://ko.wikipedia.org/wiki/SQL>
 - CRUD - <https://ko.wikipedia.org/wiki/CRUD>
 - CRUD - <http://wiki.hash.kr/index.php/CRUD>
@@ -496,6 +659,7 @@ GROUP BY COUNTRY, NAME WITH ROLLUP;
 - SQL 기초 & 자주쓰는 쿼리문 정리 - <https://365kim.tistory.com/102>
 - SQL 활용(기본 SQL 작성-DML)-명령문 - <https://velog.io/@ansalstmd/SQL 활용 기본 SQL 작성-DML-명령문>
 - 6.  [MySQL] GROUP BY , 집계 함수와 산술 함수 알아보기 - <https://velog.io/@yj-leee/06.-MySQL-GROUP-BY-집계 함수와-산술 함수-알아보기>
+- [PostgreSQL] SELECT LIMIT ~ OFFSET 사용하기 (ft. 페이징 활용) - <https://mine-it-record.tistory.com/346>
 - [MSSQL] 조인 방법 쉽게 정리 (INNER JOIN, OUTER JOIN) - <https://gent.tistory.com/376>
 - MySQL 데이터베이스 한 번에 끝내기 SQL Full Tutorial Course using MySQL Database - <https://www.youtube.com/watch? v=vgIc4 ctNFbc>
 - 왕초보용! 갖고 노는 MySQL 데이터베이스 강좌 - <https://www.youtube.com/watch?v=dgpBXNa9vJc>

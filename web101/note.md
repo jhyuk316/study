@@ -1,5 +1,32 @@
 # 일단 적어
 
+## REST
+
+- Representational state transfer
+
+  - 자원(RESOURCE) - URI
+  - 행위(Verb) - HTTP METHOD
+  - 표현(Representations)
+
+- 특징
+  - Uniform (유니폼 인터페이스)
+  - Stateless (무상태성)
+  - Cacheable (캐시 가능)
+  - Self-descriptiveness (자체 표현 구조)
+  - Client - Server 구조
+  - 계층형 구조
+
+### RESTful
+
+- REST의 기본 원칙을 잘 지킨 서비스 디자인.
+
+  - URI는 **정보의 자원**을 표현
+  - 자원에 대한 **행위는 HTTP Method(GET, POST, PUT, DELETE)**로 표현
+
+- REST API 제대로 알고 사용하기 - <https://meetup.toast.com/posts/92>
+
+- REST 아키텍처를 훌륭하게 적용하기 위한 몇 가지 디자인 팁 - <https://spoqa.github.io/2012/02/27/rest-introduction.html>
+
 ## ORM(Object Relational Mapping)
 
 - ORM이란?
@@ -45,11 +72,13 @@
   - Repersitory 개발 시 인터페이스만 작성하면 구현 객체를 동적으로 생성해서 주입.
   - 데이터 접근 계층 개발시 인터페이스만 작성해도 됨.
 
+- [배워보자 Spring Data JPA] Spring Data JPA 의 기본과 프로젝트 생성 - <https://wonit.tistory.com/464>
 - [스프링부트 (4)] Spring Boot DataBase 연동하기 (MariaDB, MyBatis, HikariCP) - <https://goddaehee.tistory.com/205>
 - [Spring Boot] MariaDB + JPA 연동하기 - <https://wecandev.tistory.com/71>
 - [Database] Docker 로 MariaDB 설치하기 - <https://wecandev.tistory.com/63>
 - Spring Boot JPA로 MariaDB 연동 - <https://gofnrk.tistory.com/20>
 - Spring Boot (게시판) - 2 | 데이터베이스(MariaDB) 연동 및 JPA CRUD - <https://kitty-geno.tistory.com/122>
+- [JPA] jpa 관련 application.properties 설정 - <https://m.blog.naver.com/writer0713/221536526190>
 
 ### 엔티티
 
@@ -70,6 +99,11 @@
 - [SQL] Index(인덱스) - <https://velog.io/@gillog/SQL-Index%EC%9D%B8%EB%8D%B1%EC%8A%A4>
 - 성능 향상을 위한 SQL 작성법 - <https://d2.naver.com/helloworld/1155>
 - 페이징 성능 향상 기법 MSSQL 쿼리 - <https://jhappy.tistory.com/entry/%ED%8E%98%EC%9D%B4%EC%A7%95-%EC%84%B1%EB%8A%A5-%ED%96%A5%EC%83%81-%EA%B8%B0%EB%B2%95-MSSQL-%EC%BF%BC%EB%A6%AC>
+
+## H2
+
+- [Spring Boot JPA] JPA를 사용하기 위해 꼭 필요한 Dialect(방언)에 대해 알아보자. - <https://firework-ham.tistory.com/106>
+- [Spring boot] Test H2 DB설정 - <https://velog.io/@jeong-god/Springboot-Test-H2-DB%EC%84%A4%EC%A0%95>
 
 ## mariaDB
 
