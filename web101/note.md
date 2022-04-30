@@ -27,6 +27,15 @@
 
 - REST 아키텍처를 훌륭하게 적용하기 위한 몇 가지 디자인 팁 - <https://spoqa.github.io/2012/02/27/rest-introduction.html>
 
+## Spirng
+
+### TestProperty 설정
+
+- Proerties
+  - `@TestPropertySource(location = "classpath:application-test.properties")`
+- YML 설정법
+  - `@TestPropertySource(properties = {"spring.config.location = classpath:application-test.yml"})`
+
 ## ORM(Object Relational Mapping)
 
 - ORM이란?

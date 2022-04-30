@@ -1,53 +1,64 @@
 # 1. 기초 SQL
 
-- [1. DB 명령어](#1-db-명령어)
-  - [1.1. SHOW DATABASES](#11-show-databases)
-  - [1.2. SHOW TABLES](#12-show-tables)
-  - [1.3. SHOW COLUMNS](#13-show-columns)
-- [2. SQL](#2-sql)
-- [3. DDL(Data Definition Language)](#3-ddldata-definition-language)
-  - [3.1. SQL Data Types](#31-sql-data-types)
-  - [3.2. CREATE](#32-create)
-  - [3.3. DROP](#33-drop)
-  - [3.4. ALTER](#34-alter)
-- [4. DML(Data Manipulation Language), DQL(Data Query Language)](#4-dmldata-manipulation-language-dqldata-query-language)
-  - [4.1. Create](#41-create)
-  - [4.2. Read](#42-read)
-  - [4.3. Update](#43-update)
-  - [4.4. Delete](#44-delete)
-  - [4.5. 추가 기능](#45-추가-기능)
-  - [4.6. Alias](#46-alias)
-    - [4.6.1. WHERE 조건절](#461-where-조건절)
-    - [4.6.2. 서브 쿼리](#462-서브-쿼리)
-    - [4.6.3. ORDER BY - 정렬](#463-order-by---정렬)
-    - [4.6.4. DISTINCT - 중복제거](#464-distinct---중복제거)
-    - [4.6.5. LIMIT & OFFSET - 출력 개수 제한](#465-limit--offset---출력-개수-제한)
-    - [4.6.6. Aggregation](#466-aggregation)
-    - [4.6.7. GRUOP BY - 그룹으로 묶기](#467-gruop-by---그룹으로-묶기)
-    - [4.6.8. HAVING - 그룹의 조건](#468-having---그룹의-조건)
-    - [4.6.9. WITH ROLLUP - 중간 합계도 출력](#469-with-rollup---중간-합계도-출력)
-    - [4.6.10. JOIN - 테이블 조합](#4610-join---테이블-조합)
-    - [4.6.11. UNION & INTERSECT](#4611-union--intersect)
-  - [4.7. MySQL 내장 함수](#47-mysql-내장-함수)
-- [5. DCL(Data Control Language)](#5-dcldata-control-language)
-  - [5.1. GRANT](#51-grant)
-  - [5.2. REVOKE](#52-revoke)
-- [6. TCL(Transaction Control Language)](#6-tcltransaction-control-language)
-  - [6.1. 트랜잭션](#61-트랜잭션)
-  - [6.2. 명령어](#62-명령어)
-- [7. 출처](#7-출처)
+- [1. SQL](#1-sql)
+  - [1.1. DB 확인 명령어](#11-db-확인-명령어)
+    - [1.1.1. SHOW DATABASES](#111-show-databases)
+    - [1.1.2. SHOW TABLES](#112-show-tables)
+    - [1.1.3. SHOW COLUMNS](#113-show-columns)
+- [2. DDL(Data Definition Language)](#2-ddldata-definition-language)
+  - [2.1. SQL Data Types](#21-sql-data-types)
+  - [2.2. CREATE](#22-create)
+    - [제약조건](#제약조건)
+  - [2.3. DROP](#23-drop)
+  - [2.4. ALTER](#24-alter)
+- [3. DML(Data Manipulation Language), DQL(Data Query Language)](#3-dmldata-manipulation-language-dqldata-query-language)
+  - [3.1. CRUD](#31-crud)
+    - [3.1.1. Create](#311-create)
+    - [3.1.2. Read](#312-read)
+    - [3.1.3. Update](#313-update)
+    - [3.1.4. Delete](#314-delete)
+  - [3.2. 추가 키워드](#32-추가-키워드)
+    - [3.2.1. Alias](#321-alias)
+    - [3.2.2. WHERE 조건절](#322-where-조건절)
+    - [3.2.3. 서브 쿼리](#323-서브-쿼리)
+    - [3.2.4. ORDER BY - 정렬](#324-order-by---정렬)
+    - [3.2.5. DISTINCT - 중복제거](#325-distinct---중복제거)
+    - [3.2.6. LIMIT & OFFSET - 출력 개수 제한](#326-limit--offset---출력-개수-제한)
+    - [3.2.7. Aggregation](#327-aggregation)
+    - [3.2.8. GRUOP BY - 그룹으로 묶기](#328-gruop-by---그룹으로-묶기)
+    - [3.2.9. HAVING - 그룹의 조건](#329-having---그룹의-조건)
+    - [3.2.10. WITH ROLLUP - 중간 합계도 출력](#3210-with-rollup---중간-합계도-출력)
+    - [3.2.11. JOIN - 테이블 조합](#3211-join---테이블-조합)
+    - [3.2.12. UNION & INTERSECT](#3212-union--intersect)
+  - [3.3. MySQL 내장 함수](#33-mysql-내장-함수)
+- [4. DCL(Data Control Language)](#4-dcldata-control-language)
+  - [4.1. GRANT](#41-grant)
+  - [4.2. REVOKE](#42-revoke)
+- [5. TCL(Transaction Control Language)](#5-tcltransaction-control-language)
+  - [5.1. 트랜잭션](#51-트랜잭션)
+  - [5.2. 명령어](#52-명령어)
+- [출처](#출처)
 
-## 1. DB 명령어
+## 1. SQL
 
-- `-- 주석은 이렇게`
+- Structured Query Language
+- 관계형 데이터베이스 관리 시스템(RDBMS)의 데이터를 관리하기 위해 설계된 특수 목적의 프로그래밍 언어
 
-### 1.1. SHOW DATABASES
+- RDBMS 밴더마다 문법이 약간 씩 다름. (Oracle, MySQL, PostgreSQL 등)
+- 대소문자를 구분하지 않음.
+- _-- 주석은 이렇게 함._
+
+- 크게 DDL, DML, DCL로 나뉨.
+
+### 1.1. DB 확인 명령어
+
+#### 1.1.1. SHOW DATABASES
 
 - MySQL - `SHOW DATABASES`
 - Oracle - 오라클은 데이터베이스 개념이 없음. 단일 데이터베이스.
 - PostgreSQL - `SELECT datname FROM pg_database;`
 
-### 1.2. SHOW TABLES
+#### 1.1.2. SHOW TABLES
 
 - MySQL
   - `SHOW TABLES`
@@ -58,7 +69,7 @@
 - PostgreSQL
   - `SELECT table_name FROM information_schema.tables WHERE table_schema = '스키마명';`
 
-### 1.3. SHOW COLUMNS
+#### 1.1.3. SHOW COLUMNS
 
 - MySQL
   - `SHOW COLUMNS FROM 테이블명`
@@ -68,15 +79,7 @@
 - PostgreSQL
   - `SELECT column_name FROM information_schema.columns WHERE table_name = '테이블명';`
 
-## 2. SQL
-
-- Structured Query Language
-- 관계형 데이터베이스 관리 시스템(RDBMS)의 데이터를 관리하기 위해 설계된 특수 목적의 프로그래밍 언어
-
-- RDBMS 밴더마다 문법이 약간 씩 다름. (Oracle, MySQL, PostgreSQL 등)
-- 대소문자를 구분하지 않음.
-
-## 3. DDL(Data Definition Language)
+## 2. DDL(Data Definition Language)
 
 - 데이터 정의 언어
 - 데이터베이스, 테이블, 뷰, 인덱스 등의 개체를 생성/삭제/변경
@@ -84,7 +87,7 @@
 - ROLLBACK, COMMIT 사용 불가
 - DLL문은 즉시 적용.
 
-### 3.1. SQL Data Types
+### 2.1. SQL Data Types
 
 - 문자
   - CHAR(n) - 고정 길이 문자열, 공간 낭비가 생길 수 있음.
@@ -102,7 +105,7 @@
   - TIME
   - TIMESTAMP
 
-### 3.2. CREATE
+### 2.2. CREATE
 
 - CREATE - 데이터베이스 객체 생성 명령어
 
@@ -121,7 +124,113 @@
   ;
   ```
 
-### 3.3. DROP
+#### 제약조건
+
+- 기본키
+
+  - 중복 안됨, NULL 안됨.
+
+  ```sql
+  CREATE TABLE USER (
+        ID VARCHAR2(100) NOT NULL PRIMARY KEY
+        ...
+  );
+  ```
+
+  - 복합키
+
+  ```sql
+  CREATE TABLE USER (
+        column_1 INTEGER NOT NULL,
+        column_2 INTEGER NOT NULL,
+        ...
+        PRIMARY KEY(column_1, column_2,...)
+  );
+  ```
+
+- 외래키
+
+  ```sql
+  create table student(
+          ID        varchar(5) primary key,
+          name      varchar(20) not null,
+
+  create table takes(
+          ID        varchar(5) primary key,
+          course_id varchar(8),
+          foreign key(ID) references student,
+          foreign key(course_id) references section);
+  ```
+
+  - 참조 테이블에 없는 값은 넣을 수 없음.
+  - 참조키(외래키 테이블의 키) 값이 변경(삭제) 되었을 경우 옵션.
+    - SET NULL - NULL로 변경.
+    - SET DEFAULT - 기본값으로 변경.
+    - RESTRICT - 참조키 변경을 금지.
+    - NO ACTION - 아무것도 하지 않음.
+    - CASCADE - 외래키가 참조키를 따라 변경됨.
+
+- NOT NULL
+  - NULL값을 허용하지 않는 칼럼 설정. 기본은 NULL 허용.
+- UNIQUE
+
+  - 컬럼의 각 데이터들이 유일함을 보장하는 제약.
+
+  ```sql
+  -- column level
+  CREATE TABLE table_name(
+      ...,
+      column_name type UNIQUE,
+      ...
+  );
+
+  -- table level
+  CREATE TABLE table_name(
+      ...,
+      UNIQUE(column_name)
+  );
+  ```
+
+  - 복합 UNIQUE
+    - 여러 칼럼을 한번에 유니크로 설정.
+    - 칼럼의 조합 결과가 유니크 해야 함.
+
+  ```sql
+  CREATE TABLE shapes(
+      shape_id INTEGER PRIMARY KEY,
+      background_color TEXT,
+      foreground_color TEXT,
+      UNIQUE(background_color,foreground_color)
+  );
+
+  INSERT INTO shapes(background_color,foreground_color)
+  VALUES('red','green');
+  ```
+
+  - 'red','blue' 나 'blue','green'은 추가 됨. 'red','green'만 추가되지 않음.
+
+- CHECK
+
+  - 데이터의 무결성 체크
+
+  ```sql
+  CREATE TABLE table_name(
+      ...,
+      column_name data_type CHECK(expression),
+      ...
+  );
+
+  CREATE TABLE table_name(
+      ...,
+      CHECK(expression)
+  );
+  ```
+
+- AUTOINCREMENT
+  - 반드시 순차적으로 증가하기 위한 옵션.
+  - PRIMARY KEY는 반드시 순차적으로 증가하는 것은 아님.
+
+### 2.3. DROP
 
 > DROP과 ALTER는 쓰지 말자!
 
@@ -140,7 +249,7 @@
 
 - `FLASHBACK TABLE 테이블명 TO BEFORE DROP` - 테이블을 DROP 전으로 되돌기.
 
-### 3.4. ALTER
+### 2.4. ALTER
 
 > DROP과 ALTER는 쓰지 말자!
 
@@ -167,7 +276,7 @@ ALTER TABLE USER
 DROP NUMBER INT NULL;
 ```
 
-## 4. DML(Data Manipulation Language), DQL(Data Query Language)
+## 3. DML(Data Manipulation Language), DQL(Data Query Language)
 
 - 데이터 조작 언어
 - 데이터를 선택, 삽입, 수정, 삭제
@@ -190,16 +299,16 @@ DROP NUMBER INT NULL;
 
   - `FROM` -> `WHERE` -> `GROUP BY` -> `HAVING` -> `SELECT` -> `ORDER BY` -> `LIMIT`
 
-- CRUD
+### 3.1. CRUD
 
-  | 이름   | 조작       | SQL    |
-  | ------ | ---------- | ------ |
-  | Create | 생성       | INSERT |
-  | Read   | 읽기, 검색 | SELECT |
-  | Update | 갱신, 편집 | UPDATE |
-  | Delete | 삭제       | DELETE |
+| 이름   | 조작       | SQL    |
+| ------ | ---------- | ------ |
+| Create | 생성       | INSERT |
+| Read   | 읽기, 검색 | SELECT |
+| Update | 갱신, 편집 | UPDATE |
+| Delete | 삭제       | DELETE |
 
-### 4.1. Create
+#### 3.1.1. Create
 
 - INSERT - 테이블에 데이터를 삽입하는 명령어
 - `INSERT INTO 테이블명 (칼럼명 1, 칼럼명 2, 칼럼명 3) VALUES (값 1, 값 2, 값 3);`
@@ -213,7 +322,7 @@ INSERT INTO USER
     VALUES ('user1', '1234', '김철수', '서울', '010-1234-1234');
 ```
 
-### 4.2. Read
+#### 3.1.2. Read
 
 - SELECT - 테이블에 저장된 데이터를 조회하는 명령어
 - `SELECT 칼럼명 FROM 테이블명 WHERE 조건 ORDER BY 칼럼명 ASC or DESC LIMIT 개수;`
@@ -230,7 +339,7 @@ SELECT
 FROM USER;
 ```
 
-### 4.3. Update
+#### 3.1.3. Update
 
 - UPDATE - 테이블에 저장되어있는 데이터를 수정하는 명령어
 - `UPDATE 테이블명 SET 칼럼명 1 = 변경할 값 1, 칼럼명 2 = 변경할 값 2 WHERE 조건`
@@ -253,7 +362,7 @@ UPDATE USER
 WHERE ID = 'user2';
 ```
 
-### 4.4. Delete
+#### 3.1.4. Delete
 
 - DELETE - 테이블에 저장된 데이터를 삭제하는 명령어.
 - `DELETE FROM 테이블명 WHERE 조건`
@@ -265,9 +374,9 @@ FROM USER
 WHERE ID = 'user2';
 ```
 
-### 4.5. 추가 기능
+### 3.2. 추가 키워드
 
-### 4.6. Alias
+#### 3.2.1. Alias
 
 - 테이블이나 칼럼의 별칭을 지정하여 사용, 출력 가능.
 - SQL 실행 순서 때문에 SELECT에서 지정한 alias 이름을 WHERE 조건에 쓸 수 없음.
@@ -294,7 +403,7 @@ WHERE ID = 'user2';
     employees AS e;
   ```
 
-#### 4.6.1. WHERE 조건절
+#### 3.2.2. WHERE 조건절
 
 - 특정 조건을 만족하는 결과만 보고 싶을 때
 - 조건 연산자 - =, <, >, <=, >=, <>, !=
@@ -307,7 +416,7 @@ WHERE ID = 'user2';
   - \_ - 한 문자
   - `WHERE COUNTRY LIKE 'K%'` - K로 시작하는 나라들
 
-#### 4.6.2. 서브 쿼리
+#### 3.2.3. 서브 쿼리
 
 - 쿼리문 안에 또 쿼리문을 넣는 것
 - 서브 쿼리 결과가 둘 이상이면 에러
@@ -351,7 +460,7 @@ WHERE COUNTRY = (
   );
   ```
 
-#### 4.6.3. ORDER BY - 정렬
+#### 3.2.4. ORDER BY - 정렬
 
 - ASC - ASCENDING, 오름차순, 생략 가능.
 - DESC - DESCENDING, 내림차순.
@@ -362,14 +471,14 @@ ORDER BY
   POPULATION DESC; -- 나라 오름차순, 인구수 내림차순 정렬.
 ```
 
-#### 4.6.4. DISTINCT - 중복제거
+#### 3.2.5. DISTINCT - 중복제거
 
 ```sql
 SELECT DISTINCT COUNTRY
 FROM CITY; -- 나라를 중복 없이 검색
 ```
 
-#### 4.6.5. LIMIT & OFFSET - 출력 개수 제한
+#### 3.2.6. LIMIT & OFFSET - 출력 개수 제한
 
 - MySQL, PostgreSQL
 
@@ -399,7 +508,7 @@ FROM CITY; -- 나라를 중복 없이 검색
   FETCH NEXT 5 ROWS ONLY;
   ```
 
-#### 4.6.6. Aggregation
+#### 3.2.7. Aggregation
 
 - AVG() - 평균
 - MIN() - 최솟값
@@ -416,7 +525,7 @@ FROM
   employees;
 ```
 
-#### 4.6.7. GRUOP BY - 그룹으로 묶기
+#### 3.2.8. GRUOP BY - 그룹으로 묶기
 
 - 주로 Aggregation과 함께 사용.
 - e.g. 나라별 도시 평균 인구 검색
@@ -429,7 +538,7 @@ FROM CITY
 GROUP BY COUNTRY;
 ```
 
-#### 4.6.8. HAVING - 그룹의 조건
+#### 3.2.9. HAVING - 그룹의 조건
 
 - e.g. 도시 평균 인구가 1000000 초과인 나라 검색
 - SELECT 절에서 설정한 Alias를 사용 가능. (왜지?)
@@ -443,7 +552,7 @@ GROUP BY COUNTRY
 HAVING AVG(POPULATION) > 1000000;
 ```
 
-#### 4.6.9. WITH ROLLUP - 중간 합계도 출력
+#### 3.2.10. WITH ROLLUP - 중간 합계도 출력
 
 - 각 도시의 인구와 인구 총합을 함께 검색
 
@@ -456,7 +565,7 @@ FROM CITY
 GROUP BY COUNTRY, NAME WITH ROLLUP;
 ```
 
-#### 4.6.10. JOIN - 테이블 조합
+#### 3.2.11. JOIN - 테이블 조합
 
 - INNER - 기준 테이블과 조인 테이블 모두에 데이터가 존재해야 함.
 - OUTTER - 기준 테이블에만 데이터가 존재하면 됨.
@@ -490,7 +599,7 @@ GROUP BY COUNTRY, NAME WITH ROLLUP;
 
 - CROSS JOIN - 교차 조인
 
-  - A 테이블과 B 테이블의 모든 조합을 출력, A\*B
+  - A 테이블과 B 테이블의 모든 조합을 출력, A X B
 
   - e.g. 직원들의 성과 이름의 모든 조합. SELF CROSS JOIN.
 
@@ -516,7 +625,7 @@ ORDER BY manager;
 
 ![Self_Join](images/01%20SQL_Self_Join.png)
 
-#### 4.6.11. UNION & INTERSECT
+#### 3.2.12. UNION & INTERSECT
 
 - 두 테이블의 집합 연산. 칼럼이 일치해야 함.
 
@@ -549,7 +658,7 @@ ORDER BY manager;
     FROM SUPPLIERS;
     ```
 
-### 4.7. MySQL 내장 함수
+### 3.3. MySQL 내장 함수
 
 - 문자열
 
@@ -584,12 +693,12 @@ ORDER BY manager;
   - DAYOFWEEK(), DAYOFMONTY(), DAYOFYEAR()
   - DATE_FORMAT(NOW(), '% y % b % d % a') - 22 APR 23 SAT
 
-## 5. DCL(Data Control Language)
+## 4. DCL(Data Control Language)
 
 - 데이터 제어 언어
 - 사용자를 등록하고, 사용자에게 특정 데이터베이스를 사용할 권리를 부여.
 
-### 5.1. GRANT
+### 4.1. GRANT
 
 - 권한 부여
 
@@ -613,27 +722,35 @@ ORDER BY manager;
   - UPDATE : 데이터 조작 권한
   - EXECUTE : PROCEDURE 실행 권한
 
-### 5.2. REVOKE
+### 4.2. REVOKE
 
 - 권한 회수
   - `REVOKE 권한 FROM 사용자 계정`
   - `REVOKE 권한 ON 객체 FROM 사용자 계정`
 
-## 6. TCL(Transaction Control Language)
+## 5. TCL(Transaction Control Language)
 
 - 트랜잭션 제어 언어
 - 안전한 거래 보장
 - 동시에 다수의 작업을 독립적으로 안전하게 처리하기 위한 상호 작용 단위
 
-### 6.1. 트랜잭션
+### 5.1. 트랜잭션
 
+- ACID
+  - Atomicity
+    - 분할할 수 없는 최소 단위
+    - 한 트랜잭션 결과가 모두 반영되거나 또는 모두 취소되어야 함.
+  - Consistency
+    - 데이터베이스가 변경되면, 유효하고 일관된 상태를 유지
+  - Isolation
+    - 어떤 트랜잭션 중에 이루어진 모든 중간 상태 변경이 다른 트랜잭션에 보이지 않아 간섭 없이 동작.
+  - Durability
+    - 트랜잭션이 완료되면 시스템 오류가 발생하여도 데이터가 손실되지 않음.
 - 일 처리 단위
 - 한 개 이상의 데이터베이스 조작
 - 하나 이상의 SQL 문장
-- 분할할 수 없는 최소 단위
-- 한 트랜잭션 결과가 모두 반영되거나 또는 모두 취소되어야 함.
 
-### 6.2. 명령어
+### 5.2. 명령어
 
 - `COMMIT` - 거래 내역 확정
 - `ROLLBACK` - 거래 내역 취소
@@ -643,7 +760,7 @@ ORDER BY manager;
 
 ---
 
-## 7. 출처
+## 출처
 
 - SQL Tutorial - <https://www.sqltutorial.org/>
 - SQL - <https://ko.wikipedia.org/wiki/SQL>
@@ -664,3 +781,4 @@ ORDER BY manager;
 - MySQL 데이터베이스 한 번에 끝내기 SQL Full Tutorial Course using MySQL Database - <https://www.youtube.com/watch? v=vgIc4 ctNFbc>
 - 왕초보용! 갖고 노는 MySQL 데이터베이스 강좌 - <https://www.youtube.com/watch?v=dgpBXNa9vJc>
 - DCL (Data Cntrol Language) - <https://velog.io/@ansalstmd/SQL 활용 기본 SQL 작성-DCL>
+- 즐겁게 배우는 SQL 7. 트랜잭션 - <https://velog.io/@jiffydev/즐겁게-배우는-SQL-7.-트랜잭션>
