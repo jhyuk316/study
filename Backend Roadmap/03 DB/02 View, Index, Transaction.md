@@ -97,16 +97,31 @@ DROP VIEW view_name
   - 한 트랜잭션 결과가 모두 반영되거나 또는 모두 취소되어야 함.
 - Consistency
   - 데이터베이스가 변경되면, 유효하고 일관된 상태를 유지
+  - eg. primary key - foreign key 참조무결성을 지켜야 함.
 - Isolation
   - 어떤 트랜잭션 중에 이루어진 모든 중간 상태 변경이 다른 트랜잭션에 보이지 않아 간섭 없이 동작.
+  - 여러 개의 transaction가 동시에 수행되어도 격리가 되어서 순차적으로 수행되는거랑 결과가 같아야 함.
 - Durability
   - 트랜잭션이 완료되면 시스템 오류가 발생하여도 데이터가 손실되지 않음.
+
+### Read Phenomena
+
+- The ANSI/ISO standard SQL 92 refers to three different read phenomena when Transaction 1 reads data that Transaction 2 might have changed.
+- Dirty Reads
+  - 다른 transaction에서 commit 되지 않는 data를 읽어서 나타나는 현상.
+- Non-repeatable reads
+  - 한 transaction에서 두번 데이터를 읽었는데 두개의 데이터가 다른 현상.
+  - read lock이 select를 할 때 일어나지 않거나 select를 하고 read lock을 release 해서 다른 trasaction이 commit을 하는 경우 두번 읽었을 때 다르게 데이터가 나옴.
+- Phantom reads
+  - tx가 진행되는 동안 다른 tx에서 new row가 added되거나 removed되어서 두번 읽는 경우 다르게 읽게 되는 현상.
 
 ### 3.2. isolcation level
 
 - 데이터의 무결성을 보장하기 위해 존재
 - 다른 트랜잭션이 현재의 데이터에 대한 무결성을 해치지 않기 위해 잠금을 설정
 - 레벨이 높아질수록 느려짐.
+- 격리 수준이 낮을 수록 concurrency로인해 이상하게 읽는 상황이 많아짐. 반대로 높아질 수록 concurrency로 인해 이상하게 읽는 상황은 적어지지만 자원을 많이 소모하고 한 transaction이 다른 transaction을 block할 확률이 높아짐.
+- Isolation Level은 ANSI/ISO 에 정의되어 있음.
 
 #### 3.2.1. Read Uncommitted(Level 0)
 
@@ -137,6 +152,7 @@ DROP VIEW view_name
 #### 3.2.4. Serializable (Level 3)
 
 - 트랜잭션이 완료될 때까지 다른 사용자는 그 영역에 해당되는 데이터에 대한 수정 및 입력이 불가능
+- `SELECT ... WHERE`을 사용하는 range lock도 걸어서 phantom read도 방지.
 
 ```sql
 SET TRANSACTION ISOLATION LEVEL
@@ -278,6 +294,14 @@ SET TRANSACTION ISOLATION LEVEL
 - 트랜잭션 간의 교착상태
 - 두 개의 트랜잭션 간에 각각의 트랜잭션이 가지고 있는 리소스 Lock 획득 시 , 발생
 - 해결책 : 한쪽 트랜잭션 처리를 강제 종료 (비용이 적은 트랜잭션의 처리 강제 종료)
+
+- Two-phase Locking (2PL)
+
+  - In transaction processing, 2PL is a concurrency control method that guarantees serializability.
+    Locks are applied and removed in two phases
+    - Expanding phase: locks are acquired and no locks are released.
+    - Shrinking phase: locks are released and no locks are acquired.
+  - Deadlock을 일으킬 수 있음.
 
 - 예시 1
 
