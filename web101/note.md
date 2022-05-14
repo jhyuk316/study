@@ -36,6 +36,26 @@
 - YML 설정법
   - `@TestPropertySource(properties = {"spring.config.location = classpath:application-test.yml"})`
 
+### assertj
+
+- AssertJ Exception Assertions - <https://www.baeldung.com/assertj-exception-assertion>
+
+### Oauth2
+
+- ClientRegistrationRepository ERROR
+- [Error] 소셜 로그인 구현시 oauth client 관련 오류 - <https://4ngeunlee.tistory.com/370>
+
+### @component
+
+- 어노테이션
+- spring에서 관리되는 가장 기본적인 객체를 표기
+- scan-auto-detection과 dependency injection을 사용하기 위해서 사용.
+
+- @Component
+  - @Controller - Web MVC 코드에 사용되는 어노테이션
+  - @Repository - Persistence Layer와 1:1 매칭
+  - @Service - 비지니스 로직, respository레이어를 호출.
+
 ## ORM(Object Relational Mapping)
 
 - ORM이란?
