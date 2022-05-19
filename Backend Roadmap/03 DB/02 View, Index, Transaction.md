@@ -181,6 +181,14 @@ SET TRANSACTION ISOLATION LEVEL
 | TABLE  | 테이블 전체 + 관련 인덱스 모두                               |   ↓    |           ↓            |
 | DB     | 데이터 베이스 전체, 데이터베이스 복구나 스키마 변경 시 발생. |  나쁨  |          적음          |
 
+#### Optimistic Lock (낙관적 락) vs Pessimistic Lock (비관적 락)
+
+- Optimistic Lock
+  - tx가 시작될때는 안걸고 data가 변경될 때만 lock을 거는 방법.
+  - Application level에서 잡아주는 lock으로 version column을 where 조건에 사용해서 updated rows가 0건이면 다른 녀석이 수정했다고 보고 에러를 발생시키는 것.
+- Pessimistic Lock
+  - tx가 시작될 때 lock을 걸어서 동시에 수정 자체를 막아버리는 것.
+
 #### Lock 종류
 
 - SHARED(S)

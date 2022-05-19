@@ -1,5 +1,22 @@
 # 1. Advance
 
+## Type of Keys
+
+- Candidate Key (후보키)
+  - Tuple을 유일하게 식별할 수 있는 최소한의 속성들의 집합
+  - eg. STUD_NO
+- Super Key (슈퍼키)
+  - Tuple을 유일하게 식별할 수 있는 속성들의 집합.
+  - 모든 Candidate key는 Super key이지만 모든 Super key가 Candiate Key는 아님.
+  - eg. STUD_NO, (STUD_NO, STUD_NAME), ...
+- Primary Key (기본키)
+  - Candiate key 중에서 선택한 키.
+  - Alternative Key (대체키)
+  - Candiate가 2개 이상일 때 Primary key를 제외한 나머지 Candiate key들.
+- Foreign Key (외래키)
+  - attribute가 다른 relation의 attribute에 있는 값들로만 이루어질 수 있는 경우.
+  - eg. STUDENT_COURSE의 STUD_NO
+
 ## 1. 스케일 업(Scale-up)과 스케일 아웃(Scale-out)
 
 ![Scale-up_Scale-out](images/04%20Advance_Scale-up_Scale-out.png)
@@ -133,6 +150,7 @@
 
 - Replication
   - 여러 개의 DB를 권한에 따라 수직적인 구조(Master-Slave)로 구축하는 방식
+  - 여러 개의 db를 master-slave 구조로 나눠서 master에는 write만, slave는 read만 처리하는 방식
   - 비동기 방식으로 노드들 간의 데이터를 동기화
   - 장점 - 비동기 방식으로 데이터가 동기화되어 지연 시간이 거의 없음
   - 단점 - 노드들 간의 데이터가 동기화되지 않아 일관성있는 데이터를 얻지 못할 수 있음.
