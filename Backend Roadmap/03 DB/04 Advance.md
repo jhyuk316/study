@@ -157,7 +157,45 @@
 
 ## 5. CAP
 
+- 분산 DB의 이론
+- Consistency (일관성)
+  - 읽기 동작은 마지막으로 쓰여진 데이터를 리턴해야 한다.
+- Availability (가용성)
+  - 특정 노드가 장애가 발생해도 서비스가 가능해야 한다.
+- Partitions Tolerance (분할 내구성, 내성)
+
+  - Tolerance to network Partitions
+  - 노드간에 통신 문제가 생겨서 메시지를 주고받지 못하는 상황에서도 동작해야 한다.
+
+- CAP 이론의 허점
+
+  - CAP를 모두 만족 할 수는 없음.
+
+- CP 시스템 - 완벽한 일관성
+
+  - 분산 시스템에서 데이터 변경은 존재하는 모든 노드에 복제되어야 함.
+  - 가용성과 성능이 나쁨.
+    - 만약 하나의 노드라도 문제가 있으면 트랜잭션은 실패
+    - 노드가 늘어날 수록 지연시간은 길어짐.
+
+- AP 시스템 - 완벽한 가용성
+
+  - 모든 노드가 어떤 상황에서도 응답할 수 있음.
+  - 네트워크 문제가 발생해서 어떤 노드에 Replication이 제대로 이루어지지 않아도 가용성을 위해서 접근한 사용자에게 데이터를 반환.
+    - 일관성이 깨짐
+    - 사용자는 문제가 발생한 것을 인지하지 못함.
+
+- CA 시스템 - 일관성과 가용성을 동시에
+  - 네트워크 장애를 허용하지 않아야 함.
+  - 네트워크 장애가 절대 일어나지 않는 네트워크는 존재 하지 않음.
+
 ## 6. Connection pool
+
+- 웹 컨테이너(WAS)가 실행되면서 connection 객체를 미리 pool에 생성해 둠.
+- HTTP 요청에 따라 pool에서 connection객체를 가져다 쓰고 반환.
+- pool에 미리 connection이 생성되어 있기 때문에 요청 마다 connection 생성 시간이 소비되지 않음.
+- 커넥션을 계속해서 재사용하기 때문에 생성되는 커넥션 수를 제한적으로 설정.
+- 물리적인 데이터베이스 connection(연결) 부하를 줄이고 연결 관리.
 
 ## 7. 영속성(Persistence)
 
@@ -263,6 +301,33 @@ public class Phone {
 
 ## 9. Sql Injection
 
+- 응용 프로그램 보안 상의 허점을 의도적으로 이용해, 악의적인 SQL문을 실행되게 함으로써 데이터베이스를 비정상적으로 조작하는 코드 인젝션 공격 방법
+
+> ### 코드 인젝션
+>
+> 공격자에 의해서 취약한 컴퓨터 프로그램 코드를 삽입하고 실행을 변경하는 방식
+
+- 예시
+  - 아래와 같은 SQL문이 있을 때
+  ```sql
+  "SELECT * FROM users WHERE username='{$username}' AND password='{$password}'"
+  ```
+  - 페스워드에 `password' OR 1=1 --`을 입력
+  ```sql
+  SELECT * FROM users WHERE username='admin' and password='password' OR 1=1 --'
+  ```
+  - 무조건 참인 문장이 완성.
+
+### 방어
+
+- 준비된 선언 - Prepared statement
+  - 쿼리문이 데이터베이스 관리 시스템(DBMS)으로 전송
+  - 사용자 입력 값은 전송되지 않는 대신 플레이스홀더로 표시
+  - 플레이스홀더에 입력할 사용자 입력 값이 전송되고 DBMS가 쿼리문을 실행
+- 이스케이프
+  - 특별한 의미를 갖는 문자들을 이스케이프해서 SQL 삽입을 방어
+  - ', ", -- 등을 입력받지 않음.
+
 ## 10. N+1 문제
 
 ---
@@ -276,3 +341,8 @@ public class Phone {
 - DB분산처리를 위한 sharding - <https://techblog.woowahan.com/2687/>
 - [Database] 리플리케이션(Replication) vs 클러스터링(Clustering) - <https://mangkyu.tistory.com/97>
 - [DB] ORM이란 - <https://gmlwjd9405.github.io/2019/02/01/orm.html>
+- [DB/분산] 초보자를 위한 CAP 이론 - <https://hamait.tistory.com/197>
+- CAP 이론과 PACELC 이론 - <https://ohjongsung.io/2019/05/01/cap-이론과-pacelc-이론>
+- [Spring] 커넥션 풀(Connection pool)이란? - <https://linked2ev.github.io/spring/2019/08/14/Spring-3-커넥션-풀이란/>
+- SQL 삽입 - <https://ko.wikipedia.org/wiki/SQL_삽입>
+- 코드 인젝션 - <https://ko.wikipedia.org/wiki/코드_인젝션>
