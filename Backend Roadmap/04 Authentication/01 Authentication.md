@@ -72,7 +72,15 @@
 
   1. 클라이언트가 서버에 로그인 요청.
   2. 서버는 로그인 요청을 인증하고 세션을 데이터베이스에 저장, 세션 ID가 포함된 쿠키를 클라이언트에 반환.
+
+     - Set-Cookie: <cookie-name>=<cookie-value>
+     - 클라이언트에게 쿠키를 저장하라고 명령.
+
   3. 클라이언트는 요청과 함께 쿠키를 보냄.
+
+     - Cookie: name=value; name2=value2; name3=value3
+     - 헤더의 쿠키에 실어보냄.
+
   4. 서버는 쿠키 안의 ID를 확인하고 DB에 있으면 응답을 보냄.
 
 - 장점
@@ -122,3 +130,4 @@
 - Basic access authentication - <https://en.wikipedia.org/wiki/Basic_access_authentication>
 - Basic Authentication in ASP.NET Web API - <https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/basic-authentication>
 - OAuth - <https://ko.wikipedia.org/wiki/OAuth>
+- 인증 방식 : Cookie & Session vs JWT - <https://tecoble.techcourse.co.kr/post/2021-05-22-cookie-session-jwt/>
