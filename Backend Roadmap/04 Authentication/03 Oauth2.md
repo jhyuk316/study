@@ -2,28 +2,14 @@
 
 ## 1. Oauth란?
 
-```text
-  +--------+                                           +---------------+
-  |        |--(A)------- Authorization Grant --------->|               |
-  |        |                                           |               |
-  |        |<-(B)----------- Access Token -------------|               |
-  |        |               & Refresh Token             |               |
-  |        |                                           |               |
-  |        |                            +----------+   |               |
-  |        |--(C)---- Access Token ---->|          |   |               |
-  |        |                            |          |   |               |
-  |        |<-(D)- Protected Resource --| Resource |   | Authorization |
-  | Client |                            |  Server  |   |     Server    |
-  |        |--(E)---- Access Token ---->|          |   |               |
-  |        |                            |          |   |               |
-  |        |<-(F)- Invalid Token Error -|          |   |               |
-  |        |                            +----------+   |               |
-  |        |                                           |               |
-  |        |--(G)----------- Refresh Token ----------->|               |
-  |        |                                           |               |
-  |        |<-(H)----------- Access Token -------------|               |
-  +--------+           & Optional Refresh Token        +---------------+
-```
+### Oauth2.0 프로세스
+
+![Oauth2.0_process](images/03%20Oauth2_Oauth2.0_process.png)
+
+- 1~5 단계는 Authorization Code 발급 요청 URL을 통해 진행
+- 7~8 단계는 서비스에서 callback URL 을 통해 전달받은 Authorization Code를 사용하여 Access Token 요청 API를 통해 진행
+- 8 단계에서 발급받은 Access Token은 서비스에서 자체적으로 저장, 관리
+- 10~11 사용자의 서비스 요청 시 회원정보가 필요하다면 Access Token을 사용해 API를 호출
 
 ### 1.1. Role
 
@@ -89,10 +75,38 @@
 
 ### 1.7. refresh token
 
+```text
+  +--------+                                           +---------------+
+  |        |--(A)------- Authorization Grant --------->|               |
+  |        |                                           |               |
+  |        |<-(B)----------- Access Token -------------|               |
+  |        |               & Refresh Token             |               |
+  |        |                                           |               |
+  |        |                            +----------+   |               |
+  |        |--(C)---- Access Token ---->|          |   |               |
+  |        |                            |          |   |               |
+  |        |<-(D)- Protected Resource --| Resource |   | Authorization |
+  | Client |                            |  Server  |   |     Server    |
+  |        |--(E)---- Access Token ---->|          |   |               |
+  |        |                            |          |   |               |
+  |        |<-(F)- Invalid Token Error -|          |   |               |
+  |        |                            +----------+   |               |
+  |        |                                           |               |
+  |        |--(G)----------- Refresh Token ----------->|               |
+  |        |                                           |               |
+  |        |<-(H)----------- Access Token -------------|               |
+  +--------+           & Optional Refresh Token        +---------------+
+```
+
 - access Token - 보안을 위해서 수명이 짧다.
 - refresh token - access token을 재발행 받기 위한 토큰.
   - 수명이 길다.
   - 매번 유저가 로그인 해서 재발행 받는 것을 방지.
+
+## OpenID
+
+- Oauth2.0 기반의 통합 로그인 프로토콜
+-
 
 ---
 
@@ -125,5 +139,7 @@
 
 ## 출처
 
+- <https://developers.payco.com/guide/development/start>
 - OAuth2.0 + JWT를 사용한 토큰 기반 서버 인증 구현하기 - <https://zkdlu.tistory.com/12>
 - [Spring Boot] OAuth2 + JWT + React 적용해보리기 - <https://velog.io/@jkijki12/Spring-Boot-OAuth2-JWT-%EC%A0%81%EC%9A%A9%ED%95%B4%EB%B3%B4%EB%A6%AC%EA%B8%B0>
+- 편의성을 높인 ID 인증 관리 - OIDC(OpenID Connect)가 주목 받는 이유 - <https://www.samsungsds.com/kr/insights/oidc.html>
