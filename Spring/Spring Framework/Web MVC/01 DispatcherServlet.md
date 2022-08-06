@@ -71,6 +71,14 @@
   - 세션 관리 기능
     - `request.getSession(create:true)`
 
+  ```java
+  @RequestMapping("/test")
+  public String test(HttpServletRequest req) {
+    String userId = req.getParameter("userId");
+    return "test";
+  }
+  ```
+
 - HttpServletResponse
   - HTTP 응답 정보를 제공
   - content-type, 응답 코드, 응답 메세지
@@ -94,8 +102,25 @@
   - 멀티스레딩 관리
   - 선언적인 보안관리
 
-- 요청에 따라 설정파일에 설정된 서블릿을 맵핑.
-- 서블릿 마다 공통 로직 중복.
+- 한계
+  - 요청에 따라 설정파일에 설정된 서블릿을 맵핑.
+  - 서블릿 마다 공통 로직 중복.
+
+## MVC
+
+![MVC](images/MVC.png)
+
+- MVC1 패턴의 경우 View와 Controller를 모두 JSP가 담당하는 형태
+
+  ![MVC1](images/MVC1.png)
+  ![MVC_Pattern_1](images/MVC_Pattern_1.png)
+
+- MVC2
+
+  - Controller와 View 분리
+
+  ![MVC2](images/MVC2.png)
+  ![MVC_Pattern_2](images/MVC_Pattern_2.png)
 
 ## DispatcherServlet
 
@@ -161,6 +186,7 @@
 - [Servlet] 서블릿(Servlet)이란? - <https://velog.io/@falling_star3/Tomcat-서블릿Servlet이란>
 - DispatcherServlet - Part 1 - <https://tecoble.techcourse.co.kr/post/2021-06-25-dispatcherservlet-part-1/>
 - Spring MVC framework
+- [Spring] Spring의 MVC 패턴과 MVC1과 MVC2 비교 - <https://chanhuiseok.github.io/posts/spring-3/>
 
 ### 김영한 MVC 수강생들 ㅋㅋㅋ
 
