@@ -146,7 +146,7 @@
 
 ### 빌드 실패
 
-- apiKey 같은 Git이 관리 하는 파일이 빠진 경우.
+- apiKey 같은 gitignore 된 파일이 빠진 경우.
 - 서버 환경에서 설정 파일이 안 맞는 경우.
 
 ### no main manifest attribute in 에러
