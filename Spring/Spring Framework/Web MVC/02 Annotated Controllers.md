@@ -1,6 +1,21 @@
 # Annotated Controllers
 
-## Declaration
+- [1. Declaration](#1-declaration)
+- [2. Request Mapping](#2-request-mapping)
+  - [2.1. URI patterns](#21-uri-patterns)
+- [3. Handler Methods](#3-handler-methods)
+  - [3.1. Method Arguments](#31-method-arguments)
+  - [3.2. Return Values](#32-return-values)
+  - [3.3. ~~@ModelAttribute~~](#33-modelattribute)
+  - [3.4. @SessionAttributes](#34-sessionattributes)
+- [4. ~~Model~~](#4-model)
+- [5. ~~DataBinder~~](#5-databinder)
+- [6. Exceptions](#6-exceptions)
+  - [6.1. REST API exceptions](#61-rest-api-exceptions)
+- [7. Controller Advice](#7-controller-advice)
+- [출처](#출처)
+
+## 1. Declaration
 
 - @Controller
   - MVC 컨트롤러
@@ -9,7 +24,7 @@
   - @Controller + @ResponseBody
   - 모든 메소드에 @ResponseBody를 단 효과.
 
-## Request Mapping
+## 2. Request Mapping
 
 ```java
 @RestController
@@ -35,12 +50,11 @@ class PersonController {
 - @DeleteMapping
 - @PatchMapping
 
-### URI patterns
+### 2.1. URI patterns
 
 - AntPathMatcher
 
-  - 5.3 이전 스프링 MVC의 방식
-  - 지금도 기본값.
+  - 5.3 이전 스프링 MVC의 방식 - 지금도 기본값.
   - ?
     - 1 글자
     - /resources/ima?e.png
@@ -85,9 +99,9 @@ public class OwnerController {
   - reflected file download (RFD) 공격의 위험이 있음.
   - 확장자를 \*로 매칭하는 것은 차단되어 있음.
 
-## Handler Methods
+## 3. Handler Methods
 
-### Method Arguments
+### 3.1. Method Arguments
 
 - javax.servlet.ServletRequest, javax.servlet.ServletResponse
   - HttpServletRequest, HttpServletResponse
@@ -129,7 +143,8 @@ public class OwnerController {
 - @RequestBody - HTTP request body
   - HttpMessageConverter에의해 역직렬화된 오브젝트를 받음.
   - @Valid, @validated로 검증 가능.
-- HttpEntity<B> - request headers, body
+- HttpEntity\<B\> - request headers, body
+
 - @ModelAttribute - 모델의 에트리뷰트
 
   ```java
@@ -152,7 +167,7 @@ public class OwnerController {
 
 - Errors, BindingResult - 검증의 errors, 검증 파라미터 바로 뒤에 선언해야 함.
 
-### Return Values
+### 3.2. Return Values
 
 - @ResponseBody
   - HttpMessageConverter로 response body를 serialized해서 리턴.
@@ -160,7 +175,7 @@ public class OwnerController {
 - ResponseEntity - @ResponseBody + status + headers
 - String - `ViewResolver`에 의해 resolved 될 view name을 리턴
 
-### ~~@ModelAttribute~~
+### 3.3. ~~@ModelAttribute~~
 
 - 메소드 위에 붙여서 사용 가능
   - View에서 사용할 데이터를 설정하는 용도로 사용
@@ -184,7 +199,7 @@ public Map<String, String> commonCodeMap(){
 }
 ```
 
-### @SessionAttributes
+### 3.4. @SessionAttributes
 
 - 컨트롤러 전역에 걸쳐 세션을 임시 저장소로 사용 가능
 
@@ -216,13 +231,13 @@ public class EditPetForm {
   }
   ```
 
-## ~~Model~~
+## 4. ~~Model~~
 
 - ~~@ModelAttribute~~ 랑 같은 내용
 
-## ~~DataBinder~~
+## 5. ~~DataBinder~~
 
-## Exceptions
+## 6. Exceptions
 
 - @ExceptionHandler는 Controller계층에서 발생하는 예외를 잡아서 메서드로 처리해주는 기능
 - @ExceptionHandler(받을 예외)
@@ -239,11 +254,11 @@ public class SimpleController {
 }
 ```
 
-### REST API exceptions
+### 6.1. REST API exceptions
 
 - 예외 발생시 response body에 오류 세부 정보를 포함해야 함.
 
-## Controller Advice
+## 7. Controller Advice
 
 - 전역 컨트롤러
 - @ControllerAdvice, @RestControllerAdvice

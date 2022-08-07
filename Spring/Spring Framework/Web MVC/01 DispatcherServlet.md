@@ -1,8 +1,23 @@
 # DispatcherServlet
 
-## WebServer vs WAS
+- [1. WebServer vs WAS](#1-webserver-vs-was)
+  - [1.1. WAS 용어 변화](#11-was-용어-변화)
+- [2. Servlet](#2-servlet)
+  - [2.1. HttpServletRequest, HttpServletResponse](#21-httpservletrequest-httpservletresponse)
+  - [2.2. 서블릿 컨테이너](#22-서블릿-컨테이너)
+  - [2.3. 쓰레드 풀](#23-쓰레드-풀)
+- [3. MVC](#3-mvc)
+- [4. DispatcherServlet](#4-dispatcherservlet)
+  - [4.1. HandlerMapping, HandlerAdapter](#41-handlermapping-handleradapter)
+  - [4.2. ViewResolver](#42-viewresolver)
+- [출처](#출처)
+  - [김영한 MVC 수강생들 ㅋㅋㅋ](#김영한-mvc-수강생들-ㅋㅋㅋ)
 
-![Static_Pages_Dynamic_Pages](images/Static_Pages_Dynamic_Pages.png)
+## 1. WebServer vs WAS
+
+<!-- ![Static_Pages_Dynamic_Pages](images/Static_Pages_Dynamic_Pages.png) -->
+
+<img src="images/Static_Pages_Dynamic_Pages.png" style="background-color:white">
 
 - Web Server
 
@@ -17,18 +32,41 @@
 
 - Web Service Architecture
 
-  ![Web_Service_Architecture](images/Web_Service_Architecture.png)
+  <!-- ![Web_Service_Architecture](images/Web_Service_Architecture.png) -->
+
+  <img src="images/Web_Service_Architecture.png" style="background-color:white">
 
   - 보통 Web Server를 WAS 앞에 붙여 놓는 구조를 가짐.
   - Web Server가 필요한 이유
     - WAS의 부하 감소 - 서버를 분리해 정적 컨덴츠를 따로 처리 할 수 있음.
     - 여러 대의 WAS에 적절한 부하를 분산 시키는 역할.
 
-## Servlet
+### 1.1. WAS 용어 변화
+
+> WAS라는 용어는 Web Server + Application Server에서 온 듯.
+>
+> > Web server - <https://en.wikipedia.org/wiki/Web_server>  
+> > Application server - <https://en.wikipedia.org/wiki/Application_server>
+>
+> WAS가 우리나라에서는 통합적으로 쓰이다가 정착.  
+> 하지만 역할에 따라 Static Server(Web Server)와 Dynamic Server(Application Server)로 분리되어  
+> WebServer와 WAS로 다시 명칭이 분리 된 것으로 추정.
+
+## 2. Servlet
 
 - 자바를 사용하여 웹페이지를 동적으로 생성하는 서버측 프로그램 혹은 그 사양.
 
 ![Servlet](images/Servlet.png)
+
+```java
+@WebServlet(name = "helloServlet", urlPatterns = "/hello")
+public class HelloServlet extends HttpServlet{
+  @Override
+  protected void service(HttpServlectRequest request, HttpServletRespone response){
+    // 애플리캐이션 로직
+  }
+}
+```
 
 - 특징
 
@@ -52,10 +90,11 @@
   4. HTTP 응답 생성
   5. 소켓 종료
 
-  - 서블릿은 반복 되는 1,2,4,5의 작업을 편하게 도와줌.
+  - 서블릿은 3번 비즈니스 로직에만 집중하게 해줌.
+  - 서블릿 컨테이너는 반복 되는 1,2,4,5의 작업을 편하게 도와줌.
   - 개발자는 비즈니스 로직에만 집중 할 수 있음.
 
-### HttpServletRequest, HttpServletResponse
+### 2.1. HttpServletRequest, HttpServletResponse
 
 - HTTP 요청/응답 정보를 자바 객체화해서 제공
 
@@ -87,52 +126,81 @@
     2. 헤더 생성
     3. 바디 생성
 
-### 서블릿 컨테이너
+### 2.2. 서블릿 컨테이너
 
-- 서블릿을 담고 관리해주는 컨테이너
-- 웹 컨테이너
+<!-- TODO 서블릿 컨테이너 보강 할 것. -->
+
+- 서블릿을 담고 관리해주는 컨테이너, 웹 컨테이너
+- 톰캣처럼 서블릿을 지원하는 WAS
 
 - 주요 기능
 
   - 서블릿의 생명주기 관리
     - 생성, 초기화, 호출, 종료
     - 서블릿 객체는 싱글톤으로 관리.
+    - URL을 특정 서블릿에 매핑
   - 통신 지원
     - 클라이언트의 Request를 받아주고 Response를 보낼 수 있게 웹 서버와 소켓을 만들어서 통신
+    - Request와 Response를 HttpServletRequest, HttpServletResponse 객체에 맵핑 생성.
   - 멀티스레딩 관리
+    - 쓰레드풀
   - 선언적인 보안관리
 
 - 한계
   - 요청에 따라 설정파일에 설정된 서블릿을 맵핑.
   - 서블릿 마다 공통 로직 중복.
 
-## MVC
+### 2.3. 쓰레드 풀
 
-![MVC](images/MVC.png)
+- [쓰레드 풀](../../../Backend%20Roadmap/02%20General%20Knowledge/02.3%20Threads%20and%20Concurrency.md#thread-pools)
 
-- MVC1 패턴의 경우 View와 Controller를 모두 JSP가 담당하는 형태
+- 실무 팁
+  - was의 주요 튜닝 포인트는 최대 쓰레드(max thread)
+  - 너무 낮게 설정할 경우 동시 요청이 많으면 클라이언트는 금방 응답이 지연
+  - 너무 높게 설정하면 동시 요청이 많아질 경우 CPU, 메모리 리소스 임계점 초과로 서버가 다운
 
-  ![MVC1](images/MVC1.png)
-  ![MVC_Pattern_1](images/MVC_Pattern_1.png)
+## 3. MVC
 
-- MVC2
+- Wikipedia - <https://en.wikipedia.org/wiki/Model–view–controller>
 
-  - Controller와 View 분리
+  - 개념적인 MVC
 
-  ![MVC2](images/MVC2.png)
+  <img src = "images/MVC.png" width="500" height="auto" style="background-color:#ffffff">
+
+- JSP MVC
+
+  - JSP에서 말하는 MVC 구조는 위의 MVC와 약간 다름.
+
+  - JSP model 1 architecture - <https://en.wikipedia.org/wiki/JSP_model_1_architecture>
+
+    - View와 Controller를 모두 JSP가 담당하는 형태
+
+    ![MVC1](images/MVC1.png)
+
+  - JSP model 2 architecture - <https://en.wikipedia.org/wiki/JSP_model_2_architecture>
+
+    - Controller와 View 분리
+
+    ![MVC2](images/MVC2.png)
+
+- Spring Web MVC
+
+  - 개념적 MVC와 동일
+  - (model1, model2가 따로 없다 이것이 내 결론.)
+
   ![MVC_Pattern_2](images/MVC_Pattern_2.png)
 
-## DispatcherServlet
+## 4. DispatcherServlet
 
-- 모든 요청을 받는 프론트 컨트롤러
+- 모든 요청을 받는 **프론트 컨트롤러**
   - 공통 로직을 처리.
 
 ![DispatcherServlet](images/DispatcherServlet.png)
 
-1. DispatcherServlet이 요청을 받음.
+1. DispatcherServlet이 요청(HttpServletRequest)을 받음.
 2. DispatcherServlet가 HandlerMapping에게 요청.
-   1. HandlerMapping가 컨트롤러 반환.
-3. DispatcherServlet는 HandlerAdapter에게 Controller 실행 작업을 보냄.
+   1. HandlerMapping가 핸들러(Controller) 반환.
+3. DispatcherServlet는 핸들러를 처리 할 수 있는 HandlerAdapter를 찾아서 Controller 실행 작업을 보냄.
 4. HandlerAdapter는 Controller의 비즈니스 로직을 호출.
 5. Controller는 비즈니스 로직을 실행하고 결과를 Model에 반영, View를 HandlerAdapter로 반환.
 6. DispatcherServlet는 ViewResolver에게 View 이름과 작업을 보냄.
@@ -141,25 +209,35 @@
 8. View는 Model data를 랜더링.
    1. response를 반환
 
-### HandlerMapping, HandlerAdapter
+> @RestController의 경우 ⑥, ⑦ 과정이 생략  
+> 즉, ViewResolver를 타지 않고 반환값에 알맞는 MessageConverter를 찾아 응답 본문을 작성
+
+### 4.1. HandlerMapping, HandlerAdapter
 
 - HandlerMapping
 
-  - RequestMappingHandlerMapping - 어노테이션으로 찾음.
-  - BeanNameUrlHandlerMapping - 스프링 빈 이름으로 핸들러 찾음.
+  - RequestMappingHandlerMapping - 어노테이션으로 핸들러 찾음.
+  - SimpleUrlHandlerMapping - URI path patterns 이름으로 핸들러 찾음.
 
 - HandlerAdapter
 
-  - RequestmappingHandlerAdapter - 어노테이션 찾음
+  - RequestMappingHandlerAdapter - 어노테이션 찾음
   - HttpRequestHandlerAdapter
   - SimpleControllerHandlerAdapter - Controller 인터페이스 처리, _어노테이션이 아님_
+  - 서로 다른 컨트롤러 다룰 수 있게 하는 어뎁터 패턴.
+  - DispatcherServlet가 세부 정보를 아는 것을 막음.
+
+- Handler
+
+  - 컨트롤러
+  - 컨트롤러 이외의 것들도 어탭터로 처리 가능하기 때문에 포괄적인 명칭을 사용.
 
 - 순서
   - 핸들러 매핑으로 핸들러 조회
   - 핸들러가 실행가능한 어뎁터를 찾음.
   - 핸들러 어뎁터 실행.
 
-### ViewResolver
+### 4.2. ViewResolver
 
 - BeanNameViewResolver - 빈 이름으로 찾아서 뷰 반환.
 - InternalResourceViewResolver - jsp를 처리하는 뷰 반환.
@@ -178,15 +256,15 @@
 
 - <https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-servlet-context-hierarchy>
 - Overview of Spring MVC Architecture - <http://terasolunaorg.github.io/guideline/5.4.1.RELEASE/en/Overview/SpringMVCOverview.html>
-
 - [Web] Web Server와 WAS의 차이와 웹 서비스 구조 - <https://gmlwjd9405.github.io/2018/10/27/webserver-vs-was.html>
-
 - [Web] 서블릿(Servlet)이란 무엇인가? 서블릿 총정리 - <https://coding-factory.tistory.com/742>
 - [JSP] 서블릿(Servlet)이란? - <https://mangkyu.tistory.com/14>
 - [Servlet] 서블릿(Servlet)이란? - <https://velog.io/@falling_star3/Tomcat-서블릿Servlet이란>
 - DispatcherServlet - Part 1 - <https://tecoble.techcourse.co.kr/post/2021-06-25-dispatcherservlet-part-1/>
 - Spring MVC framework
 - [Spring] Spring의 MVC 패턴과 MVC1과 MVC2 비교 - <https://chanhuiseok.github.io/posts/spring-3/>
+- 요청처리 내부구조 - <https://gowoonsori.com/spring/architecture/>
+- Spring MVC 처리 과정 - <https://github.com/binghe819/TIL/blob/master/Spring/MVC/Spring%20MVC%20flow.md>
 
 ### 김영한 MVC 수강생들 ㅋㅋㅋ
 
