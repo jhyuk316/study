@@ -1,0 +1,242 @@
+# 컨피그맵과 비밀값
+
+- [1. 애플리케이션에 설정 전달 과정](#1-애플리케이션에-설정-전달-과정)
+  - [파드 정의에 환경 변수 추가](#파드-정의에-환경-변수-추가)
+  - [컨피그맵](#컨피그맵)
+- [2. 컨피그맵에 저장한 설정 파일 사용](#2-컨피그맵에-저장한-설정-파일-사용)
+  - [쿠버네티스 설정 전략](#쿠버네티스-설정-전략)
+- [3. 컨피그맵에 담긴 설정값 데이터 주입](#3-컨피그맵에-담긴-설정값-데이터-주입)
+  - [과정에 필요한 파드 정의](#과정에-필요한-파드-정의)
+  - [여러 설정을 하나의 configMap](#여러-설정을-하나의-configmap)
+  - [파드가 동작 중인 상황에서 컨피그맵 업데이트](#파드가-동작-중인-상황에서-컨피그맵-업데이트)
+  - [특정 파일만 마운트하기](#특정-파일만-마운트하기)
+- [4. 비밀값을 이용](#4-비밀값을-이용)
+  - [비밀값 전달 방법](#비밀값-전달-방법)
+- [5. 쿠퍼네티스의 애플리케이션 설정 관리](#5-쿠퍼네티스의-애플리케이션-설정-관리)
+  - [애플리케이션의 중단 없이 설정 변경이 필요한가?](#애플리케이션의-중단-없이-설정-변경이-필요한가)
+  - [설정 변경 이력을 남기는 법](#설정-변경-이력을-남기는-법)
+  - [민감 정보를 어떻게 관리할 것인가?](#민감-정보를-어떻게-관리할-것인가)
+
+## 1. 애플리케이션에 설정 전달 과정
+
+- 컨테이너에 설정값을 주입하는 데 쓰이는 리소스
+- ConfigMap
+- Secret
+
+> printenv - 환경 변수를 출력하는 리눅스 명령어
+
+### 파드 정의에 환경 변수 추가
+
+```yaml
+spec:
+  containers:
+    - name: sleep
+      image: kiamol/ch03-sleep
+      env: # 환경 변수 정의
+        - name: KIAMOL_CHAPTER # 환경 변수 key
+          value: "04" # 환경 변수 value
+```
+
+- 환경 변수는 파드의 생애 주기내에 불변
+- 설정값을 변경하려면 파드를 수정된 버전으로 변경해야함
+
+### 컨피그맵
+
+- 파드에서 읽어 들이는 데이터를 저장하는 리소스
+- 컨피그맵은 읽기 전용
+
+```yaml
+env:
+  - name: KIAMOL_CHAPTER
+    value: "04"
+  - name: KIAMOL_SECTION
+    valueFrom:
+      configMapKeyRef: # configMap에서 Read
+        name: sleep-config-literal # configMap Name
+        key: kiamol.section # 읽을 항목의 key
+```
+
+## 2. 컨피그맵에 저장한 설정 파일 사용
+
+- 키=벨류의 텍스트 파일도 환경 파일로 사용 가능
+
+```yaml
+env:
+- name: KIAMOL_CHAPTER
+value: "04"
+- name: KIAMOL_SECTION
+valueFrom:
+    configMapKeyRef:
+    name: sleep-config-literal
+    key: kiamol.section
+envFrom:
+- configMapRef:
+    name: sleep-config-env-file
+```
+
+- 환경 변수명이 중복되는 경우 **env** 항목에서 정의된 값이 envFrom 보다 우선한다
+
+### 쿠버네티스 설정 전략
+
+- 기본값은 컨테이너 이미지에 포함
+  - e.g. 모든 환경의 공통 값 or 모든 환경값을 넣고 dev 환경으로 동작
+- 각 환경의 실제 설정값은 configMap에 담겨 컨테이너의 파일 시스템에 전달
+- 변겨이 필요한 설정값은 deployment 내 pod 정의에서 환경 변수 형태로 적용
+
+```yaml
+apiVersion: v1
+kind: ConfigMap # 리소스 유형: configMap
+metadata:
+  name: todo-web-config-dev # configMap Name
+data:
+  config.json: |- # key-value의 key가 파일명
+    {                           # 파일 내용의 포멧은 자유
+      "ConfigController": {
+        "Enabled" : true
+      }
+    }
+```
+
+- configMap에 내용 포함 - apply 명령만으로 쉽게 배치 가능
+- 다른 파일에 내용 있음 - create로 해당리소스를 먼저 배치 후 apply 해야 함
+
+## 3. 컨피그맵에 담긴 설정값 데이터 주입
+
+- 환경 변수 외에 설정값 전달 방법 - 컨테이너 파일 시스템 속 파일로 설정값 주입
+- 컨테이너 파일 시스템은 컨테이너 이미지와 그외 출처에서 온 파일로 구성
+
+### 과정에 필요한 파드 정의
+
+- configMap에 담긴 데이터를 파드로 전달하는 Volume
+- configMap을 읽어 들인 볼륨을 파드 컨테이너의 특정 경로에 Volume Mount
+
+```yaml
+spec:
+    containers:
+    - name: web
+        image: kiamol/ch04-todo-list
+        volumeMounts:
+        - name: config                  # 마운트할 volume name
+            mountPath: "/app/config"    # 마운트 경로
+            readOnly: true              # 읽기 전용
+    volumes:
+    - name: config                      # volume name
+        configMap:                      # volume의 원본
+        name: todo-web-config-dev       # configMap name
+```
+
+### 여러 설정을 하나의 configMap
+
+```yaml
+data:
+  config.json: |-
+    {
+      "ConfigController": {
+        "Enabled" : true
+      }
+    }
+  logging.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "ToDoList.Pages" : "Debug"
+        }
+      }
+    }
+```
+
+### 파드가 동작 중인 상황에서 컨피그맵 업데이트
+
+- 쿠버네티스는 수정된 파일을 컨테이너에 전달
+- 이후는 어플리케이션의 재량
+- 어플리케이션은 파일 변화를 감지하고 설정에 반영 해야함
+
+### 특정 파일만 마운트하기
+
+> 볼륨 마운트시 주의사항
+>
+> - 이미 존재하는 경로라면 디렉토리를 모두 덮어씀. 기존 파일이 삭제됨.
+
+```yaml
+spec:
+    containers:
+    - name: web
+        image: kiamol/ch04-todo-list
+        volumeMounts:
+        - name: config
+            mountPath: "/app/config"
+            readOnly: true
+    volumes:
+    - name: config
+        configMap:
+        name: todo-web-config-dev
+        items:
+        - key: config.json
+            path: config.json
+```
+
+## 4. 비밀값을 이용
+
+- configMap은 텍스트 파일을 단순히 추상화한 객체로 보안이 없음.
+- secret
+  - 민감한 정보로 클러스터 내부에서 별도로 관리.
+  - 해당 값을 사용해야하는 노드에만 전달됨.
+  - 전달 과정과 저장시 **암호화**가 적용됨.
+  - **base64**로 인코딩됨.
+
+```yaml
+spec:
+    containers:
+    - name: sleep
+        image: kiamol/ch03-sleep
+        env:
+        - name: KIAMOL_SECRET
+        valueFrom:
+            secretKeyRef:
+            name: sleep-secret-literal
+            key: secret
+```
+
+- 애플리케이션 정의에서 환경 변수로 읽을 수 있음.
+
+> 환경 변수는 컨테이너 내의 모든 프로세스가 접근 가능하므로 주의가 필요
+> 비밀값을 파일 형태로 전달해서 파일 권한으로 제어 가능
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: todo-db-secret-test
+type: Opaque
+stringData:
+  POSTGRES_PASSWORD: "kiamol-2*2*"
+```
+
+- 운영 환경의 민감한 데이터를 YAML에 포함하면 안됨.
+- 민감한데이터가 들어갈 자리를 표시 후 애플리케이션을 배치할 때 추가적인 처리
+  - e.g. 깃허브 시크릿 기능에 저장된 값을 채움.
+
+> 쿠버네티스 클러스터에 들어간 비밀값은 권한 있는 사람은 누구나 볼 수 있는 상태
+
+### 비밀값 전달 방법
+
+- 환경 변수에 비밀값 저장
+- 환경 변수에 파일 패스를 지정 후 파일을 읽기
+
+## 5. 쿠퍼네티스의 애플리케이션 설정 관리
+
+### 애플리케이션의 중단 없이 설정 변경이 필요한가?
+
+- 환경 변수는 파드 교체가 필요함.
+- 볼륨 마운트로 설정 파일 교체가 필요.
+
+### 설정 변경 이력을 남기는 법
+
+- 설정 객체의 이름에 버전을 넣음.
+- 파드 교체로 새 버전의 설정을 로드.
+- 파드 교체가 필수
+
+### 민감 정보를 어떻게 관리할 것인가?
+
+- YAML 템플릿 파일에는 실제 민감 정보 대신 해당 정보가 채워질 빈칸을 둠.
+- 배치 절차 중에 이 빈칸을 Vault의 값으로 채움.
